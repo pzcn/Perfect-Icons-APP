@@ -1,0 +1,52 @@
+name: Android CI
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    if: ${{ !startsWith(github.event.head_commit.message, '[Release]') }}
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Setup JDK 1.8
+        uses: actions/setup-java@v2.0.0
+        with:
+          java-version: 12
+          distribution: 'adopt'
+
+      - name: Retrieve version
+        run: |
+          
+          echo VERSIONCODE=`date +%s` >> $GITHUB_ENV
+          echo VERSION=$(echo ${{ github.event.head_commit.id }} | head -c 10) >> $GITHUB_ENV
+
+      - name: Build with Gradle
+        run: bash ./gradlew -PappVerName=${{ env.VERSION }} -PappVerCode=${{ env.VERSIONCODE }} assembleRelease
+        
+      - name: Sign Android release
+        if: success()
+        id: sign
+        uses: r0adkll/sign-android-release@v1
+        env:
+          BUILD_TOOLS_VERSION: "30.0.3"
+        with:
+          releaseDirectory: pio/build/outputs/apk/release
+          signingKeyBase64: ${{ secrets.SIGNING_KEY }}
+          alias: ${{ secrets.ALIAS }}
+          keyStorePassword: ${{ secrets.KEY_STORE_PASSWORD }}
+          keyPassword: ${{ secrets.KEY_PASSWORD }}
+
+      - name: Post to channel
+        if: contains(github.event.head_commit.message, '[skip post]') == false
+        env:
+          CHANNEL_ID: ${{ secrets.CHANNEL_ID }}
+          BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
+          MODULE: ${{ steps.sign.outputs.signedReleaseFile }}
+          COMMIT_MESSAGE: |+
+            ${{ github.event.head_commit.message }}
+        run: |
+          ESCAPED=`python3 -c 'import json,os,urllib.parse; print(urllib.parse.quote(json.dumps(os.environ["COMMIT_MESSAGE"])))'`
+          curl -v "https://api.telegram.org/bot${BOT_TOKEN}/sendMediaGroup?chat_id=${CHANNEL_ID}&media=%5B%7B%22type%22:%22document%22,%20%22media%22:%22attach://module%22,%22caption%22:${ESCAPED}%7D%5D"  -F module="@$MODULE"
