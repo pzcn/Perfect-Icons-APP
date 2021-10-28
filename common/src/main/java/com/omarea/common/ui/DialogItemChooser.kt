@@ -5,10 +5,7 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
-import android.widget.AbsListView
-import android.widget.EditText
-import android.widget.Filterable
-import android.widget.TextView
+import android.widget.*
 import com.omarea.common.R
 import com.omarea.common.model.SelectItem
 
@@ -36,6 +33,29 @@ class DialogItemChooser(
         view.findViewById<View>(R.id.btn_confirm).setOnClickListener {
             this.onConfirm(absListView)
         }
+
+        // 全选功能
+        val selectAll = view.findViewById<CompoundButton?>(R.id.select_all)
+        if (selectAll != null) {
+            if (multiple) {
+                val adapter = (absListView.adapter as AdapterItemChooser?)
+                selectAll.visibility = View.VISIBLE
+                selectAll.isChecked = items.filter { it.selected }.size == items.size
+                selectAll.setOnClickListener {
+                    adapter?.setSelectAllState((it as CompoundButton).isChecked)
+                }
+                adapter?.run {
+                    setSelectStateListener(object : AdapterItemChooser.SelectStateListener {
+                        override fun onSelectChange(selected: List<SelectItem>) {
+                            selectAll.isChecked = selected.size == items.size
+                        }
+                    })
+                }
+            } else {
+                selectAll.visibility = View.GONE
+            }
+        }
+
         // 长列表才有搜索
         if (items.size > 5) {
             val clearBtn = view.findViewById<View>(R.id.search_box_clear)
@@ -68,7 +88,7 @@ class DialogItemChooser(
 
     private fun updateTitle() {
         view?.run {
-                findViewById<TextView?>(R.id.dialog_title).run {
+                findViewById<TextView?>(R.id.dialog_title)?.run {
                     text = title
                     visibility = if (title.isNotEmpty()) {
                         View.VISIBLE
@@ -81,7 +101,7 @@ class DialogItemChooser(
 
     private fun updateMessage() {
         view?.run {
-            findViewById<TextView?>(R.id.dialog_desc).run {
+            findViewById<TextView?>(R.id.dialog_desc)?.run {
                 text = message
                 visibility = if (message.isNotEmpty()) {
                     View.VISIBLE

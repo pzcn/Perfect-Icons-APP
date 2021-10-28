@@ -62,7 +62,7 @@ object ThemeModeState {
 
                 activity.window.run {
                     clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
-                    decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LAYOUT_STABLE or View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                    decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN or View.SYSTEM_UI_FLAG_LAYOUT_STABLE
                     addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
 
                     // 设置白色状态栏和白色导航栏
