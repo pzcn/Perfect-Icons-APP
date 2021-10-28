@@ -5,7 +5,10 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
-import android.widget.*
+import android.widget.AbsListView
+import android.widget.EditText
+import android.widget.Filterable
+import android.widget.TextView
 import com.omarea.common.R
 import com.omarea.common.model.SelectItem
 
@@ -35,10 +38,6 @@ class DialogItemChooser2(
         view.findViewById<View>(R.id.btn_confirm).setOnClickListener {
             this.onConfirm(absListView)
         }
-
-        // 全选功能（因为这种类型的选择列表，需要关注选择顺序，将全选功能禁用）
-        view.findViewById<CompoundButton?>(R.id.select_all)?.visibility = View.GONE
-
         // 长列表才有搜索
         if (items.size > 5) {
             val clearBtn = view.findViewById<View>(R.id.search_box_clear)
@@ -71,7 +70,7 @@ class DialogItemChooser2(
 
     private fun updateTitle() {
         view?.run {
-                findViewById<TextView?>(R.id.dialog_title)?.run {
+                findViewById<TextView?>(R.id.dialog_title).run {
                     text = title
                     visibility = if (title.isNotEmpty()) {
                         View.VISIBLE
@@ -84,7 +83,7 @@ class DialogItemChooser2(
 
     private fun updateMessage() {
         view?.run {
-            findViewById<TextView?>(R.id.dialog_desc)?.run {
+            findViewById<TextView?>(R.id.dialog_desc).run {
                 text = message
                 visibility = if (message.isNotEmpty()) {
                     View.VISIBLE

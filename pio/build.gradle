@@ -4,20 +4,22 @@ apply plugin: 'kotlin-android-extensions'
 
 android {
     compileSdkVersion 28
-    buildToolsVersion '28.0.3'
+    buildToolsVersion '30.0.2'
 
     defaultConfig {
+        applicationId "dev.miuiicons.pedroz"
         resConfigs "zh"
         minSdkVersion 21
+        //noinspection ExpiredTargetSdkVersion
         targetSdkVersion 28
-        versionCode 202110081
-        versionName "4.0.4"
+        versionCode appVerCode.toInteger()
+        versionName appVerName
     }
     buildTypes {
+        //release {
+        //  minifyEnabled false
+        //}
         release {
-            minifyEnabled false
-        }
-        release_mini {
             shrinkResources true
             minifyEnabled = true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'

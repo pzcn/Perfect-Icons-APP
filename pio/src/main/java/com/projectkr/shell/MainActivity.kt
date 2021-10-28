@@ -43,8 +43,8 @@ class MainActivity : AppCompatActivity() {
     private fun checkPermission(permission: String): Boolean = PermissionChecker.checkSelfPermission(this, permission) == PermissionChecker.PERMISSION_GRANTED
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
         ThemeModeState.switchTheme(this)
+        super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
         //supportActionBar!!.elevation = 0f

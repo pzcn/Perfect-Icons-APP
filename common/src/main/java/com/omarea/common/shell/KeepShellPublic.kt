@@ -1,5 +1,7 @@
 package com.omarea.common.shell
 
+import android.util.Log
+
 /**
  * Created by Hello on 2018/01/23.
  */
@@ -15,7 +17,7 @@ object KeepShellPublic {
         }
     }
 
-    fun destroyInstance(key: String) {
+    fun destoryInstance(key: String) {
         synchronized(keepShells) {
             if (!keepShells.containsKey(key)) {
                 return
@@ -27,7 +29,7 @@ object KeepShellPublic {
         }
     }
 
-    fun destroyAll() {
+    fun destoryAll() {
         synchronized(keepShells) {
             while (keepShells.isNotEmpty()) {
                 val key = keepShells.keys.first()
@@ -38,15 +40,13 @@ object KeepShellPublic {
         }
     }
 
-    public val defaultKeepShell = KeepShell()
-    public val secondaryKeepShell = KeepShell()
+    private var defaultKeepShell: KeepShell? = null
 
     fun getDefaultInstance(): KeepShell {
-        return if (defaultKeepShell.isIdle || !secondaryKeepShell.isIdle) {
-            defaultKeepShell
-        } else {
-            secondaryKeepShell
+        if (defaultKeepShell == null) {
+            defaultKeepShell = KeepShell()
         }
+        return defaultKeepShell!!
     }
 
     fun doCmdSync(commands: List<String>): Boolean {
@@ -67,11 +67,13 @@ object KeepShellPublic {
 
     //执行脚本
     fun checkRoot(): Boolean {
-        return defaultKeepShell.checkRoot()
+        return getDefaultInstance().checkRoot()
     }
 
     fun tryExit() {
-        defaultKeepShell.tryExit()
-        secondaryKeepShell.tryExit()
+        if (defaultKeepShell != null) {
+            defaultKeepShell!!.tryExit()
+            defaultKeepShell = null
+        }
     }
 }

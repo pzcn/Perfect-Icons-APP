@@ -42,8 +42,6 @@ class ActionPage : AppCompatActivity() {
     private var autoRunItemId = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
         // 如果应用还没启动，就直接打开了actionPage(通常是PIO的快捷方式)，先跳转到启动页面
         if (!ScriptEnvironmen.isInited()) {
             val initIntent = Intent(this.applicationContext, SplashActivity::class.java)
@@ -59,6 +57,7 @@ class ActionPage : AppCompatActivity() {
 
         ThemeModeState.switchTheme(this)
 
+        super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_action_page)
         val toolbar = findViewById<View>(R.id.toolbar) as Toolbar
         setSupportActionBar(toolbar)

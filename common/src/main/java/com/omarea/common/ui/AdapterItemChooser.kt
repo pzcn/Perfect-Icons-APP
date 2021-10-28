@@ -11,11 +11,6 @@ import com.omarea.common.model.SelectItem
 import java.util.*
 
 class AdapterItemChooser(private val context: Context, private var items: ArrayList<SelectItem>, private val multiple: Boolean) : BaseAdapter(), Filterable {
-    interface SelectStateListener {
-        fun onSelectChange(selected: List<SelectItem>)
-    }
-
-    private var selectStateListener: SelectStateListener? = null
     private var filter: Filter? = null
     internal var filterItems: ArrayList<SelectItem> = items
     private val mLock = Any()
@@ -32,7 +27,7 @@ class AdapterItemChooser(private val context: Context, private var items: ArrayL
 
         override fun performFiltering(constraint: CharSequence?): FilterResults {
             val results = Filter.FilterResults()
-            val prefix: String = constraint?.toString() ?: ""
+            val prefix: String = if (constraint == null) "" else constraint.toString()
 
             if (prefix.isEmpty()) {
                 val list: ArrayList<SelectItem>
@@ -48,31 +43,26 @@ class AdapterItemChooser(private val context: Context, private var items: ArrayL
                 synchronized(adapter.mLock) {
                     values = ArrayList<SelectItem>(adapter.items)
                 }
-                val selected = adapter.getSelectedItems()
 
                 val count = values.size
                 val newValues = ArrayList<SelectItem>()
 
                 for (i in 0 until count) {
                     val value = values[i]
-                    if (selected.contains(value)) {
+                    val valueText = if (value.title == null) "" else value.title!!.toLowerCase()
+
+                    // First match against the whole, non-splitted value
+                    if (valueText.contains(prefixString)) {
                         newValues.add(value)
                     } else {
-                        val valueText = if (value.title == null) "" else value.title!!.toLowerCase()
+                        val words = valueText.split(" ".toRegex()).dropLastWhile({ it.isEmpty() }).toTypedArray()
+                        val wordCount = words.size
 
-                        // First match against the whole, non-splitted value
-                        if (valueText.contains(prefixString)) {
-                            newValues.add(value)
-                        } else {
-                            val words = valueText.split(" ".toRegex()).dropLastWhile({ it.isEmpty() }).toTypedArray()
-                            val wordCount = words.size
-
-                            // Start at index 0, in case valueText starts with space(s)
-                            for (k in 0 until wordCount) {
-                                if (words[k].contains(prefixString)) {
-                                    newValues.add(value)
-                                    break
-                                }
+                        // Start at index 0, in case valueText starts with space(s)
+                        for (k in 0 until wordCount) {
+                            if (words[k].contains(prefixString)) {
+                                newValues.add(value)
+                                break
                             }
                         }
                     }
@@ -141,20 +131,15 @@ class AdapterItemChooser(private val context: Context, private var items: ArrayL
         viewHolder.checkBox = convertView.findViewById(R.id.ItemChecBox)
 
         convertView.setOnClickListener {
-            if (multiple) {
+            if (multiple || item.selected) {
                 item.selected = !item.selected
                 viewHolder.checkBox?.isChecked = item.selected
             } else {
-                if (item.selected) {
-                    return@setOnClickListener
-                } else {
-                    val current = items.find { it.selected }
-                    current?.selected = false
-                    item.selected = true
-                    notifyDataSetChanged()
-                }
+                val current = items.find { it.selected }
+                current?.selected = false
+                item.selected = true
+                notifyDataSetChanged()
             }
-            selectStateListener?.onSelectChange(getSelectedItems())
         }
 
         viewHolder.itemTitle?.text = item.title
@@ -166,17 +151,6 @@ class AdapterItemChooser(private val context: Context, private var items: ArrayL
             }
         }
         viewHolder.checkBox?.isChecked = item.selected
-    }
-
-    fun setSelectAllState(allSelected: Boolean) {
-        items.forEach {
-            it.selected = allSelected
-        }
-        notifyDataSetChanged()
-    }
-
-    fun setSelectStateListener(selectStateListener: SelectStateListener?) {
-        this.selectStateListener = selectStateListener
     }
 
     fun getSelectedItems(): List<SelectItem> {

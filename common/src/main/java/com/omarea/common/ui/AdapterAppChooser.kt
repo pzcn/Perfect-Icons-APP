@@ -10,15 +10,7 @@ import com.omarea.common.R
 import kotlinx.coroutines.*
 import java.util.*
 
-class AdapterAppChooser(
-        private val context: Context,
-        private var apps: ArrayList<AppInfo>,
-        private val multiple: Boolean
-) : BaseAdapter(), Filterable {
-    interface SelectStateListener {
-        fun onSelectChange(selected: List<AppInfo>)
-    }
-
+class AdapterAppChooser(private val context: Context, private var apps: ArrayList<AppInfo>, private val multiple: Boolean) : BaseAdapter(), Filterable {
     open class AppInfo {
         var appName: String = ""
         var packageName: String = ""
@@ -28,7 +20,6 @@ class AdapterAppChooser(
         var selected: Boolean = false
     }
 
-    private var selectStateListener: SelectStateListener? = null
     private var filter: Filter? = null
     internal var filterApps: ArrayList<AppInfo> = apps
     private val mLock = Any()
@@ -79,23 +70,18 @@ class AdapterAppChooser(
                 synchronized(adapter.mLock) {
                     values = ArrayList<AppInfo>(adapter.apps)
                 }
-                val selected = adapter.getSelectedItems()
 
                 val count = values.size
                 val newValues = ArrayList<AppInfo>()
 
                 for (i in 0 until count) {
                     val value = values[i]
-                    if (selected.contains(value)) {
+                    val labelText = value.appName.toLowerCase()
+                    val valueText = value.packageName.toLowerCase()
+                    if (searchStr(labelText, prefixString)) {
                         newValues.add(value)
-                    } else {
-                        val labelText = value.appName.toLowerCase()
-                        val valueText = value.packageName.toLowerCase()
-                        if (searchStr(labelText, prefixString)) {
-                            newValues.add(value)
-                        } else if (searchStr(valueText, prefixString)) {
-                            newValues.add(value)
-                        }
+                    } else if (searchStr(valueText, prefixString)) {
+                        newValues.add(value)
                     }
                 }
 
@@ -200,17 +186,14 @@ class AdapterAppChooser(
 
         convertView.setOnClickListener {
             if (multiple || item.selected) {
-                if (multiple) {
-                    item.selected = !item.selected
-                    viewHolder.checkBox?.isChecked = item.selected
-                }
+                item.selected = !item.selected
+                viewHolder.checkBox?.isChecked = item.selected
             } else {
                 val current = apps.find { it.selected }
                 current?.selected = false
                 item.selected = true
                 notifyDataSetChanged()
             }
-            selectStateListener?.onSelectChange(getSelectedItems())
         }
 
         viewHolder.run {
@@ -227,17 +210,6 @@ class AdapterAppChooser(
                 }
             }
         }
-    }
-
-    fun setSelectAllState(allSelected: Boolean) {
-        apps.forEach {
-            it.selected = allSelected
-        }
-        notifyDataSetChanged()
-    }
-
-    fun setSelectStateListener(selectStateListener: SelectStateListener?) {
-        this.selectStateListener = selectStateListener
     }
 
     fun getSelectedItems(): List<AppInfo> {
