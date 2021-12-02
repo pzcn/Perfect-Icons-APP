@@ -12,6 +12,8 @@
         android:textSize="15dp"
         android:padding="0dp"
         android:text=""
+        android:maxLines="8"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:breakStrategy="simple" />
 </LinearLayout>

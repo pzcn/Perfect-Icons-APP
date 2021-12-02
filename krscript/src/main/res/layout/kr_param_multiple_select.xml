@@ -18,12 +18,14 @@
         android:marqueeRepeatLimit="marquee_forever"
         android:maxLines="3"
         android:textColor="?android:textColorPrimary"
+        android:breakStrategy="simple"
         android:textSize="15dp" />
 
     <TextView
         android:id="@+id/kr_param_value_text"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:maxLines="1"
         android:visibility="gone" />
 
     <TextView
