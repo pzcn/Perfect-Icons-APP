@@ -11,7 +11,7 @@ android {
         resConfigs "zh"
         minSdkVersion 21
         //noinspection ExpiredTargetSdkVersion
-        targetSdkVersion 30
+        targetSdkVersion 29
         versionCode appVerCode.toInteger()
         versionName appVerName
     }
