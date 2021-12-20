@@ -1,12 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
 <group>
     <text>
-        <slice bold="true" align="center" break="true" size="30">⚠启动时未检测到网络连接···</slice>
+        <slice bold="true" align="center" break="true" size="30">⚠️网络连接异常</slice>
     </text>
 </group>
 
 <group>
     <text>
-        <slice bold="true" break="true" size="15">如果是APP首次启动，看到这个页面是正常现象
+        <slice bold="true" break="true" size="20">如果是APP首次启动，看到这个页面是正常现象
 
 建议：
 1、确保APP有连接网络以及读写内部储存的权限
