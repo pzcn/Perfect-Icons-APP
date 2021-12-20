@@ -7,11 +7,11 @@
 
 <group>
     <text>
-        <slice bold="true" break="true" size="18">如果APP是首次启动，看到这个页面是正常现象
+        <slice bold="true" break="true" size="14">如果APP是首次启动，看到这个页面是正常现象
 
 建议：
 · 确保APP有联网以及读写内部储存的权限
-· 确保权限正常情况下，重新打开APP即可正常启动
+· 确保权限正常后，重新打开APP即可正常启动
 
 如果多次看到这个页面，请联系开发者。</slice>
     </text>
@@ -19,6 +19,6 @@
 
 <group>
     <text>
-        <slice bold="true" break="true" size="15">注：MIUI从某个版本开始，对于非应用商店安装的应用，默认不授予联网权限，而是在app首次打开时进行弹窗询问。但是对于本app来说，联网弹窗时机过晚，首次启动时没有网络，导致无法加载页面。当赋予app联网权限后，再次启动即可。</slice>
+        <slice bold="true" break="true" size="12">注：MIUI从某个版本开始，对于非应用商店安装的应用，默认不授予联网权限，而是在app首次打开时进行弹窗询问。但是对于本app来说，联网弹窗时机过晚，首次启动时没有网络，导致无法加载页面。当赋予app联网权限后，再次启动即可。</slice>
     </text>
 </group>
