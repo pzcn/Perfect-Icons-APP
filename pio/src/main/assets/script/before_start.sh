@@ -8,5 +8,5 @@ if [ "`curl -I -s --connect-timeout 1 http://connect.rom.miui.com/generate_204 -
 	sh "$START_DIR/script/before_start_online.sh"
 else
 	mkdir -p $START_DIR/online-scripts
-	mv $START_DIR/script/local.xml $START_DIR/online-scripts/more.xml
+	[ -f "$START_DIR/online-scripts/more.xml ] || ( cp $TOOLKIT/local.xml $START_DIR/online-scripts/more.xml )
 fi
