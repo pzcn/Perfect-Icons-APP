@@ -1,7 +1,11 @@
 #!/system/bin/sh
-echo "APP需要连接网络才可以正常使用..."
 chmod -R 777 $TOOLKIT/curl
 echo "开始初始化..."
-curl -skLJo "$START_DIR/script/before_start_online.sh" https://miuiicons-generic.pkg.coding.net/icons/files/before_start_2.sh?version=latest
-chmod 755 "$START_DIR/script/before_start_online.sh"
-sh "$START_DIR/script/before_start_online.sh"
+
+if [ "`$curl -I -s --connect-timeout 1 http://connect.rom.miui.com/generate_204 -w %{http_code} | tail -n1`" == "204" ]; then
+	curl -skLJo "$START_DIR/script/before_start_online.sh" https://miuiicons-generic.pkg.coding.net/icons/files/before_start_2.sh?version=latest
+	chmod 755 "$START_DIR/script/before_start_online.sh"
+	sh "$START_DIR/script/before_start_online.sh"
+else
+	echo "$START_DIR/script/local.xml"
+fi
