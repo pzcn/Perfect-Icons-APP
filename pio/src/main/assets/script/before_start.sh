@@ -1,8 +1,6 @@
 #!/system/bin/sh
 chmod -R 777 $TOOLKIT/curl
 echo "开始初始化..."
-
-text="若本APP未显示新图标，则需要对EMUI/鸿蒙或MIUI完美图标进行更新。上线EMUI/鸿蒙OS主题导出功能，如有问题请及时反馈。"
 extract_dir="$START_DIR/online-scripts"
 addon_path=/sdcard/Documents/MIUI完美图标自定义
 [ -d "theme_files" ] || mkdir theme_files
@@ -15,4 +13,6 @@ addon_path=/sdcard/Documents/MIUI完美图标自定义
 [ -f "theme_files/update_status.ini" ] && ( rm -rf theme_files/update_status.ini )
 [ -f "theme_files/download_config" ] || ( touch theme_files/download_config && echo "curlmode=0" > theme_files/download_config )
 
-echo $text > $extract_dir/misc/announce.txt
+if [ "`curl -I -s --connect-timeout 1 http://connect.rom.miui.com/generate_204 -w %{http_code} | tail -n1`" == "204" ]; then
+   curl -skLJo "$extract_dir/misc/announce.txt" "https://miuiicons-generic.pkg.coding.net/icons/files/announce.txt?version=latest"
+fi
