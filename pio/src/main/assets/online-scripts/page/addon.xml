@@ -1,0 +1,41 @@
+<group>
+    <text>
+        <title>自定义图标使用说明</title>
+        <slice break="true" size="13">使用自定义图标，自动在安装/导出mtz的过程中添加、替换自定义图标。若需要对部分图标进行自定义，可以在 /sdcard/Documents/MIUI完美图标自定义/ 目录下放置对应的静态或动态图标并在安装/导出mtz时开启 是否启用自定义图标 开关，</slice>
+        <slice bold="true" size="13">重新安装模块</slice>
+        <slice size="13">即可应用。
+提供了部分图标的其他风格/历史图标存档，在 自定义图标 页面即可下载。
+</slice>
+        <slice break="true" size="13" bold="true">静态图标</slice>
+        <slice break="true" size="13">若需要自定义静态分层图标，请在 静态图标 文件夹下放置对应包名（或活动名）文件夹，并在其中放置0.png和1.png两张图片，分别作为静态分层图标的背景与前景。具体适配规则请参考 图标适配指南。
+</slice>
+        <slice break="true" size="13" bold="true">动态图标</slice>
+        <slice break="true" size="13">若需要自定义静态分层图标，请在 动态图标 文件夹下放置对应包名（或活动名）文件夹，并在其中放置素材，此处不再展开，具体参考适配指南。</slice>
+    </text>
+</group>
+<group>
+    <text>
+        <title>其他说明</title>
+        <slice break="true" size="13" bold="true">禁用动态图标</slice>
+        <slice break="true" size="13">如果想禁用某个动态图标，在 动态图标/包名文件夹 下新建一个名为config.xml的空文件即可。
+</slice>
+        <slice break="true" size="13" bold="true">[进阶]高级附加</slice>
+        <slice break="true" size="13">自行创建『高级附加』文件夹，可在里面放置MIUI主题的其他组件，如双开角标等。属于进阶用法，不提供任何技术支持。</slice>
+        <slice break="true" size="13" bold="true">删除静态/动态图标</slice>
+        <slice break="true" size="13">暂不支持，将尽力在后续版本中实现。</slice>
+    </text>
+</group>
+<group>
+    <text>
+        <title>从旧版本附加模块迁移</title>
+        <slice break="true" size="13">为了简化自定义流程，旧版本附加模块将不受支持。但是应用提供了自动迁移选项，当检测到旧版本附加模块存在时，在 自定义图标 页面内可找到 自动迁移旧版本附加模块 选项，轻触即可完成迁移以及旧模块卸载。您也可以自行按照说明移动。</slice>
+    </text>
+</group>
+<group>
+    <text>
+        <title>实例-为随机包名的Magisk添加图标</title>
+        <slice break="true" size="13">Magisk随机包名后，为了防止应用检测，将不再显示图标。下面是一个使用自定义图标为Magisk添加图标的实例。
+
+假设Magisk随机后包名为aaa.bbb，那么在/sdcard/Documents/MIUI完美图标自定义/静态图标/内新建一个名为aaa.bbb的文件夹，并在这个文件夹内添加0.png和1.png两张图标图片（图标存档内提供下载）。添加后，安装时打开自定义图标开关重新安装即可使用。</slice>
+    </text>
+</group>

@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+    <group>
+            <text visible="online-scripts/misc/announce_check.sh">
+        <title>配置</title>
+    </text>
+          <picker auto-off="true" shell="hidden" icon="pic/style.png">
+            <title>选择主题图标</title>
+            <options>
+                <option value="ColorOS12">ColorOS12</option>
+                <option value="Flyme9">Flyme9</option>
+                <option value="Aquamarine">润泽</option>
+                <option value="PoeticRomance">镜中诗</option>
+                <option value="BlushGold">8号色</option>
+                <option value="ClearBlue">晴光蓝</option>
+                <option value="CrushGreen">艾草青</option>
+                <option value="PurpleAmber">紫烟琥珀</option>
+                <option value="AmethystLake">紫晶湖</option>
+                <option value="GoldenBeach">碧海金沙</option>
+                <option value="LightWings">光之翼</option>
+                <option value="Nebulae">宇宙之眼</option>
+                <option value="StarrySky">星夜彩绘</option>
+                <option value="Reconstruction">未来之翼</option>
+            </options>
+            <summary sh="sh online-scripts/misc/get_hwt_name.sh" />
+            <auto-off>true</auto-off>
+            <get> 
+            source theme_files/hwt_theme_config
+            echo $sel_theme 
+            </get>
+            <set>echo "sel_theme=$state" &gt; theme_files/hwt_theme_config </set>
+        </picker>
+
+          <picker auto-off="true" shell="hidden" icon="pic/style.png">
+            <title>选择图标大小</title>
+            <options>
+                <option value="S">小</option>
+                <option value="M">中</option>
+                <option value="L">大</option>
+                <option value="XL">特大（鸿蒙不推荐）</option>
+            </options>
+            <summary sh="sh online-scripts/misc/get_hwt_size.sh" />
+            <auto-off>true</auto-off>
+            <get> 
+            source theme_files/hwt_size_config
+            echo $hwt_size 
+            </get>
+            <set>echo "hwt_size=$state" &gt; theme_files/hwt_size_config </set>
+        </picker>
+
+          <picker auto-off="true" shell="hidden" icon="pic/style.png">
+            <title>选择图标形状</title>
+            <options>
+                <option value="Round">圆形</option>
+                <option value="SquareCircle">方圆形</option>
+                <option value="Rectangle">圆角矩形</option>
+            </options>
+            <summary sh="sh online-scripts/misc/get_hwt_shape.sh" />
+            <auto-off>true</auto-off>
+            <get> 
+            source theme_files/hwt_shape_config
+            echo $hwt_shape 
+            </get>
+            <set>echo "hwt_shape=$state" &gt; theme_files/hwt_shape_config </set>
+        </picker>
+         <page html="https://icons-demo.vercel.app/" title="预览主题图标" icon="pic/preview.png" visible="false" />
+         <page config="page/hwt.xml" title="使用说明及常见问题" icon="pic/qa.png" visible="false" />
+        </group>
+
+        <group>
+        <text visible="online-scripts/misc/announce_check.sh">
+        <title>下载</title>
+        </text>
+        <action shell="hidden" icon="pic/folder.png">
+            <title>选择下载位置</title>
+            <param name="dir" type="folder" value="/sdcard/Huawei/Themes" />
+            <summary sh="source theme_files/hwt_dir_config ; echo 当前路径为：$hwtdir " />
+            <set>echo "hwtdir=$dir" &gt; theme_files/hwt_dir_config</set>
+        </action>
+        <action icon="pic/start.png">
+            <title>开始下载hwt</title>
+            <desc>确认上述配置无误后，轻触下载hwt主题包</desc>
+            <set>sh $START_DIR/online-scripts/misc/hwt.sh</set>
+        </action>
+        </group>

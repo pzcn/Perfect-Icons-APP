@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<items>
+    <group >
+        <page config="1.xml" title="资源提取">
+            <resource dir="file:///android_asset/online-scripts" />
+        </page>
+    </group>
+
+</items>
