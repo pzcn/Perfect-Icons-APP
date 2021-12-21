@@ -1,4 +1,15 @@
 <group>
+    <switch shell="hidden">
+     <title>加入Beta计划</title>
+         <desc>加入Beta计划后，脚本将在启动时自动更新到最新版本，将第一时间体验到最新特性，同时稳定性可能会下降。 </desc>
+        <get>
+        source theme_files/beta_config
+        echo $beta
+        </get>
+        <set>echo "beta=$state" &gt; theme_files/beta_config</set>
+    </switch>
+</group>
+<group>
     <text>
         <title>关于</title>
         <slice break="true" size="13" bold="true">完美图标计划以及本APP已开源至Github，APP使用了开源框架kr-scripts。</slice>

@@ -2,7 +2,7 @@
 <items>
     <group >
         <page config="1.xml" title="资源提取">
-            <resource dir="file:///android_asset/online-scripts" />
+            <resource dir="file:///android_asset/local-scripts" />
         </page>
     </group>
 
