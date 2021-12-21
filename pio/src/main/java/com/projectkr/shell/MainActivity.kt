@@ -75,14 +75,7 @@ class MainActivity : AppCompatActivity() {
             val favorites = getItems(favoritesConfig)
             handler.post {
                 progressBarDialog.hideDialog()
-
-                if (favorites != null && favorites.size > 0) {
-                    updateFavoritesTab(favorites, favoritesConfig)
-                    tabIconHelper.newTabSpec(getString(R.string.tab_favorites), ContextCompat.getDrawable(this, R.drawable.tab_favorites)!!, R.id.main_tabhost_2)
-                } else {
-                    main_tabhost_2.visibility = View.GONE
-                }
-
+                main_tabhost_2.visibility = View.GONE
                 if (pages != null && pages.size > 0) {
                     updateMoreTab(pages, page2Config)
                     tabIconHelper.newTabSpec(getString(R.string.tab_pages), ContextCompat.getDrawable(this, R.drawable.tab_pages)!!, R.id.main_tabhost_3)
