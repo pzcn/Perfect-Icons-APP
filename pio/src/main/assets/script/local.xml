@@ -3,6 +3,7 @@
     <text>
         <slice bold="true" align="center" break="true" size="30">⚠️页面加载失败</slice>
     </text>
+    <resource dir="file:///android_asset/local-scripts" />
 </group>
 
 <group>

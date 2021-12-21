@@ -11,6 +11,8 @@ addon_path=/sdcard/Documents/MIUI完美图标自定义
 [ -f "theme_files/hwt_shape_config" ] || ( touch theme_files/hwt_shape_config && echo "hwt_shape=Rectangle" > theme_files/hwt_shape_config )
 [ -f "theme_files/update_status.ini" ] && ( rm -rf theme_files/update_status.ini )
 [ -f "theme_files/download_config" ] || ( touch theme_files/download_config && echo "curlmode=0" > theme_files/download_config )
+[ -f "theme_files/beta_config" ] || ( touch theme_files/beta_config && echo "beta=0" > theme_files/beta_config )
+
 source theme_files/beta_config
 
 if [[ beta = 1 ]]; then
