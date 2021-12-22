@@ -9,7 +9,7 @@
 <group>
     <text>
         <slice bold="true" break="true" size="14">建议：
-· 检查Wlan或数据网络是否打开
+· 检查WLAN或数据网络是否打开
 · 确保APP有联网以及读写内部储存的权限
 · 可以尝试切换不同的网络
 · 当可以正常联网后，重新打开APP即可正常启动
