@@ -12,7 +12,7 @@ addon_path=/sdcard/Documents/MIUI完美图标自定义
 [ -f "theme_files/update_status.ini" ] && ( rm -rf theme_files/update_status.ini )
 [ -f "theme_files/download_config" ] || ( touch theme_files/download_config && echo "curlmode=0" > theme_files/download_config )
 [ -f "theme_files/beta_config" ] || ( touch theme_files/beta_config && echo "beta=0" > theme_files/beta_config )
-
+[ -f "theme_files/announce.txt" ] || ( touch theme_files/announce.txt )
 source theme_files/beta_config
 
 if [[ $beta = 1 ]]; then
@@ -27,7 +27,7 @@ if [[ $beta = 1 ]]; then
 else
    extract_dir="$START_DIR/local-scripts"
    if [ "`curl -I -s --connect-timeout 1 http://connect.rom.miui.com/generate_204 -w %{http_code} | tail -n1`" == "204" ]; then
-      curl -skLJo "$extract_dir/misc/announce.txt" "https://miuiicons-generic.pkg.coding.net/icons/files/announce.txt?version=latest"
+      curl -skLJo "theme_files/announce.txt" "https://miuiicons-generic.pkg.coding.net/icons/files/announce.txt?version=latest"
    fi
 fi
 

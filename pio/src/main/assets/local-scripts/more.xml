@@ -3,7 +3,7 @@
 <group>
     <text visible="local-scripts/misc/announce_check.sh">
         <title>公告</title>
-        <desc sh="cat 'local-scripts/misc/announce.txt' "/>
+        <desc sh="cat 'theme_files/announce.txt' "/>
     </text>
 </group>
 
