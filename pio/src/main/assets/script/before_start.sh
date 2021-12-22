@@ -15,7 +15,7 @@ addon_path=/sdcard/Documents/MIUI完美图标自定义
 
 source theme_files/beta_config
 
-if [[ beta = 1 ]]; then
+if [[ $beta = 1 ]]; then
    extract_dir="$START_DIR/online-scripts"
    echo "当前为Beta通道..."
    [ -d "$START_DIR/online-scripts" ] || mkdir -p $START_DIR/online-scripts
