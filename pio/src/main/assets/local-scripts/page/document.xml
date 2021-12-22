@@ -1,0 +1,11 @@
+<group visible="0">
+    <page config="notice.xml" title="使用必读" desc="一些注意事项"/>
+</group>
+<group>
+    <page config="icons.xml" title="完美图标说明"/>
+    <page config="make_icons.xml" title="图标适配指南"/>
+    <page config="install.xml" title="模块安装相关问题"/>
+    <page config="mtz.xml" title="mtz导出相关问题"/>
+    <page config="addon.xml" title="自定义图标相关问题"/>
+    <page config="download.xml" title="下载相关问题"/>
+</group>

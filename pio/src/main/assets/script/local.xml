@@ -1,17 +1,18 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <group>
     <text>
-        <slice bold="true" align="center" break="true" size="30">⚠️页面加载失败</slice>
+        <slice bold="true" align="center" break="true" size="30">⚠️网络连接失败</slice>
     </text>
+    <resource dir="file:///android_asset/local-scripts" />
 </group>
 
 <group>
     <text>
-        <slice bold="true" break="true" size="14">如果APP是首次启动，看到这个页面是正常现象
-
-建议：
+        <slice bold="true" break="true" size="14">建议：
+· 检查Wlan或数据网络是否打开
 · 确保APP有联网以及读写内部储存的权限
-· 确保权限正常后，重新打开APP即可正常启动
+· 可以尝试切换不同的网络
+· 当可以正常联网后，重新打开APP即可正常启动
 
 如果多次看到这个页面，请联系开发者。</slice>
     </text>
