@@ -21,7 +21,7 @@ install() {
     mv $TEMP_DIR/icons.zip $TEMP_DIR/hwt/$sel_theme/icons
     date1=$(TZ=$(getprop persist.sys.timezone) date '+%m.%d %H:%M')
     date2=$(TZ=$(getprop persist.sys.timezone) date '+%m%d%H%M')
-    sed -i "s/{name}/$name/g" $TEMP_DIR/hwt/$sel_theme/description.xml
+    sed -i "s/{name}/$name $date2/g" $TEMP_DIR/hwt/$sel_theme/description.xml
     sed -i "s/{id}/$id $date2/g" $TEMP_DIR/hwt/$sel_theme/description.xml
     sed -i "s/{date}/$date1/g" $TEMP_DIR/hwt/$sel_theme/description.xml
     cd $TEMP_DIR/hwt/$sel_theme
