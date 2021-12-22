@@ -5,7 +5,7 @@
         <title>下载图标存档</title>
         <desc>将会下载一些app的历史图标或者其他样式的图标，您需要自行移动文件夹位置以启用它们。将会下载到/sdcard/Documents/MIUI完美图标自定义/图标存档</desc>
         <script>
-        sh online-scripts/misc/Icons_Archiving.sh
+        sh local-scripts/misc/Icons_Archiving.sh
             </script>
         </action>
         <text><title>存档存档目前包含</title>
@@ -32,10 +32,10 @@ BanG Dream! b服4.0图标其他样式</slice>
 微信动态图标 旧版方案
 QQ 8.8.0眨眼张嘴帧动画</slice> </text>
 </group><group>
-        <action icon="pic/migrate.png" visible="sh online-scripts/misc/addon_check.sh" id="@addon" reload="@addon"> 
+        <action icon="pic/migrate.png" visible="sh local-scripts/misc/addon_check.sh" id="@addon" reload="@addon"> 
         <title>从之前的自定义模块迁移</title>
         <desc>自动将您安装的自定义模块迁移到新版本位置，并删除之前的自定义模块。</desc>
-        <script>sh $START_DIR/online-scripts/misc/addon_remove.sh</script>
+        <script>sh $START_DIR/local-scripts/misc/addon_remove.sh</script>
         </action>
 </group><group>
          <page config="page/addon.xml" title="自定义图标使用说明" icon="pic/description.png" />

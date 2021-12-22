@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
 <group>
-    <text visible="online-scripts/misc/announce_check.sh">
+    <text visible="local-scripts/misc/announce_check.sh">
         <title>公告</title>
-        <desc sh="cat 'online-scripts/misc/announce.txt' "/>
+        <desc sh="cat 'local-scripts/misc/announce.txt' "/>
     </text>
 </group>
 
 <group>
-    <text visible="online-scripts/misc/announce_check.sh">
+    <text visible="local-scripts/misc/announce_check.sh">
         <title>更新</title>
     </text>
-    <action auto-off="true" id="@status" reload="@status" visible="sh online-scripts/misc/installer_check.sh" icon="pic/update.png">
+    <action auto-off="true" id="@status" reload="@status" visible="sh local-scripts/misc/installer_check.sh" icon="pic/update.png">
         <title>检查更新</title>
-        <set>sh $START_DIR/online-scripts/misc/update_check.sh</set>
-        <summary sh="online-scripts/misc/update_status.sh" />
+        <set>sh $START_DIR/local-scripts/misc/update_check.sh</set>
+        <summary sh="local-scripts/misc/update_status.sh" />
     </action>
-    <page config-sh="online-scripts/misc/get_changelog.sh" icon="pic/changelog.png">
+    <page config-sh="local-scripts/misc/get_changelog.sh" icon="pic/changelog.png">
         <title>更新日志</title>
         <desc>查看近期更新日志。</desc>
     </page>
@@ -27,35 +27,35 @@
 </group>
 
 <group>
-    <text visible="online-scripts/misc/announce_check.sh">
+    <text visible="local-scripts/misc/announce_check.sh">
         <title>MIUI</title>
     </text>
-    <page visible="sh online-scripts/misc/installer_check.sh" id="@install" icon="pic/install.png" before-read="./online-scripts/misc/addon_init.sh" >
+    <page visible="sh local-scripts/misc/installer_check.sh" id="@install" icon="pic/install.png" before-read="./local-scripts/misc/addon_init.sh" >
         <config>install.xml</config>
         <title>安装/升级</title>
         <desc>以 Magisk 模块形式进行安装图标。</desc>
-        <summary sh="online-scripts/misc/get_themes.sh" />
+        <summary sh="local-scripts/misc/get_themes.sh" />
     </page>
-    <page config="mtz.xml" title="导出mtz主题包" icon="pic/download.png" desc="导出mtz主题包。导出后需要主题破解或MIUI主题设计师账号才能使用。" before-read="./online-scripts/misc/addon_init.sh" />
-    <page config="addon.xml" title="图标自定义" icon="pic/addon.png" desc="图标存档下载，以及关于自定义图标的一些杂项。" before-read="./online-scripts/misc/addon_init.sh" />
+    <page config="mtz.xml" title="导出mtz主题包" icon="pic/download.png" desc="导出mtz主题包。导出后需要主题破解或MIUI主题设计师账号才能使用。" before-read="./local-scripts/misc/addon_init.sh" />
+    <page config="addon.xml" title="图标自定义" icon="pic/addon.png" desc="图标存档下载，以及关于自定义图标的一些杂项。" before-read="./local-scripts/misc/addon_init.sh" />
 </group>
 
 <group>
-    <text visible="online-scripts/misc/announce_check.sh">
+    <text visible="local-scripts/misc/announce_check.sh">
         <title>HarmonyOS/EMUI</title>
     </text>
-    <page config="hwt.xml" title="下载hwt主题包" icon="pic/download.png" desc="下载HarmonyOS/EMUI使用的hwt主题包。" before-read="./online-scripts/misc/hwt_init.sh" />
+    <page config="hwt.xml" title="下载hwt主题包" icon="pic/download.png" desc="下载HarmonyOS/EMUI使用的hwt主题包。" before-read="./local-scripts/misc/hwt_init.sh" />
 </group>
 
 <group>
-    <text visible="online-scripts/misc/announce_check.sh">
+    <text visible="local-scripts/misc/announce_check.sh">
         <title>其他</title>
     </text>
     <action shell="hidden" confirm="true" id="@cleancache" reload="@cleancache" icon="pic/clean.png">
         <title>清理缓存</title>
         <desc>当图标安装后出现奇怪的问题时，可以尝试清理缓存，清理后下次安装时会重新下载资源。 </desc>
-        <summary sh="online-scripts/misc/cache_size.sh"/>
-        <set>sh online-scripts/misc/cleancache.sh</set>
+        <summary sh="local-scripts/misc/cache_size.sh"/>
+        <set>sh local-scripts/misc/cleancache.sh</set>
     </action>
     <page config="page/document.xml" title="一些说明" desc="使用前请高强度阅读说明，大部分问题都能在这里找到答案" icon="pic/tips.png" />
     <page config="page/about.xml" title="关于" desc="关于本项目、联系我们、加入群组。" icon="pic/about.png"/>

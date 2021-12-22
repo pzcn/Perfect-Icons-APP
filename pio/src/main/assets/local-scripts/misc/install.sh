@@ -102,7 +102,7 @@ var_miui_version="`getprop ro.miui.ui.version.code`"
 source theme_files/theme_config
 source theme_files/addon_config
 FAKEMODPATH=$TEMP_DIR/modpath
-source $START_DIR/online-scripts/misc/downloader.sh
+source $START_DIR/local-scripts/misc/downloader.sh
   if [ $var_version -lt 10 ]; then 
     echo "- 您的 Android 版本不符合要求，即将退出安装。"
     rm -rf $TEMP_DIR/*

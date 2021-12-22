@@ -18,7 +18,7 @@
                 <option value="StarrySky">EMUI-星夜彩绘(Beta)</option>
                 <option value="Reconstruction">EMUI-未来之翼(Beta)</option>
             </options>
-            <summary sh="sh online-scripts/misc/get_seltheme_name.sh" />
+            <summary sh="sh local-scripts/misc/get_seltheme_name.sh" />
             <auto-off>true</auto-off>
             <get> 
             source theme_files/theme_config
@@ -50,7 +50,7 @@
         <action icon="pic/start.png">
             <title>开始导出mtz</title>
             <desc>确认上述配置无误后，轻触导出mtz</desc>
-            <set>sh $START_DIR/online-scripts/misc/mtz.sh</set>
+            <set>sh $START_DIR/local-scripts/misc/mtz.sh</set>
         </action>
         </group>
         <group>
@@ -59,6 +59,6 @@
             <desc>以 Magisk 模块形式破解主题，自动修改系统内置版本。
 额外功能，无法保证可用性。
 由 @余空_YUK 提供。</desc>
-            <set>sh online-scripts/misc/theme_crack.sh</set>
+            <set>sh local-scripts/misc/theme_crack.sh</set>
         </action>
 </group>

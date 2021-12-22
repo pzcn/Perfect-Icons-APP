@@ -34,7 +34,7 @@ downloader() {
     # --es taskId 【taskId】下载任务的唯一标识 用于跟踪进度
 
     activity="$PACKAGE_NAME/com.projectkr.shell.ActionPageOnline"
-    sh $START_DIR/online-scripts/misc/downloaduiactivity.sh start -a android.intent.action.MAIN -n "$activity" --es downloadUrl "$downloadUrl" --ez autoClose true --es taskId "$task_id" 1 > /dev/null
+    sh $START_DIR/local-scripts/misc/downloaduiactivity.sh start -a android.intent.action.MAIN -n "$activity" --es downloadUrl "$downloadUrl" --ez autoClose true --es taskId "$task_id" 1 > /dev/null
 
     # 等待下载完成
     # downloader/status 存储的是所有下载任务的进度

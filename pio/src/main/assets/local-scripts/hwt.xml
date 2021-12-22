@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
     <group>
-            <text visible="online-scripts/misc/announce_check.sh">
+            <text visible="local-scripts/misc/announce_check.sh">
         <title>配置</title>
     </text>
           <picker auto-off="true" shell="hidden" icon="pic/style.png">
@@ -21,7 +21,7 @@
                 <option value="StarrySky">星夜彩绘</option>
                 <option value="Reconstruction">未来之翼</option>
             </options>
-            <summary sh="sh online-scripts/misc/get_hwt_name.sh" />
+            <summary sh="sh local-scripts/misc/get_hwt_name.sh" />
             <auto-off>true</auto-off>
             <get> 
             source theme_files/hwt_theme_config
@@ -38,7 +38,7 @@
                 <option value="L">大</option>
                 <option value="XL">特大（鸿蒙不推荐）</option>
             </options>
-            <summary sh="sh online-scripts/misc/get_hwt_size.sh" />
+            <summary sh="sh local-scripts/misc/get_hwt_size.sh" />
             <auto-off>true</auto-off>
             <get> 
             source theme_files/hwt_size_config
@@ -54,7 +54,7 @@
                 <option value="SquareCircle">方圆形</option>
                 <option value="Rectangle">圆角矩形</option>
             </options>
-            <summary sh="sh online-scripts/misc/get_hwt_shape.sh" />
+            <summary sh="sh local-scripts/misc/get_hwt_shape.sh" />
             <auto-off>true</auto-off>
             <get> 
             source theme_files/hwt_shape_config
@@ -67,7 +67,7 @@
         </group>
 
         <group>
-        <text visible="online-scripts/misc/announce_check.sh">
+        <text visible="local-scripts/misc/announce_check.sh">
         <title>下载</title>
         </text>
         <action shell="hidden" icon="pic/folder.png">
@@ -79,6 +79,6 @@
         <action icon="pic/start.png">
             <title>开始下载hwt</title>
             <desc>确认上述配置无误后，轻触下载hwt主题包</desc>
-            <set>sh $START_DIR/online-scripts/misc/hwt.sh</set>
+            <set>sh $START_DIR/local-scripts/misc/hwt.sh</set>
         </action>
         </group>

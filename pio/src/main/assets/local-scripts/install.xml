@@ -19,7 +19,7 @@
                 <option value="Reconstruction">EMUI-未来之翼(Beta)</option>
             </options>
             <auto-off>true</auto-off>
-            <summary sh="sh online-scripts/misc/get_seltheme_name.sh" />
+            <summary sh="sh local-scripts/misc/get_seltheme_name.sh" />
             <get> 
             source theme_files/theme_config
             echo $sel_theme 
@@ -47,7 +47,7 @@
         <action confirm="true" icon="pic/start.png" reload="@status,@install,@cleancache,@reboot">
             <title>开始安装</title>
             <desc>确认上述配置无误后，轻触进行安装</desc>
-            <set>sh $START_DIR/online-scripts/misc/install.sh</set>
+            <set>sh $START_DIR/local-scripts/misc/install.sh</set>
         </action>
         <action confirm="true" icon="pic/reboot.png" id="@reboot" shell="hidden">
             <title>重启设备</title>

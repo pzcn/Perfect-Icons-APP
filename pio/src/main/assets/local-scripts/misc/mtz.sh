@@ -81,7 +81,7 @@ addon(){
   source theme_files/theme_config
   source theme_files/mtzdir_config
   source theme_files/addon_config
-  source $START_DIR/online-scripts/misc/downloader.sh
+  source $START_DIR/local-scripts/misc/downloader.sh
   [ -d "$mtzdir" ] || {  echo "× 选择导出的文件夹不存在，请重新选择 "&& rm -rf $TEMP_DIR/* >/dev/null && exit 1; }
   var_theme=icons
   getfiles
