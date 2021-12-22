@@ -19,6 +19,14 @@
 </group>
 
 <group>
+    <action>
+        <title>网络连接检查</title>
+        <set>sh $START_DIR/script/network_check.sh</set>
+        <resource file="script/network_check.sh" />
+    </action>
+</group>
+
+<group>
     <text>
         <slice bold="true" break="true" size="12">注：MIUI从某个版本开始，对于非应用商店安装的应用，默认不授予联网权限，而是在app首次打开时进行弹窗询问。但是对于本app来说，联网弹窗时机过晚，首次启动时没有网络，导致无法加载页面。当赋予app联网权限后，再次启动即可。</slice>
     </text>
