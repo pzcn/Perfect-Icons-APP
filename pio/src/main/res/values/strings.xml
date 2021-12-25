@@ -16,7 +16,7 @@
     <string name="btn_exit">Exit</string>
     <string name="btn_hide">Hide</string>
     <string name="float_monitor_tips">Double tap to close or long press to drag.</string>
-    <string name="permission_float">Please allow the "display over other apps" permission.</string>
+    <string name="permission_float">Please allow the \"display over other apps\" permission.</string>
     <string name="please_wait">Please wait...</string>
     <string name="load_ratio">Load: </string>
     <string name="mhz">Mhz</string>
