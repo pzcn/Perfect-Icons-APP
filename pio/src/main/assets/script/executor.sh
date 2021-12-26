@@ -56,3 +56,10 @@ if [[ -f "$script_path" ]]; then
 else
     echo "${script_path} 已丢失" 1>&2
 fi
+
+if [ "$(getprop persist.sys.locale)" = "zh-CN" ]; then
+    [ -d "$START_DIR/misc/string.ini" ] && source $START_DIR/misc/string.ini
+else
+    [ -d "$START_DIR/misc/stringeng.ini" ] && source $START_DIR/misc/stringeng.ini
+fi
+
