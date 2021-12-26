@@ -16,7 +16,7 @@ jobs:
         with:
           java-version: 12
           distribution: 'adopt'
-       - name: Decode Keystore
+      - name: Decode Keystore
         env:
             ENCODED_STRING: ${{ secrets.SIGNING_KEY }}
         run: |
