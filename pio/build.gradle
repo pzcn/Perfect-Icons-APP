@@ -15,16 +15,8 @@ android {
         versionName appVerName
     }
     signingConfigs {
-        release {
-            def tmpFilePath = System.getProperty("user.home") + "/work/_temp/keystore/"
-            def allFilesFromDir = new File(tmpFilePath).listFiles()
-
-            if (allFilesFromDir != null) {
-                def keystoreFile = allFilesFromDir.first()
-                keystoreFile.renameTo("keystore/signing_keystore.jks")
-            }
-
-            storeFile = file("keystore/signing_keystore.jks")
+        create("release") {
+            storeFile = file("signing_keystore.jks")
             storePassword System.getenv("SIGNING_STORE_PASSWORD")
             keyAlias System.getenv("SIGNING_KEY_ALIAS")
             keyPassword System.getenv("SIGNING_KEY_PASSWORD")
@@ -34,7 +26,8 @@ android {
         //release {
         //  minifyEnabled false
         //}
-        release {
+        getByName("release") {
+            signingConfig = signingConfigs.getByName("release")
             shrinkResources true
             minifyEnabled = true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
