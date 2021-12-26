@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <group>
-    <text>
+    <text visible="if [ $(getprop persist.sys.locale) = zh-CN ]; then echo 1; else echo 0; fi">
         <slice bold="true" align="center" break="true" size="30">⚠️网络连接失败</slice>
     </text>
     <resource dir="file:///android_asset/local-scripts" />
 </group>
 
 <group>
-    <text>
+    <text visible="if [ $(getprop persist.sys.locale) = zh-CN ]; then echo 1; else echo 0; fi">
         <slice bold="true" break="true" size="14">建议：
 · 检查WLAN或数据网络是否打开
 · 确保APP有联网以及读写内部储存的权限
@@ -19,7 +19,7 @@
 </group>
 
 <group>
-    <action>
+    <action visible="if [ $(getprop persist.sys.locale) = zh-CN ]; then echo 1; else echo 0; fi">
         <title>网络连接检查</title>
         <set>sh $START_DIR/script/network_check.sh</set>
         <resource file="script/network_check.sh" />
@@ -27,7 +27,43 @@
 </group>
 
 <group>
-    <text>
+    <text visible="if [ $(getprop persist.sys.locale) = zh-CN ]; then echo 1; else echo 0; fi">
         <slice bold="true" break="true" size="12">注：MIUI从某个版本开始，对于非应用商店安装的应用，默认不授予联网权限，而是在app首次打开时进行弹窗询问。但是对于本app来说，联网弹窗时机过晚，首次启动时没有网络，导致无法加载页面。当赋予app联网权限后，再次启动即可。</slice>
+    </text>
+</group>
+
+
+
+<group>
+    <text visible="if [ $(getprop persist.sys.locale) = zh-CN ]; then echo 0; else echo 1; fi">
+        <slice bold="true" align="center" break="true" size="30">⚠️
+No Network Detected</slice>
+    </text>
+    <resource dir="file:///android_asset/local-scripts" />
+</group>
+
+<group>
+    <text visible="if [ $(getprop persist.sys.locale) = zh-CN ]; then echo 0; else echo 1; fi">
+        <slice bold="true" break="true" size="14">Please：
+· Check if you have your wifi or mobile data activated.
+· Ensure that the app has the permission to network and storage.
+· Try to connect to different kinds of network.
+· When everything is correct, restart the app then it should work well.
+
+If you have trouble in this page, please contact us.</slice>
+    </text>
+</group>
+
+<group>
+    <action visible="if [ $(getprop persist.sys.locale) = zh-CN ]; then echo 0; else echo 1; fi">
+        <title>Network check</title>
+        <set>sh $START_DIR/script/network_check.sh</set>
+        <resource file="script/network_check.sh" />
+    </action>
+</group>
+
+<group>
+    <text visible="if [ $(getprop persist.sys.locale) = zh-CN ]; then echo 0; else echo 1; fi">
+        <slice bold="true" break="true" size="12">Notice that in recent version of MIUI, apps that are not installed in APP Store have no access to network by default, so it might be normal to see this page if it's the first launch of this app. Restart this app after you enable the network permission.</slice>
     </text>
 </group>

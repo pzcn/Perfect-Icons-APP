@@ -8,11 +8,12 @@ if [ "`curl -I -s --connect-timeout 1 http://connect.rom.miui.com/generate_204 -
     else
         extract_dir="$START_DIR/local-scripts"
     fi
-    if [[ -f "$extract_dir/more.xml" ]]; then
-        echo "$extract_dir/more.xml"
+    if [ "$(getprop persist.sys.locale)" = "zh-CN" ]; then
+        page_dir=$extract_dir
+    else
+        page_dir=$extract_dir/eng
+    fi
+    if [[ -f "$page_dir/more.xml" ]]; then
+        echo "$page_dir/more.xml"
     fi
 fi
-
-
-
-    
