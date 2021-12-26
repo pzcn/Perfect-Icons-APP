@@ -23,6 +23,12 @@ export PACKAGE_VERSION_NAME="$({PACKAGE_VERSION_NAME})"
 export PACKAGE_VERSION_CODE="$({PACKAGE_VERSION_CODE})"
 export APP_USER_ID="$({APP_USER_ID})"
 
+if [ "$(getprop persist.sys.locale)" = "zh-CN" ]; then
+    [ -d "$START_DIR/misc/string.ini" ] && source $START_DIR/misc/string.ini
+else
+    [ -d "$START_DIR/misc/stringeng.ini" ] && source $START_DIR/misc/stringeng.ini
+fi
+
 # ROOT_PERMISSION 取值为：true 或 false
 export ROOT_PERMISSION=$({ROOT_PERMISSION})
 
@@ -56,10 +62,3 @@ if [[ -f "$script_path" ]]; then
 else
     echo "${script_path} 已丢失" 1>&2
 fi
-
-if [ "$(getprop persist.sys.locale)" = "zh-CN" ]; then
-    [ -d "$START_DIR/misc/string.ini" ] && source $START_DIR/misc/string.ini
-else
-    [ -d "$START_DIR/misc/stringeng.ini" ] && source $START_DIR/misc/stringeng.ini
-fi
-
