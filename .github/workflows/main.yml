@@ -63,7 +63,7 @@ jobs:
         env:
           CHANNEL_ID: ${{ secrets.CHANNEL_ID }}
           BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
-          MODULE: "${{ github.workspace }}/pio/build/outputs/apk/release/app-release.apk"
+          MODULE: "${{ github.workspace }}/pio/build/outputs/apk/release/pio-release.apk"
           COMMIT_MESSAGE: |+
             ${{ github.event.head_commit.message }}
         run: |
