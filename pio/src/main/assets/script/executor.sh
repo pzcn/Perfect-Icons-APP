@@ -23,14 +23,6 @@ export PACKAGE_VERSION_NAME="$({PACKAGE_VERSION_NAME})"
 export PACKAGE_VERSION_CODE="$({PACKAGE_VERSION_CODE})"
 export APP_USER_ID="$({APP_USER_ID})"
 
-source $START_DIR/theme_files/beta_config
-if [ $beta = 1 ]; then scripts_dir=$START_DIR/online-scripts; else scripts_dir=$START_DIR/local-scripts; fi
-if [ "$(getprop persist.sys.locale)" = "zh-CN" ]; then
-    [ -f "$scripts_dir/misc/string.ini" ] && source $scripts_dir/misc/string.ini
-else
-    [ -f "$scripts_dir/misc/stringeng.ini" ] && source $scripts_dir/misc/stringeng.ini
-fi
-
 # ROOT_PERMISSION 取值为：true 或 false
 export ROOT_PERMISSION=$({ROOT_PERMISSION})
 
@@ -54,6 +46,19 @@ fi
 if [[ "$START_DIR" != "" ]] && [[ -d "$START_DIR" ]]
 then
     cd "$START_DIR"
+fi
+
+# 语言文件
+if [ -f "$START_DIR/theme_files/beta_config" ]; then
+    source $START_DIR/theme_files/beta_config
+else
+    beta=0
+fi
+if [ $beta = 1 ]; then scripts_dir=$START_DIR/online-scripts; else scripts_dir=$START_DIR/local-scripts; fi
+if [ "$(getprop persist.sys.locale)" = "zh-CN" ]; then
+    [ -f "$scripts_dir/misc/string.ini" ] && source $scripts_dir/misc/string.ini
+else
+    [ -f "$scripts_dir/misc/stringeng.ini" ] && source $scripts_dir/misc/stringeng.ini
 fi
 
 # 运行脚本
