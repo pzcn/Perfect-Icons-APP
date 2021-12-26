@@ -23,10 +23,12 @@ export PACKAGE_VERSION_NAME="$({PACKAGE_VERSION_NAME})"
 export PACKAGE_VERSION_CODE="$({PACKAGE_VERSION_CODE})"
 export APP_USER_ID="$({APP_USER_ID})"
 
+source $START_DIR/theme_files/beta_config
+if [ $beta = 1 ]; then scripts_dir=$START_DIR/online-scripts; else scripts_dir=$START_DIR/local-scripts; fi
 if [ "$(getprop persist.sys.locale)" = "zh-CN" ]; then
-    [ -d "$START_DIR/misc/string.ini" ] && source $START_DIR/misc/string.ini
+    [ -d "$scripts_dir/misc/string.ini" ] && source $scripts_dir/misc/string.ini
 else
-    [ -d "$START_DIR/misc/stringeng.ini" ] && source $START_DIR/misc/stringeng.ini
+    [ -d "$scripts_dir/misc/stringeng.ini" ] && source $scripts_dir/misc/stringeng.ini
 fi
 
 # ROOT_PERMISSION 取值为：true 或 false
