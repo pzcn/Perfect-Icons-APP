@@ -10,7 +10,7 @@ android {
         applicationId "dev.miuiicons.pedroz"
         minSdkVersion 21
         //noinspection ExpiredTargetSdkVersion
-        targetSdkVersion 31
+        targetSdkVersion 28
         versionCode appVerCode.toInteger()
         versionName appVerName
     }
