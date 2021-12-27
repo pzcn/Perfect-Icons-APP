@@ -4,13 +4,13 @@ downloader() {
     downloader_result="" # 清空变量，后续此变量将用于存放文件下载后的存储路径
     source $START_DIR/theme_files/download_config
 
-    echo "- 需要下载$theme_name资源... "
+    echo "${string_needtodownloadname_1}${theme_name}${string_needtodownloadname_2}"
 
-    [ $file_size ] || { echo "× 抱歉，在线资源临时维护中，请切换其他主题或稍后再试。" && rm -rf $TEMP_DIR/* 2>/dev/null&& exit 1; }
+    [ $file_size ] || { echo ${string_cannotdownload} && rm -rf $TEMP_DIR/* 2>/dev/null&& exit 1; }
 
-    echo "- 本次需下载 $(printf '%.1f' `echo "scale=1;$file_size/1048576"|bc`) MB"
+    echo "${string_needtodownloadsize_1}$(printf '%.1f' `echo "scale=1;$file_size/1048576"|bc`)${string_needtodownloadsize_2}"
     if [ $curlmode == 0 ]; then
-    echo "- 开始下载... "
+    echo $string_downloadstart
     # 检查是否下载过相同MD5的文件，并且文件文件还存在
     # 如果存在相同md5的文件，直接输出其路径，并跳过下载
     # downloader/path 目录存储的是此前下载过的文件路径，以md5作为区分
@@ -52,7 +52,7 @@ downloader() {
                 echo "progress:[$status/100]"
                 # echo '已下载：'$status
             elif [[ "$status" = '-1' ]]; then
-                echo '文件下载失败' 1>&2
+                echo "${string_downloadfailed}" 1>&2
                 # 退出
                 return 10
             fi
@@ -66,25 +66,25 @@ downloader() {
         if [[ -f "$hisotry" ]]; then
             downloader_result=`cat "$hisotry"`
         else
-            echo '文件下载损坏，请重新尝试下载' && rm -rf $TEMP_DIR/* >/dev/null && exit 1;
+            echo ${string_downloaderror} && rm -rf $TEMP_DIR/* >/dev/null && exit 1;
         fi
     else
         downloader_result=`cat $START_DIR/downloader/result/$task_id`
     fi
     else
-    echo "- 开始以兼容模式下载... "
+    echo $string_downloadstartwithcompatiblemode
     curlfile=$TEMP_DIR/$var_theme.tar.xz
     curl -skLJo "$curlfile" "$downloadUrl"
     md5_loacl=`md5sum $curlfile|cut -d ' ' -f1`
     if [[ "$md5" != "$md5_loacl" ]]; then
-        echo '文件下载损坏，请重新尝试下载' 1>&2
+        echo ${string_downloaderror} 1>&2
     fi
     downloader_result=$curlfile
     fi
 
     if [[ ! "$downloader_result" = "" ]]; then
-    echo '- 下载完成'
+    echo $string_downloadsuccess
     else
-    echo '× 下载失败' && rm -rf $TEMP_DIR/* >/dev/null && exit 1;
+    echo $string_downloadfailed && rm -rf $TEMP_DIR/* >/dev/null && exit 1;
     fi
 }

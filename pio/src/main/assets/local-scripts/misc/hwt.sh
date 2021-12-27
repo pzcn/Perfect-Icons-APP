@@ -1,16 +1,18 @@
 
 install() {
-    echo "- 正在导出主题包..."
+    echo ${string_exportinghwt}
     mkdir -p $TEMP_DIR/
     mkdir -p $TEMP_DIR/hwt
     mkdir -p $TEMP_DIR/icons
     mkdir -p $TEMP_DIR/style
-    tar -xf "$TEMP_DIR/icons.tar.xz" -C "$TEMP_DIR/" >&2
+    cd theme_files/hwt/icons
+    zip -r $TEMP_DIR/icons.zip * -x './.git/*' >/dev/null
+    cd ../..
     tar -xf  $TEMP_DIR/$hwt_theme.tar.xz -C "$TEMP_DIR/hwt/"
     mv $TEMP_DIR/hwt/$sel_theme/icons $TEMP_DIR/hwt/$sel_theme/icons.zip
     unzip -qo $TEMP_DIR/hwt/$sel_theme/icons.zip -d $TEMP_DIR/icons
     rm -rf $TEMP_DIR/hwt/$sel_theme/icons.zip
-    echo "- 正在设置形状和大小..."
+    echo ${string_setsizeshape}
     tar -xf "$TEMP_DIR/style.tar.xz" -C "$TEMP_DIR/style" >&2
     cp -rf ${TEMP_DIR}/style/${hwt_shape}_${hwt_size}/* $TEMP_DIR/icons
     source ${TEMP_DIR}/style/${hwt_shape}_${hwt_size}/config.ini
@@ -26,9 +28,9 @@ install() {
     sed -i "s/{date}/$date1/g" $TEMP_DIR/hwt/$sel_theme/description.xml
     cd $TEMP_DIR/hwt/$sel_theme
     zip -qr $TEMP_DIR/hwt.zip * 
-    mv $TEMP_DIR/hwt.zip $hwtdir/${theme_name}完美图标补全-$date2.hwt
+    mv $TEMP_DIR/hwt.zip $hwtdir/${theme_name}${string_projectname}-$date2.hwt
     rm -rf $TEMP_DIR/*
-    echo "- hwt主题包已导出到 $hwtdir/${theme_name}完美图标补全-$date2.hwt"
+    echo "${string_hwthasexportto} $hwtdir/${theme_name}${string_projectname}-$date2.hwt"
     exit 0
     }
 
@@ -41,10 +43,10 @@ curl -skLJo "$TEMP_DIR/${hwt_theme}.ini" "https://emuiicons-generic.pkg.coding.n
 source $TEMP_DIR/${hwt_theme}.ini
 new_ver=$theme_version
 if [ $new_ver -ne $old_ver ] ;then 
-echo "- ${theme_name}有新版本，即将开始下载..."
+echo "${string_newverdown_1}${theme_name}${string_newverdown_2}"
 download
 else
-echo "- ${theme_name}没有更新，无需下载..."
+echo "${string_vernoneedtodown_1}${theme_name}${string_vernoneedtodown_2}"
 cp -rf theme_files/hwt/${hwt_theme}.ini $TEMP_DIR/${hwt_theme}.ini
 cp -rf theme_files/hwt/${hwt_theme}.tar.xz $TEMP_DIR/${hwt_theme}.tar.xz
 fi
@@ -59,23 +61,43 @@ download() {
     cp -rf $TEMP_DIR/${hwt_theme}.ini theme_files/hwt/${hwt_theme}.ini
     downloadUrl=https://emuiicons-generic.pkg.coding.net/files/zip/${hwt_theme}.tar.xz?version=latest
     downloader "$downloadUrl" $md5
-    cp $file theme_files/hwt/${hwt_theme}.tar.xz
-    cp $downloader_result $file
-    mv $downloader_result theme_files/hwt/${hwt_theme}.tar.xz
+    [ $hwt_theme == iconsrepo ] || cp $downloader_result theme_files/hwt/${hwt_theme}.tar.xz
+    mv $downloader_result $file
 }
 
   exec 3>&2
   exec 2>/dev/null
   mkdir -p theme_files/hwt
-  [ "`curl -I -s --connect-timeout 1 https://miuiiconseng-generic.pkg.coding.net/iconseng/engtest/test?version=latest -w %{http_code} | tail -n1`" == "200" ] ||{  echo "× 未检测到网络连接，取消安装 ... "&& rm -rf $TEMP_DIR/* >/dev/null && exit 1; }
+  [ "`curl -I -s --connect-timeout 1 https://miuiiconseng-generic.pkg.coding.net/iconseng/engtest/test?version=latest -w %{http_code} | tail -n1`" == "200" ] || {  echo "${string_nonetworkdetected}" && rm -rf $TEMP_DIR/* >/dev/null && exit 1; }
   source theme_files/hwt_theme_config
   source theme_files/hwt_dir_config
   source theme_files/hwt_size_config
   source theme_files/hwt_shape_config
   source $START_DIR/local-scripts/misc/downloader.sh
-  [ -d "$hwtdir" ] || {  echo "× 选择导出的文件夹不存在，请重新选择 "&& rm -rf $TEMP_DIR/* >/dev/null && exit 1; }
-  hwt_theme=icons
-  getfiles
+  [ -d "$hwtdir" ] || {  echo ${string_dirnotexist} && rm -rf $TEMP_DIR/* >/dev/null && exit 1; }
+  hwt_theme=iconsrepo
+    if [[ -d theme_files/hwt/icons/.git ]]; then
+    source theme_files/hwt/${hwt_theme}.ini
+    old_ver=$theme_version
+    curl -skLJo "$TEMP_DIR/${hwt_theme}.ini" "https://emuiicons-generic.pkg.coding.net/files/zip/${hwt_theme}.ini?version=latest"
+    source $TEMP_DIR/${hwt_theme}.ini
+    new_ver=$theme_version
+    if [ $new_ver -ne $old_ver ] ;then 
+    echo "${string_newverdown_1}${theme_name}${string_newverdown_2}"
+    cd theme_files/hwt/icons
+    git pull --rebase >/dev/null
+    echo "${string_gitpull}"
+    cd ../../..
+    curl -skLJo "theme_files/hwt/${hwt_theme}.ini" "https://emuiicons-generic.pkg.coding.net/files/zip/${hwt_theme}.ini?version=latest"
+    else
+    echo "${string_vernoneedtodown_1}${theme_name}${string_vernoneedtodown_2}"
+    fi
+  else
+    getfiles
+    echo "${string_extracting}${theme_name}..."
+    tar -xf "$TEMP_DIR/iconsrepo.tar.xz" -C "theme_files/hwt" >&2
+    rm -rf $TEMP_DIR/iconsrepo.tar.xz
+  fi
   hwt_theme=style
   getfiles
   hwt_theme=$sel_theme

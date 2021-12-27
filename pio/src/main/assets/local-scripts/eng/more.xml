@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<group>
+    <text visible="source local-scripts/misc/announce_check.sh">
+        <title>Announcement</title>
+        <desc sh="cat 'theme_files/announce.txt' "/>
+    </text>
+</group>
+
+<group>
+    <text>
+        <title>Update</title>
+    </text>
+    <action icon="pic/update.png">
+        <title>Check for icons update</title>
+        <set>source $START_DIR/local-scripts/misc/update_check.sh</set>
+        <desc>Tap to see if there's an update for resources.</desc>
+    </action>
+    <page config-sh="source local-scripts/misc/get_changelog.sh" icon="pic/changelog.png">
+        <title>Change logs</title>
+        <desc>Check out recent change logs (in Chinese)</desc>
+    </page>
+</group>
+
+<group>
+    <text visible="local-scripts/misc/announce_check.sh">
+        <title>MIUI</title>
+    </text>
+    <page visible="source local-scripts/misc/installer_check.sh" id="@install" icon="pic/install.png" before-read="source local-scripts/misc/addon_init.sh" >
+        <config>install.xml</config>
+        <title>Install / Update</title>
+        <desc>Install MIUI Perfect Icons with Magisk module.</desc>
+        <summary sh="source local-scripts/misc/get_themes.sh" />
+    </page>
+    <page config="mtz.xml" title="Export .mtz file" icon="pic/download.png" desc="Export .mtz file for importing MIUI Perfect Icons in Themes app manually." before-read="source local-scripts/misc/addon_init.sh" />
+    <page config="addon.xml" title="Icons customise" icon="pic/addon.png" desc="Check out how to customize icons and download archieved icons for customization." before-read="source local-scripts/misc/addon_init.sh" />
+</group>
+
+<group>
+    <text>
+        <title>HarmonyOS/EMUI</title>
+    </text>
+    <page config="hwt.xml" title="Export .hwt file" icon="pic/download.png" desc="HarmonyOS/EMUI11 supported." before-read="source local-scripts/misc/hwt_init.sh" />
+    <page config="page/emui10.xml" title="Export .hwt file without adapted icons" icon="pic/download.png" desc="EMUI10 and below are supported." />
+</group>
+
+<group>
+    <text>
+        <title>Others</title>
+    </text>
+    <action shell="hidden" confirm="true" id="@cleancache" reload="@cleancache" icon="pic/clean.png">
+        <title>Clear cache</title>
+        <desc>If there's any error while installing, try to clear cache.</desc>
+        <summary sh="source local-scripts/misc/cache_size.sh"/>
+        <set>source local-scripts/misc/cleancache.sh</set>
+    </action>
+    <page config="page/document.xml" title="Some notes" desc="Please read this first if you have trouble." icon="pic/tips.png" />
+    <page config="page/about.xml" title="About" desc="About the project, contact us, join our chatgroup." icon="pic/about.png"/>
+</group>

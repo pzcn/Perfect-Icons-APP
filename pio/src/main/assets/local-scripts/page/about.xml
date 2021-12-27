@@ -6,7 +6,7 @@
         source theme_files/beta_config
         echo $beta
         </get>
-        <set>sh local-scripts/misc/beta.sh</set>
+        <set>source local-scripts/misc/beta.sh</set>
     </switch>
 </group>
 <group>
@@ -23,7 +23,7 @@
         <slice break="true" size="13" bold="true" link="https://qm.qq.com/cgi-bin/qm/qr?k=_92-RGlaiz3Xm-9i8O3USqTSg29EYg44" u="true">QQ群：561180493</slice>
         <slice break="true" size="13" bold="true" link="https://t.me/miuiicons" u="true">Telegram频道</slice>
         <slice break="true" size="13" bold="true" link="https://t.me/miui_icons_dev" u="true">Telegram群组</slice>
-        <slice break="true" size="13" bold="true" link="https://iconsx.tech/privacy.html" u="true">隐私协议</slice>
+        <slice break="true" size="13" bold="true" link="https://iconsx.vercel.app/privacy.html" u="true">隐私协议</slice>
     </text>
 </group>
 <group>

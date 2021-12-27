@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="UTF-8" ?>
     <group>
         <picker auto-off="true" interruptible="false" shell="hidden" icon="pic/style.png">
-            <title>选择主题图标</title>
+            <title>Theme</title>
             <options>
-                <option value="default">MIUI经典</option>
+                <option value="default">Classic</option>
                 <option value="coloros12">ColorOS12</option>
                 <option value="explore">MIUI探·界</option>
                 <option value="flyme9">Flyme9</option>
                 <option value="lrone">Lrone</option>
                 <option value="luck7">Luck7</option>
-                <option value="perfectcurve">完美曲线</option>
-                <option value="Aquamarine">鸿蒙-润泽(Beta)</option>
-                <option value="AmethystLake">EMUI-紫晶湖(Beta)</option>
-                <option value="GoldenBeach">EMUI-碧海金沙(Beta)</option>
-                <option value="LightWings">EMUI-光之翼(Beta)</option>
-                <option value="Nebulae">EMUI-宇宙之眼(Beta)</option>
-                <option value="StarrySky">EMUI-星夜彩绘(Beta)</option>
-                <option value="Reconstruction">EMUI-未来之翼(Beta)</option>
+                <option value="perfectcurve">Perfect Curve</option>
+                <option value="Aquamarine">HarmonyOS-Aquamarine(Beta)</option>
+                <option value="AmethystLake">EMUI-AmethystLake(Beta)</option>
+                <option value="GoldenBeach">EMUI-GoldenBeach(Beta)</option>
+                <option value="LightWings">EMUI-LightWings(Beta)</option>
+                <option value="Nebulae">EMUI-Nebulae(Beta)</option>
+                <option value="StarrySky">EMUI-StarrySky(Beta)</option>
+                <option value="Reconstruction">EMUI-Reconstruction(Beta)</option>
             </options>
             <auto-off>true</auto-off>
             <summary sh="source local-scripts/misc/get_seltheme_name.sh" />
@@ -27,8 +27,8 @@
             <set>echo "sel_theme=$state" &gt; theme_files/theme_config </set>
         </picker>
         <switch shell="hidden" icon="pic/addon.png">
-            <title>是否启用自定义图标</title>
-            <desc>开启后，安装时将会导入您的自定义图标。</desc>
+            <title>Customized icons?</title>
+            <desc>While activated, customized icons will be import into the theme.</desc>
             <get>
             source theme_files/addon_config
             echo $addon
@@ -38,19 +38,19 @@
 </group>
 
     <group>
-         <page title="预览主题图标" html="https://icons-demo.vercel.app/" icon="pic/preview.png"/>
-         <page config="page/install.xml" title="使用说明及常见问题" icon="pic/qa.png"/>
+         <page title="Themes preview" html="https://icons-demo.vercel.app/" icon="pic/preview.png"/>
+         <page config="page/install.xml" title="Q and A (in Chinese)" icon="pic/qa.png"/>
     </group>
 
     <group>
         <action confirm="true" icon="pic/start.png" reload="@install,@cleancache">
-            <title>开始安装</title>
-            <desc>确认上述配置无误后，轻触进行安装</desc>
+            <title>Start installation</title>
+            <desc>Check all settings above then tap to start installation.</desc>
             <set>source $START_DIR/local-scripts/misc/install.sh</set>
         </action>
-        <action confirm="true" icon="pic/reboot.png" shell="hidden" warning="确认重启？">
-            <title>重启设备</title>
-            <desc>轻触重启</desc>
+        <action confirm="true" icon="pic/reboot.png" shell="hidden" warning="Are you sure to reboot your device?">
+            <title>Reboot</title>
+            <desc>Tap to reboot your device.</desc>
             <set>/system/bin/sync;/system/bin/svc power reboot || reboot</set>
         </action>
 </group>

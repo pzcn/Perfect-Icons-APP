@@ -1,1 +1,1 @@
-[ -d "$addon_path" ] || mkdir -p $addon_path/静态图标 && mkdir -p $addon_path/动态图标 && echo " " >  $addon_path/.nomedia
+[ -d "$addon_path" ] || mkdir -p $addon_path/$string_staticicons && mkdir -p $addon_path/$string_animatingicons && echo " " >  $addon_path/.nomedia
