@@ -61,11 +61,10 @@ else
 fi
 
 unset language
-
-if [ -n $(echo $(getprop persist.sys.locale) | grep CN ) ]; then
+if [ -z "$(echo $(getprop persist.sys.locale) | grep CN )" ]; then
    language=eng
 fi
-   source $scripts_dir/misc/string$language.ini
+source $scripts_dir/misc/string$language.ini
 
 # 运行脚本
 if [[ -f "$script_path" ]]; then
