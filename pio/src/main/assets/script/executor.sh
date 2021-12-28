@@ -57,6 +57,8 @@ fi
 if [ $beta = 1 ]; then scripts_dir=$START_DIR/online-scripts; else scripts_dir=$START_DIR/local-scripts; fi
 if [ "$(getprop persist.sys.locale)" = "zh-CN" ]; then
     [ -f "$scripts_dir/misc/string.ini" ] && source $scripts_dir/misc/string.ini
+elif [ "$(getprop persist.sys.locale)" = "zh-Hans-CN" ]; then
+    [ -f "$scripts_dir/misc/string.ini" ] && source $scripts_dir/misc/string.ini
 else
     [ -f "$scripts_dir/misc/stringeng.ini" ] && source $scripts_dir/misc/stringeng.ini
 fi
