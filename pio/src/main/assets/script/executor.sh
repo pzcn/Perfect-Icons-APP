@@ -51,15 +51,17 @@ fi
 # 语言文件
 if [ -f "$START_DIR/theme_files/beta_config" ]; then
     source $START_DIR/theme_files/beta_config
-if [ $beta = 1 ]; then 
-    scripts_dir=$START_DIR/online-scripts; 
-else scripts_dir=$START_DIR/local-scripts
-fi
+    if [ $beta = 1 ]; then 
+        scripts_dir=$START_DIR/online-scripts 
+    else 
+        scripts_dir=$START_DIR/local-scripts
+    fi
 else
-scripts_dir=$START_DIR/local-scripts   
+    scripts_dir=$START_DIR/local-scripts   
 fi
 
 unset language
+
 if [ -n $(echo $(getprop persist.sys.locale) | grep CN ) ]; then
    language=eng
 fi
