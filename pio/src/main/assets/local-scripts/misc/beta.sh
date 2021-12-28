@@ -1,6 +1,6 @@
 echo "beta=$state" > theme_files/beta_config
 
-if [ "$language" = "" ]; then
+if [ "$(getprop persist.sys.locale)" = "zh-CN" ]; then
 	if [ $state = 1 ]; then
 		echo '- 欢迎加入Beta计划'
 		echo '- 以后在app启动时，将联网获取最新版本的脚本'

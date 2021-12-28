@@ -4,13 +4,13 @@ downloader() {
     downloader_result="" # 清空变量，后续此变量将用于存放文件下载后的存储路径
     source $START_DIR/theme_files/download_config
 
-    echo "'@string:string_needtodownloadname_1'${theme_name}'@string:string_needtodownloadname_2'"
+    echo "${string_needtodownloadname_1}${theme_name}${string_needtodownloadname_2}"
 
-    [ $file_size ] || { echo @string:string_cannotdownload} && rm -rf $TEMP_DIR/* 2>/dev/null&& exit 1; }
+    [ $file_size ] || { echo ${string_cannotdownload} && rm -rf $TEMP_DIR/* 2>/dev/null&& exit 1; }
 
-    echo "'@string:string_needtodownloadsize_1'$(printf '%.1f' `echo "scale=1;$file_size/1048576"|bc`)'@string:string_needtodownloadsize_2'"
+    echo "${string_needtodownloadsize_1}$(printf '%.1f' `echo "scale=1;$file_size/1048576"|bc`)${string_needtodownloadsize_2}"
     if [ $curlmode == 0 ]; then
-    echo @string:string_downloadstart
+    echo $string_downloadstart
     # 检查是否下载过相同MD5的文件，并且文件文件还存在
     # 如果存在相同md5的文件，直接输出其路径，并跳过下载
     # downloader/path 目录存储的是此前下载过的文件路径，以md5作为区分
@@ -52,7 +52,7 @@ downloader() {
                 echo "progress:[$status/100]"
                 # echo '已下载：'$status
             elif [[ "$status" = '-1' ]]; then
-                echo "@string:string_downloadfailed" 1>&2
+                echo "${string_downloadfailed}" 1>&2
                 # 退出
                 return 10
             fi
@@ -66,25 +66,25 @@ downloader() {
         if [[ -f "$hisotry" ]]; then
             downloader_result=`cat "$hisotry"`
         else
-            echo @string:string_downloaderror && rm -rf $TEMP_DIR/* >/dev/null && exit 1;
+            echo ${string_downloaderror} && rm -rf $TEMP_DIR/* >/dev/null && exit 1;
         fi
     else
         downloader_result=`cat $START_DIR/downloader/result/$task_id`
     fi
     else
-    echo @string:string_downloadstartwithcompatiblemode
+    echo $string_downloadstartwithcompatiblemode
     curlfile=$TEMP_DIR/$var_theme.tar.xz
     curl -skLJo "$curlfile" "$downloadUrl"
     md5_loacl=`md5sum $curlfile|cut -d ' ' -f1`
     if [[ "$md5" != "$md5_loacl" ]]; then
-        echo @string:string_downloaderror 1>&2
+        echo ${string_downloaderror} 1>&2
     fi
     downloader_result=$curlfile
     fi
 
     if [[ ! "$downloader_result" = "" ]]; then
-    echo @string:string_downloadsuccess
+    echo $string_downloadsuccess
     else
-    echo @string:string_downloadfailed && rm -rf $TEMP_DIR/* >/dev/null && exit 1;
+    echo $string_downloadfailed && rm -rf $TEMP_DIR/* >/dev/null && exit 1;
     fi
 }
