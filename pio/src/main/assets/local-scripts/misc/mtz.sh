@@ -1,6 +1,6 @@
 
 install() {
-    echo "${string_exporting}$theme_name..."
+    echo "'@string:string_exporting'$theme_name..."
     cd theme_files/miui
     zip -r $TEMP_DIR/icons.zip * -x './res/drawable-xxhdpi/.git/*' >/dev/null
     cd ../..
@@ -22,10 +22,10 @@ install() {
     cd $TEMP_DIR/mtztmp
     time=$(TZ=$(getprop persist.sys.timezone) date '+%Y%m%d%H%M')
     zip -r mtz.zip * >/dev/null
-    mv mtz.zip $mtzdir/${theme_name}${string_projectname}-$time.mtz
+    mv mtz.zip $mtzdir/${theme_name}'@string:string_projectname'-$time.mtz
     rm -rf $TEMP_DIR/*
-    echo "${string_mtzhasexportto} $mtzdir/${theme_name}${string_projectname}-$time.mtz"
-    echo "${string_mtznotice}"
+    echo "'@string:string_mtzhasexportto' $mtzdir/${theme_name}@string:string_projectname}-$time.mtz"
+    echo "@string:string_mtznotice}"
     exit 0
     }
 
@@ -38,10 +38,10 @@ curl -skLJo "$TEMP_DIR/${var_theme}.ini" "https://miuiicons-generic.pkg.coding.n
 source $TEMP_DIR/${var_theme}.ini
 new_ver=$theme_version
 if [ $new_ver -ne $old_ver ] ;then 
-echo "${string_newverdown_1}${theme_name}${string_newverdown_2}"
+echo "'@string:string_newverdown_1'${theme_name}'@string:string_newverdown_2'"
 download
 else
-echo "${string_vernoneedtodown_1}${theme_name}${string_vernoneedtodown_2}"
+echo "'@string:string_vernoneedtodown_1'${theme_name}'@string:string_vernoneedtodown_2'"
 cp -rf theme_files/${var_theme}.ini $TEMP_DIR/${var_theme}.ini
 cp -rf theme_files/${var_theme}.tar.xz $TEMP_DIR/${var_theme}.tar.xz
 fi
@@ -63,13 +63,13 @@ download() {
 
 
 addon(){
-    addon_path=/sdcard/Documents/${string_addonfolder}
+    addon_path=/sdcard/Documents/'@string:string_addonfolder'
     if [ -d "$addon_path" ];then
-    echo "${string_importaddonicons}"
+    echo "'@string:string_importaddonicons'"
     mkdir -p $TEMP_DIR/res/drawable-xxhdpi/
     mkdir -p $TEMP_DIR/layer_animating_icons
-    cp -rf $addon_path/${string_animatingicons}/* $TEMP_DIR/layer_animating_icons/ >/dev/null
-    cp -rf $addon_path/${string_staticicons}/* $TEMP_DIR/res/drawable-xxhdpi/ >/dev/null
+    cp -rf $addon_path/'@string:string_animatingicons'/* $TEMP_DIR/layer_animating_icons/ >/dev/null
+    cp -rf $addon_path/'@string:string_staticicons'/* $TEMP_DIR/res/drawable-xxhdpi/ >/dev/null
     cd $TEMP_DIR
     zip -r icons.zip res >/dev/null
     zip -r icons.zip layer_animating_icons >/dev/null
@@ -78,12 +78,12 @@ addon(){
 }
   exec 3>&2
   exec 2>/dev/null
-  [ "`curl -I -s --connect-timeout 1 https://miuiiconseng-generic.pkg.coding.net/iconseng/engtest/test?version=latest -w %{http_code} | tail -n1`" == "200" ] ||{  echo "${string_nonetworkdetected}" && rm -rf $TEMP_DIR/* >/dev/null && exit 1; }
+  [ "`curl -I -s --connect-timeout 1 https://miuiiconseng-generic.pkg.coding.net/iconseng/engtest/test?version=latest -w %{http_code} | tail -n1`" == "200" ] ||{  echo "@string:string_nonetworkdetected" && rm -rf $TEMP_DIR/* >/dev/null && exit 1; }
   source theme_files/theme_config
   source theme_files/mtzdir_config
   source theme_files/addon_config
   source $START_DIR/local-scripts/misc/downloader.sh
-  [ -d "$mtzdir" ] || {  echo ${string_dirnotexist} && rm -rf $TEMP_DIR/* >/dev/null && exit 1; }
+  [ -d "$mtzdir" ] || {  echo @string:string_dirnotexist && rm -rf $TEMP_DIR/* >/dev/null && exit 1; }
   var_theme=iconsrepo
   if [[ -d theme_files/miui/res/drawable-xxhdpi/.git ]]; then
     source theme_files/${var_theme}.ini
@@ -92,18 +92,18 @@ addon(){
     source $TEMP_DIR/${var_theme}.ini
     new_ver=$theme_version
     if [ $new_ver -ne $old_ver ] ;then 
-    echo "${string_newverdown_1}${theme_name}${string_newverdown_2}"
+    echo "'@string:string_newverdown_1'${theme_name}'@string:string_newverdown_2'"
         cd theme_files/miui/res/drawable-xxhdpi
         git pull --rebase >/dev/null
-        echo "${string_gitpull}"
+        echo "@string:string_gitpull"
     cd ../../../..
     else
-    echo "${string_vernoneedtodown_1}${theme_name}${string_vernoneedtodown_2}"
+    echo "'@string:string_vernoneedtodown_1'${theme_name}'@string:string_vernoneedtodown_2'"
     fi
     echo "$var_theme=$theme_version" >> $TEMP_DIR/module.prop
   else
     getfiles
-        echo "${string_extracting}${theme_name}..."
+        echo "'@string:string_extracting'${theme_name}..."
     tar -xf "$TEMP_DIR/iconsrepo.tar.xz" -C "$TEMP_DIR/" >&2
     mv $TEMP_DIR/icons $TEMP_DIR/icons.zip
     unzip $TEMP_DIR/icons.zip -d theme_files/miui >/dev/null

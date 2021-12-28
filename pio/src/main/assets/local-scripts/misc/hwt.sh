@@ -1,6 +1,6 @@
 
 install() {
-    echo ${string_exportinghwt}
+    echo @string:string_exportinghwt
     mkdir -p $TEMP_DIR/
     mkdir -p $TEMP_DIR/hwt
     mkdir -p $TEMP_DIR/icons
@@ -12,7 +12,7 @@ install() {
     mv $TEMP_DIR/hwt/$sel_theme/icons $TEMP_DIR/hwt/$sel_theme/icons.zip
     unzip -qo $TEMP_DIR/hwt/$sel_theme/icons.zip -d $TEMP_DIR/icons
     rm -rf $TEMP_DIR/hwt/$sel_theme/icons.zip
-    echo ${string_setsizeshape}
+    echo @string:string_setsizeshape
     tar -xf "$TEMP_DIR/style.tar.xz" -C "$TEMP_DIR/style" >&2
     cp -rf ${TEMP_DIR}/style/${hwt_shape}_${hwt_size}/* $TEMP_DIR/icons
     source ${TEMP_DIR}/style/${hwt_shape}_${hwt_size}/config.ini
@@ -28,9 +28,9 @@ install() {
     sed -i "s/{date}/$date1/g" $TEMP_DIR/hwt/$sel_theme/description.xml
     cd $TEMP_DIR/hwt/$sel_theme
     zip -qr $TEMP_DIR/hwt.zip * 
-    mv $TEMP_DIR/hwt.zip $hwtdir/${theme_name}${string_projectname}-$date2.hwt
+    mv $TEMP_DIR/hwt.zip $hwtdir/${theme_name}'@string:string_projectname'-$date2.hwt
     rm -rf $TEMP_DIR/*
-    echo "${string_hwthasexportto} $hwtdir/${theme_name}${string_projectname}-$date2.hwt"
+    echo "'@string:string_hwthasexportto' $hwtdir/${theme_name}'@string:string_projectname'-$date2.hwt"
     exit 0
     }
 
@@ -43,10 +43,10 @@ curl -skLJo "$TEMP_DIR/${hwt_theme}.ini" "https://emuiicons-generic.pkg.coding.n
 source $TEMP_DIR/${hwt_theme}.ini
 new_ver=$theme_version
 if [ $new_ver -ne $old_ver ] ;then 
-echo "${string_newverdown_1}${theme_name}${string_newverdown_2}"
+echo "'@string:string_newverdown_1'${theme_name}'@string:string_newverdown_2'"
 download
 else
-echo "${string_vernoneedtodown_1}${theme_name}${string_vernoneedtodown_2}"
+echo "'@string:string_vernoneedtodown_1'${theme_name}'@string:string_vernoneedtodown_2'"
 cp -rf theme_files/hwt/${hwt_theme}.ini $TEMP_DIR/${hwt_theme}.ini
 cp -rf theme_files/hwt/${hwt_theme}.tar.xz $TEMP_DIR/${hwt_theme}.tar.xz
 fi
@@ -68,13 +68,13 @@ download() {
   exec 3>&2
   exec 2>/dev/null
   mkdir -p theme_files/hwt
-  [ "`curl -I -s --connect-timeout 1 https://miuiiconseng-generic.pkg.coding.net/iconseng/engtest/test?version=latest -w %{http_code} | tail -n1`" == "200" ] || {  echo "${string_nonetworkdetected}" && rm -rf $TEMP_DIR/* >/dev/null && exit 1; }
+  [ "`curl -I -s --connect-timeout 1 https://miuiiconseng-generic.pkg.coding.net/iconseng/engtest/test?version=latest -w %{http_code} | tail -n1`" == "200" ] || {  echo "@string:string_nonetworkdetected" && rm -rf $TEMP_DIR/* >/dev/null && exit 1; }
   source theme_files/hwt_theme_config
   source theme_files/hwt_dir_config
   source theme_files/hwt_size_config
   source theme_files/hwt_shape_config
   source $START_DIR/local-scripts/misc/downloader.sh
-  [ -d "$hwtdir" ] || {  echo ${string_dirnotexist} && rm -rf $TEMP_DIR/* >/dev/null && exit 1; }
+  [ -d "$hwtdir" ] || {  echo @string:string_dirnotexist && rm -rf $TEMP_DIR/* >/dev/null && exit 1; }
   hwt_theme=iconsrepo
     if [[ -d theme_files/hwt/icons/.git ]]; then
     source theme_files/hwt/${hwt_theme}.ini
@@ -83,18 +83,18 @@ download() {
     source $TEMP_DIR/${hwt_theme}.ini
     new_ver=$theme_version
     if [ $new_ver -ne $old_ver ] ;then 
-    echo "${string_newverdown_1}${theme_name}${string_newverdown_2}"
+    echo "'@string:string_newverdown_1'${theme_name}'@string:string_newverdown_2'"
     cd theme_files/hwt/icons
     git pull --rebase >/dev/null
-    echo "${string_gitpull}"
+    echo "'@string:string_gitpull'"
     cd ../../..
     curl -skLJo "theme_files/hwt/${hwt_theme}.ini" "https://emuiicons-generic.pkg.coding.net/files/zip/${hwt_theme}.ini?version=latest"
     else
-    echo "${string_vernoneedtodown_1}${theme_name}${string_vernoneedtodown_2}"
+    echo "'@string:string_vernoneedtodown_1'${theme_name}'@string:string_vernoneedtodown_2'"
     fi
   else
     getfiles
-    echo "${string_extracting}${theme_name}..."
+    echo "'@string:string_extracting'${theme_name}..."
     tar -xf "$TEMP_DIR/iconsrepo.tar.xz" -C "theme_files/hwt" >&2
     rm -rf $TEMP_DIR/iconsrepo.tar.xz
   fi
