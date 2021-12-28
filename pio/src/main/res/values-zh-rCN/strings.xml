@@ -169,7 +169,7 @@
     <string name="string_localver">  旧版本：</string>
     <string name="string_onlinever">  新版本：</string>
     <string name="string_hasnewver1">  </string>
-    <string name="string_hasnewver1">有新版本</string>
+    <string name="string_hasnewver2">有新版本</string>
     <string name="string_newestver1">  </string>
     <string name="string_newestver2">已是最新</string>
 
