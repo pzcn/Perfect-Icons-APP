@@ -51,17 +51,19 @@ fi
 # 语言文件
 if [ -f "$START_DIR/theme_files/beta_config" ]; then
     source $START_DIR/theme_files/beta_config
-else
-    beta=0
+if [ $beta = 1 ]; then 
+    scripts_dir=$START_DIR/online-scripts; 
+else scripts_dir=$START_DIR/local-scripts
 fi
-if [ $beta = 1 ]; then scripts_dir=$START_DIR/online-scripts; else scripts_dir=$START_DIR/local-scripts; fi
-if [ "$(getprop persist.sys.locale)" = "zh-CN" ]; then
-    [ -f "$scripts_dir/misc/string.ini" ] && source $scripts_dir/misc/string.ini
-elif [ "$(getprop persist.sys.locale)" = "zh-Hans-CN" ]; then
-    [ -f "$scripts_dir/misc/string.ini" ] && source $scripts_dir/misc/string.ini
 else
-    [ -f "$scripts_dir/misc/stringeng.ini" ] && source $scripts_dir/misc/stringeng.ini
+scripts_dir=$START_DIR/local-scripts   
 fi
+
+unset language
+if [ -n $(echo $(getprop persist.sys.locale) | grep CN ) ]; then
+   language=eng
+fi
+   source $scripts_dir/misc/string$language.ini
 
 # 运行脚本
 if [[ -f "$script_path" ]]; then
