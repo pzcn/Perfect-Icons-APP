@@ -112,7 +112,7 @@
     <string name="string_lrone">Lrone</string>
     <string name="string_luck7">Luck7</string>
     <string name="string_M">Middle</string>
-    <string name="string_MagiskNotSupport">- This module doesn't support this Magisk version.</string>
+    <string name="string_MagiskNotSupport">- This module doesn&quot;t support this Magisk version.</string>
     <string name="string_MIUI">MIUI12</string>
     <string name="string_moduledescription_1">Using </string>
     <string name="string_moduledescription_2"> with adapted icons.</string>
@@ -122,10 +122,10 @@
     <string name="string_needtodownloadname_2">...</string>
     <string name="string_needtodownloadsize_1">- Downloading </string>
     <string name="string_needtodownloadsize_2"> MB Total...</string>
-    <string name="string_newverdown_1">- There's an update for </string>
+    <string name="string_newverdown_1">- There&quot;s an update for </string>
     <string name="string_newverdown_2">, downloading...</string>
     <string name="string_nonetworkdetected">× No network detected...</string>
-    <string name="string_nooldaddon">Seems like there's no old addon module...</string>
+    <string name="string_nooldaddon">Seems like there&quot;s no old addon module...</string>
     <string name="string_notinstalled">Not installed yet.</string>
     <string name="string_nowinstalled">Now installed: </string>
     <string name="string_nowselected">Now Selected: </string>
@@ -146,7 +146,7 @@
     <string name="string_startinstallation">- Start installation...</string>
     <string name="string_staticicons">Static_Icons</string>
     <string name="string_SysVerNotSupport">- Your Android version is not supported.</string>
-    <string name="string_vernoneedtodown_1">- There's no update for </string>
+    <string name="string_vernoneedtodown_1">- There&quot;s no update for </string>
     <string name="string_vernoneedtodown_2">.</string>
     <string name="string_willredownloadres">- Will redownload online resources in next installation.</string>
     <string name="string_XL">Extra large(Not recommended for Harmoney OS)</string>
@@ -167,13 +167,13 @@
     <string name="string_checking">- Checking </string>
     <string name="string_localver">  Local version: </string>
     <string name="string_onlinever">  Online version: </string>
-    <string name="string_hasnewver1">  There's an update for </string>
+    <string name="string_hasnewver1">  There&quot;s an update for </string>
     <string name="string_hasnewver2">.</string>
-    <string name="string_newestver1">  There's no update for </string>
+    <string name="string_newestver1">  There&quot;s no update for </string>
     <string name="string_newestver2">.</string>
 
     <string name="string_checkingmiuimodule">- Checking update for MIUI module...</string>
-    <string name="string_outofdatemodule">- Out-of-date module detected, and can't get the version code. Please do an update to fix that.</string>
+    <string name="string_outofdatemodule">- Out-of-date module detected, and can&quot;t get the version code. Please do an update to fix that.</string>
     <string name="string_checkingmiuires">- Checking update for MIUI resources...</string>
     <string name="string_checkingemuires">- Checking update for EMUI/HarmonyOS resources...</string>
     <string name="string_checknoupfile">- No installed module or downloaded resources founded.</string>
