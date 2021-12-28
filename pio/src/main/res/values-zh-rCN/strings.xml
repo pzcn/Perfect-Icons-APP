@@ -88,7 +88,7 @@
     <string name="string_cachesize">当前缓存大小</string>
     <string name="string_cannotdownload">× 抱歉，在线资源临时维护中，请切换其他主题或稍后再试。</string>
     <string name="string_ClearBlue">晴光蓝</string>
-    <string name="string_ColorOS1">2ColorOS12</string>
+    <string name="string_ColorOS12">ColorOS12</string>
     <string name="string_completed">完成</string>
     <string name="string_CrushGreen">艾草青</string>
     <string name="string_default">MIUI经典</string>
@@ -116,15 +116,15 @@
     <string name="string_MagiskNotSupport">- 当前模块不支持此Magisk版本</string>
     <string name="string_MIUI">MIUI12</string>
     <string name="string_moduledescription_1">使用</string>
-    <string name="string_moduledescription_">2主题并补全MIUI完美图标</string>
+    <string name="string_moduledescription_2">主题并补全MIUI完美图标</string>
     <string name="string_Nebulae">宇宙之眼</string>
     <string name="string_NeedNewMagisk">- 请安装最新的 Magisk ！</string>
     <string name="string_needtodownloadname_1">- 需要下载</string>
-    <string name="string_needtodownloadname_">2资源... </string>
+    <string name="string_needtodownloadname_2">资源... </string>
     <string name="string_needtodownloadsize_1">- 本次需下载 </string>
-    <string name="string_needtodownloadsize_">2 MB</string>
+    <string name="string_needtodownloadsize_2"> MB</string>
     <string name="string_newverdown_1">- </string>
-    <string name="string_newverdown_">2有新版本，即将开始下载...</string>
+    <string name="string_newverdown_2">有新版本，即将开始下载...</string>
     <string name="string_nonetworkdetected">× 未检测到网络连接，取消安装...</string>
     <string name="string_nooldaddon">似乎没有检测到遗留的附加模块...</string>
     <string name="string_notinstalled">当前未安装。</string>
@@ -148,7 +148,7 @@
     <string name="string_staticicons">静态图标</string>
     <string name="string_SysVerNotSupport">- 您的 Android 版本不符合要求，即将退出安装。</string>
     <string name="string_vernoneedtodown_1">- </string>
-    <string name="string_vernoneedtodown_">2没有更新，无需下载...</string>
+    <string name="string_vernoneedtodown_2">没有更新，无需下载...</string>
     <string name="string_willredownloadres">- 下次安装时需要重新下载在线资源</string>
     <string name="string_XL">最大（鸿蒙不推荐）</string>
 
@@ -169,9 +169,9 @@
     <string name="string_localver">  旧版本：</string>
     <string name="string_onlinever">  新版本：</string>
     <string name="string_hasnewver1">  </string>
-    <string name="string_hasnewver">2有新版本</string>
+    <string name="string_hasnewver1">有新版本</string>
     <string name="string_newestver1">  </string>
-    <string name="string_newestver">2已是最新</string>
+    <string name="string_newestver2">已是最新</string>
 
     <string name="string_checkingmiuimodule">- 检查MIUI完美图标补全模块更新情况：</string>
     <string name="string_outofdatemodule">- 检测到您安装了旧版本，无法获取已安装版本号。完成首次更新后即可正常检查更新。</string>

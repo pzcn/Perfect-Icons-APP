@@ -101,6 +101,7 @@
     <string name="string_explore">MIUI Expoler</string>
     <string name="string_extracting">- Extracting...</string>
     <string name="string_Flyme9">Flyme9</string>
+    <string name="string_Firmament">Firmament</string>
     <string name="string_gitpull">- Block OTA...</string>
     <string name="string_GoldenBeach">Golden Beach</string>
     <string name="string_HarmonyOSAquamarine">HarmonyOS-Aquamarine</string>
@@ -176,5 +177,5 @@
     <string name="string_outofdatemodule">- Out-of-date module detected, and can&quot;t get the version code. Please do an update to fix that.</string>
     <string name="string_checkingmiuires">- Checking update for MIUI resources...</string>
     <string name="string_checkingemuires">- Checking update for EMUI/HarmonyOS resources...</string>
-    <string name="string_checknoupfile">- No installed module or downloaded resources founded.</string>
+    <string name="string_checknofile">- No installed module or downloaded resources founded.</string>
 </resources>
