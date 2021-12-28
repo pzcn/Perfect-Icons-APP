@@ -7,6 +7,7 @@
     <title>选择主题图标</title>
     <options>
       <option value="Firmament">苍穹</option>
+      <option value="MIUI">MIUI12</option>
       <option value="ColorOS12">ColorOS12</option>
       <option value="Flyme9">Flyme9</option>
       <option value="Aquamarine">润泽</option>

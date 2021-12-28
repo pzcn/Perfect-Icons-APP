@@ -14,3 +14,4 @@ source theme_files/hwt_theme_config
 [ $sel_theme = Flyme9 ] && echo "${string_nowselected}${string_Flyme9}"
 [ $sel_theme = ColorOS12 ] && echo "${string_nowselected}${string_ColorOS12}"
 [ $sel_theme = Firmament ] && echo "${string_nowselected}${string_Firmament}"
+[ $sel_theme = MIUI12 ] && echo "${string_nowselected}${string_MIUI}"
