@@ -64,8 +64,7 @@ unset language
 if [ -z "$(echo $(getprop persist.sys.locale) | grep CN )" ]; then
    language=eng
 fi
-source $scripts_dir/misc/string$language.ini
-
+[ -f "$scripts_dir/misc/string$language.ini" ] && source $scripts_dir/misc/string$language.ini
 # 运行脚本
 if [[ -f "$script_path" ]]; then
     chmod 755 "$script_path"
