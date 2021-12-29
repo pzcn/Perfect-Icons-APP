@@ -21,18 +21,6 @@
             android:src="@drawable/ic_settings" />
 
         <TextView
-            android:id="@+id/fullscreen_content"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="50sp"
-            android:gravity="center"
-            android:keepScreenOn="true"
-            android:text="@string/pio_starting"
-            android:textColor="#44ffffff"
-            android:textSize="35sp"
-            android:textStyle="bold" />
-
-        <TextView
             android:id="@+id/start_state_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
