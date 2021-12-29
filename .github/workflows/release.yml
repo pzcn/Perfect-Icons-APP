@@ -25,7 +25,7 @@ jobs:
         run: |
           source gradle.properties
           echo VERSIONCODE=`date +%s` >> $GITHUB_ENV
-          sed -i "s/versionname/${{ appVerName }}/g" pio/src/main/res/values/strings.xml
+          sed -i "s/versionname/${appVerName}/g" pio/src/main/res/values/strings.xml
       - name: Build with Gradle
         run: bash ./gradlew -PappVerCode=${{ env.VERSIONCODE }} assembleRelease
         env:
