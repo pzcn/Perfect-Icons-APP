@@ -23,7 +23,7 @@
     <string name="core">核心</string>
     <string name="title_activity_action_page">功能分页</string>
 
-    <string name="appliction_name">完美图标计划贡献者名单</string>
+    <string name="about_title">完美图标计划贡献者名单</string>
     <string name="engine_version_name">由 Kr-Script 强力驱动</string>
     <string name="system_ram">系统内存</string>
     <string name="hardware_ram">物理内存</string>
