@@ -22,7 +22,6 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
             android:text="@string/about_develpoer"
             android:textColor="#aaaaaa"
             android:textSize="13dp" 
