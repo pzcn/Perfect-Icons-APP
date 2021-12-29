@@ -23,12 +23,8 @@
     <string name="core">核心</string>
     <string name="title_activity_action_page">功能分页</string>
 
-    <string name="author_name">By PedroZ</string>
-    <string name="about_title">关于</string>
-    <string name="appliction_desc">为MIUI、EMUI以及HarmonyOS提供完美图标。</string>
-    <string name="appliction_name">完美图标计划</string>
-    <string name="appliction_author">完美图标计划开发团队</string>
-    <string name="engine_version_name">由 Kr-Script 驱动</string>
+    <string name="appliction_name">完美图标计划贡献者名单</string>
+    <string name="engine_version_name">由 Kr-Script 强力驱动</string>
     <string name="system_ram">系统内存</string>
     <string name="hardware_ram">物理内存</string>
     <string name="swap">交换分区</string>
@@ -75,13 +71,10 @@
     <string name="power_recovery_cmd">sync;reboot recovery;</string>
     <string name="power_emergency_cmd">sync;reboot edl;</string>
 
-    <string name="about_contributor">贡献者名单</string>
     <string name="about_develpoer">完美图标计划开发团队</string>
-    <string name="about_develpoer_mumber">@PedroZ @Yife_Playte @余空_YuK</string>
-    <string name="about_maker">图标绘制</string>
-    <string name="about_maker_mumber">@PedroZ @Yife Playte @潮留美海かり @余空_YuK @Mastiff_Li @Eirperuier @艾欧利娅 @叡煜 @兰博教育 @扫地的喵 @HeMing505 @huoyiming @与病共存 @三滴 @Shahzaib_Ahmed</string>
-    <string name="about_authorizer">主题授权</string>
-    <string name="about_authorizer_mumber">江户川Conan @JellyBeans @栗子汤圆Ria</string>
-    <string name="about_supporter">技术支持</string>
-    <string name="about_supporter_mumber">@相见即是缘 @薛定谔の鼠</string>
+    <string name="about_develpoer_mumber">@PedroZ @Yife_Playte @YuKongA</string>
+    <string name="about_maker">图标绘制与主题适配</string>
+    <string name="about_maker_mumber">@PedroZ @Yife_Playte @潮留美海かり @YuKongA @Mastiff_Li @Eirperuier @艾欧利娅 @叡煜 @兰博教育 @扫地的喵 @HeMing505 @huoyiming @与病共存 @三滴 @Shahzaib_Ahmed</string>
+    <string name="about_supporter">主题授权与技术支持</string>
+    <string name="about_supporter_mumber">@江户川Conan @JellyBeans @栗子汤圆Ria @相见即是缘 @薛定谔の鼠</string>
 </resources>
