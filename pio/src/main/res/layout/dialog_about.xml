@@ -99,10 +99,10 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
             android:text="@string/about_thanks"
             android:textColor="#aaaaaa"
-            android:textSize="11dp" />
+            android:textSize="13dp"
+            android:layout_marginTop="20dp" />
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
