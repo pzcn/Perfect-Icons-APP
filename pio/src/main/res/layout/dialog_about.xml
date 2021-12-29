@@ -11,12 +11,31 @@
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/about_title"
+            android:textColor="#aaaaaa"
+            android:textSize="11dp" />
+
+        <ImageView
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:src="@drawable/ic_settings" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/about_appname"
             android:textColor="@color/fontcolor"
+            android:textAlignment="center"
+            android:textSize="24dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/about_contributor"
+            android:textColor="#aaaaaa"
             android:textSize="20dp" />
 
         <TextView
@@ -25,7 +44,7 @@
             android:text="@string/about_develpoer"
             android:textColor="#aaaaaa"
             android:textSize="13dp" 
-            android:layout_marginTop="24dp"/>
+            android:layout_marginTop="20dp"/>
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -39,7 +58,7 @@
             android:text="@string/about_maker"
             android:textColor="#aaaaaa"
             android:textSize="13dp" 
-            android:layout_marginTop="24dp"/>
+            android:layout_marginTop="20dp"/>
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -53,7 +72,7 @@
             android:text="@string/about_supporter"
             android:textColor="#aaaaaa"
             android:textSize="13dp" 
-            android:layout_marginTop="24dp"/>
+            android:layout_marginTop="20dp"/>
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
