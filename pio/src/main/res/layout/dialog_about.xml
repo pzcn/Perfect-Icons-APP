@@ -22,7 +22,7 @@
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp">
+            android:layout_marginTop="20dp">
             <ImageView
                 android:layout_width="60dp"
                 android:layout_height="60dp"
@@ -96,7 +96,19 @@
             android:text="@string/about_supporter_mumber"
             android:textColor="#aaaaaa"
             android:textSize="11dp" />
-
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="@string/about_thanks"
+            android:textColor="#aaaaaa"
+            android:textSize="11dp" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/about_thanks_mumber"
+            android:textColor="#aaaaaa"
+            android:textSize="11dp" />
         <LinearLayout
             android:gravity="bottom"
             android:orientation="horizontal"
