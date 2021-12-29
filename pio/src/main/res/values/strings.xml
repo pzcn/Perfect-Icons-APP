@@ -72,6 +72,7 @@
     <string name="about_title">About</string>
     <string name="about_appname">Perfect Icon Project</string>
     <string name="about_contributor">Contributor</string>  
+    <string name="engine_version_name">Powered By Kr-Script</string>
     <string name="about_develpoer">Development Team</string>
     <string name="about_develpoer_mumber">@PedroZ @Yife_Playte @余空_YuK</string>
     <string name="about_maker">Icons and Themes Maker </string>
