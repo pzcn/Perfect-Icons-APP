@@ -11,17 +11,12 @@
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/about_title"
-            android:textColor="#aaaaaa"
-            android:textSize="11dp" />
         <LinearLayout
             android:gravity="center"
             android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp">
             <ImageView
                 android:layout_width="60dp"
                 android:layout_height="60dp"
@@ -38,6 +33,12 @@
                     android:layout_height="wrap_content"
                     android:text="@string/about_appname"
                     android:textAlignment="viewStart" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/about_title"
+                    android:textColor="#aaaaaa"
+                    android:textSize="13dp" />
             </LinearLayout>
         </LinearLayout>
 
