@@ -23,7 +23,7 @@ jobs:
             echo $ENCODED_STRING | base64 -di > "pio/signing_keystore.jks"
       - name: Retrieve version
         run: |
-          source gradle.properties
+          source gradle.properties || true
           echo VERSIONCODE=`date +%s` >> $GITHUB_ENV
           sed -i "s/versionname/${appVerName}/g" pio/src/main/res/values/strings.xml
       - name: Build with Gradle

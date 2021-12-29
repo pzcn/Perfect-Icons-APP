@@ -40,7 +40,7 @@ jobs:
 
       - name: Retrieve version
         run: |
-          source gradle.properties
+          source gradle.properties || true
           echo VERSIONCODE=`date +%s` >> $GITHUB_ENV
           VERSION=${appVerName}.$(echo ${{ github.event.head_commit.id }} | head -c 10)
           echo VERSION=${appVerName}.$(echo ${{ github.event.head_commit.id }} | head -c 10) >> $GITHUB_ENV
