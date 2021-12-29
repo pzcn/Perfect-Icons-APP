@@ -40,10 +40,11 @@ jobs:
 
       - name: Retrieve version
         run: |
-          
+          source gradle.properties
           echo VERSIONCODE=`date +%s` >> $GITHUB_ENV
-          echo VERSION=$(echo ${{ github.event.head_commit.id }} | head -c 10) >> $GITHUB_ENV
-
+          VERSION=${{ appVerName }}.$(echo ${{ github.event.head_commit.id }} | head -c 10)
+          echo VERSION=${{ appVerName }}.$(echo ${{ github.event.head_commit.id }} | head -c 10) >> $GITHUB_ENV
+          sed -i "s/versionname/${{ VERSION }}/g" pio/src/main/res/values/strings.xml
       - name: Build with Gradle
         run: bash ./gradlew -PappVerName=${{ env.VERSION }} -PappVerCode=${{ env.VERSIONCODE }} assembleRelease
         env:

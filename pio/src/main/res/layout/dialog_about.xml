@@ -11,12 +11,18 @@
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/about_version"
+            android:textColor="#aaaaaa"
+            android:textSize="11dp" />
         <LinearLayout
             android:gravity="center"
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp">
+            android:layout_marginTop="10dp">
             <ImageView
                 android:layout_width="60dp"
                 android:layout_height="60dp"
@@ -36,7 +42,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/about_title"
+                    android:text="@string/about_contributors"
                     android:textColor="#aaaaaa"
                     android:textSize="13dp" />
             </LinearLayout>
