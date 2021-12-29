@@ -104,7 +104,7 @@
             android:textColor="#aaaaaa"
             android:textSize="11dp" />
         <LinearLayout
-            android:gravity="bottom"
+            android:gravity="center"
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
