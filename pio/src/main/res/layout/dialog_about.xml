@@ -135,6 +135,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/about_version"
                     android:textColor="#aaaaaa"
+                    android:textAlignment="textEnd"
                     android:textSize="11dp" />
                 <TextView
                     android:layout_width="match_parent"
