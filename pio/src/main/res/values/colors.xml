@@ -9,8 +9,7 @@
     <color name="cardBgDarkTransparent">#a0000000</color>
     <color name="cardBgLight">#ffffff</color>
     <color name="cardBgLightTransparent">#c0ffffff</color>
-    <color name="font_light">#464646</color>
-    <color name="font_dark">#c0c0c0</color>
+    <color name="font_color">#464646</color>
     <color name="color_load_none">#00d5d9</color>
     <color name="color_load_low">#02d98d</color>
     <color name="color_load_mid">#87cb00</color>
