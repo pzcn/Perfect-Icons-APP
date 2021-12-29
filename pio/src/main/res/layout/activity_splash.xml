@@ -20,7 +20,7 @@
     </LinearLayout>
     <TextView
         android:textSize="13sp"
-        android:textColor="@color/fontcolor"
+        android:textColor="#808080"
         android:layout_gravity="bottom"
         android:id="@+id/start_state_text"
         android:layout_width="match_parent"
