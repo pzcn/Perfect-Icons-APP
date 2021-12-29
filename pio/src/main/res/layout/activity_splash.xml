@@ -6,7 +6,6 @@
     android:backgroundTintMode="screen"
     android:clipToPadding="true"
     android:fitsSystemWindows="false">
-
     <LinearLayout
         android:id="@+id/start_logo"
         android:layout_width="match_parent"
@@ -14,17 +13,14 @@
         android:layout_gravity="center"
         android:gravity="center"
         android:orientation="vertical">
-
         <ImageView
             android:layout_width="200dp"
             android:layout_height="200dp"
             android:src="@drawable/ic_settings" />
-
     </LinearLayout>
-    
     <TextView
         android:textSize="13sp"
-        android:textColor="#AAFFFFFF"
+        android:textColor="?android:fontcolor"
         android:layout_gravity="bottom"
         android:id="@+id/start_state_text"
         android:layout_width="match_parent"
@@ -36,5 +32,4 @@
         android:textAlignment="center"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp" />
-
 </FrameLayout>
