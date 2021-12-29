@@ -17,12 +17,16 @@
             android:text="@string/about_title"
             android:textColor="#aaaaaa"
             android:textSize="11dp" />
-
-        <ImageView
-            android:layout_width="200dp"
-            android:layout_height="200dp"
-            android:src="@drawable/ic_settings" />
-
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical">
+            <ImageView
+                android:layout_width="200dp"
+                android:layout_height="200dp"
+                android:src="@drawable/ic_settings" />
+        </LinearLayout>
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -35,8 +39,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/about_contributor"
-            android:textColor="#aaaaaa"
-            android:textSize="20dp" />
+            android:textColor="@color/fontcolor"
+            android:textAlignment="center"
+            android:textSize="24dp" />
 
         <TextView
             android:layout_width="match_parent"
