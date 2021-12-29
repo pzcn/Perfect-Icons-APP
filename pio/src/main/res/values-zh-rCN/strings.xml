@@ -79,6 +79,6 @@
     <string name="about_supporter">主题授权与技术支持</string>
     <string name="about_authorizer_mumber">@江户川Conan @JellyBeans @栗子汤圆Ria</string>
     <string name="about_supporter_mumber">@相见即是缘 @薛定谔の鼠</string>
-    <string name="about_supporter">特别鸣谢</string>
-    <string name="about_authorizer_mumber">@嘟嘟斯基</string>
+    <string name="about_thanks">特别鸣谢</string>
+    <string name="about_thanks_mumber">@嘟嘟斯基</string>
 </resources>
