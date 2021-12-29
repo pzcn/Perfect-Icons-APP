@@ -35,6 +35,69 @@
             android:textColor="@color/colorAccent"
             android:textSize="11dp" />
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="@string/about_contributor"
+            android:textColor="#aaaaaa"
+            android:textSize="13dp" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="@string/about_develpoer"
+            android:textColor="#aaaaaa"
+            android:textSize="13dp" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="@string/about_develpoer_mumber"
+            android:textColor="#aaaaaa"
+            android:textSize="11dp" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="@string/about_maker"
+            android:textColor="#aaaaaa"
+            android:textSize="13dp" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="@string/aabout_maker_mumber"
+            android:textColor="#aaaaaa"
+            android:textSize="11dp" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="@string/about_authorizer_mumber"
+            android:textColor="#aaaaaa"
+            android:textSize="13dp" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="@string/about_authorizer_mumber"
+            android:textColor="#aaaaaa"
+            android:textSize="11dp" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="@string/about_supporter"
+            android:textColor="#aaaaaa"
+            android:textSize="13dp" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="@string/about_supporter_mumber"
+            android:textColor="#aaaaaa"
+            android:textSize="11dp" />
         <LinearLayout
             android:gravity="bottom"
             android:orientation="horizontal"
