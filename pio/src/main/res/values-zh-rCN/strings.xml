@@ -69,8 +69,8 @@
     <string name="power_recovery_cmd">sync;reboot recovery;</string>
     <string name="power_emergency_cmd">sync;reboot edl;</string>
 
-    <string name="about_title">贡献者名单</string>
     <string name="about_appname">完美图标计划</string>
+    <string name="about_contributors">贡献者名单</string>    
     <string name="engine_version_name">由 Kr-Script 强力驱动</string>
     <string name="about_develpoer">完美图标计划开发团队</string>
     <string name="about_develpoer_mumber">@PedroZ @Yife_Playte @YuKongA</string>

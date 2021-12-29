@@ -69,8 +69,9 @@
     <string name="power_recovery_cmd">sync;reboot recovery;</string>
     <string name="power_emergency_cmd">sync;reboot edl;</string>
 
-    <string name="about_title">Contributors</string>
+    <string name="about_version">[versionname]</string>
     <string name="about_appname">Perfect Icon Project</string>
+    <string name="about_contributors">Contributors</string>  
     <string name="engine_version_name">Powered By Kr-Script</string>
     <string name="about_develpoer">Development Team</string>
     <string name="about_develpoer_mumber">@PedroZ @Yife_Playte @余空_YuK</string>
