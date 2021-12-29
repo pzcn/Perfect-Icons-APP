@@ -52,19 +52,19 @@ fi
 if [ -f "$START_DIR/theme_files/beta_config" ]; then
     source $START_DIR/theme_files/beta_config
     if [ $beta = 1 ]; then 
-        scripts_dir=$START_DIR/online-scripts 
+        extract_dir=$START_DIR/online-scripts 
     else 
-        scripts_dir=$START_DIR/local-scripts
+        extract_dir=$START_DIR/local-scripts
     fi
 else
-    scripts_dir=$START_DIR/local-scripts   
+    extract_dir=$START_DIR/local-scripts   
 fi
 
 unset language
 
 [ -z "$(echo $(getprop persist.sys.locale) | grep CN )" ] && language=eng
 
-[ -f "$scripts_dir/misc/string$language.ini" ] && source $scripts_dir/misc/string$language.ini
+[ -f "$extract_dir/misc/string$language.ini" ] && source $extract_dir/misc/string$language.ini
 
 # 运行脚本
 if [[ -f "$script_path" ]]; then
