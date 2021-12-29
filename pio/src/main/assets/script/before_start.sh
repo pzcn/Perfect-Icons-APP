@@ -1,7 +1,7 @@
 #!/system/bin/sh
 
 if [ -z $language ]; then
-   string_init="开始初始化..."
+   string_init="启动中..."
    string_beta="当前为Beta通道..."
    language=""
 else
