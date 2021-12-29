@@ -81,9 +81,7 @@
     <string name="about_maker">图标绘制</string>
     <string name="about_maker_mumber">@PedroZ @Yife Playte @潮留美海かり @余空_YuK @Mastiff_Li @Eirperuier @艾欧利娅 @叡煜 @兰博教育 @扫地的喵 @HeMing505 @huoyiming @与病共存 @三滴 @Shahzaib_Ahmed</string>
     <string name="about_authorizer">主题授权</string>
-    <string name="about_authorizer_mumber1">LRONE-江户川Conan</string>
-    <string name="about_authorizer_mumber2">Luck7-JellyBeans</string>
-    <string name="about_authorizer_mumber2">完美曲线主题-栗子汤圆Ria</string>
-    <string name="about_Supporter">技术支持</string>
-    <string name="about_Supporter_mumber1">@相见即是缘 @薛定谔の鼠</string>
+    <string name="about_authorizer_mumber">江户川Conan @JellyBeans @栗子汤圆Ria</string>
+    <string name="about_supporter">技术支持</string>
+    <string name="about_supporter_mumber">@相见即是缘 @薛定谔の鼠</string>
 </resources>
