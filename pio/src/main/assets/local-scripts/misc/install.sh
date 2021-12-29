@@ -51,7 +51,7 @@ curl -skLJo "$TEMP_DIR/${var_theme}.ini" "https://miuiicons-generic.pkg.coding.n
     mv $downloader_result $TEMP_DIR/$var_theme.tar.xz
 }
 addon(){
-    addon_path=/sdcard/Documents/${string_addonfolder}
+    addon_path=$SDCARD_PATH/Documents/${string_addonfolder}
     if [ -d "$addon_path" ];then
     echo "${string_importaddonicons}"
     mkdir -p $TEMP_DIR/res/drawable-xxhdpi/
@@ -140,7 +140,7 @@ source $START_DIR/local-scripts/misc/downloader.sh
   var_theme=$sel_theme
   getfiles
   echo "id=MIUIiconsplus
-name=MIUI ${string_projectname}
+name=MIUI${string_projectname}
 author=@PedroZ
 description=${string_moduledescription_1}${theme_name}${string_moduledescription_2}
 version=$(TZ=$(getprop persist.sys.timezone) date '+%Y%m%d%H%M')

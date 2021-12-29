@@ -4,11 +4,11 @@
 
 if [[ ! -f "theme_files/hwt_dir_config" ]]; then
 	touch theme_files/hwt_dir_config
-	if [[ -d "/sdcard/Huawei/Themes" ]]; then
-		echo "hwtdir=/sdcard/Huawei/Themes" > theme_files/hwt_dir_config
-	elif [[ -d "/sdcard/Download" ]]; then
-		echo "hwtdir=/sdcard/Download" > theme_files/hwt_dir_config
+	if [[ -d "$SDCARD_PATH/Huawei/Themes" ]]; then
+		echo "hwtdir=$SDCARD_PATH/Huawei/Themes" > theme_files/hwt_dir_config
+	elif [[ -d "$SDCARD_PATH/Download" ]]; then
+		echo "hwtdir=$SDCARD_PATH/Download" > theme_files/hwt_dir_config
 	else
-		echo "hwtdir=/sdcard" > theme_files/hwt_dir_config
+		echo "hwtdir=$SDCARD_PATH" > theme_files/hwt_dir_config
 	fi
 fi

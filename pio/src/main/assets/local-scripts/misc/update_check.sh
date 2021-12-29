@@ -22,10 +22,10 @@ echo
 modules_installed=0
 #MIUI模块
 if [ -f "/data/adb/modules_update/MIUIiconsplus/module.prop" ]; then
-source /data/adb/modules_update/MIUIiconsplus/module.prop
+source /data/adb/modules_update/MIUIiconsplus/module.prop 2>/dev/null
 modules_installed=1
 elif [ -f "/data/adb/modules/MIUIiconsplus/module.prop" ]; then
-source /data/adb/modules/MIUIiconsplus/module.prop
+source /data/adb/modules/MIUIiconsplus/module.prop 2>/dev/null
 modules_installed=1
 fi
 
@@ -37,7 +37,11 @@ if [ -z $themeid ]; then
 echo ${string_outofdatemodule}
 fi
 url=https://miuiicons-generic.pkg.coding.net/icons/files/
-old_ver=$iconsrepo
+if [ -z "$icons" ];then
+	old_ver=$iconsrepo
+else
+	old_ver=$icons
+fi
 f=iconsrepo.ini
 check
 f=${themeid}.ini

@@ -63,7 +63,7 @@ download() {
 
 
 addon(){
-    addon_path=/sdcard/Documents/${string_addonfolder}
+    addon_path=$SDCARD_PATH/Documents/${string_addonfolder}
     if [ -d "$addon_path" ];then
     echo "${string_importaddonicons}"
     mkdir -p $TEMP_DIR/res/drawable-xxhdpi/
