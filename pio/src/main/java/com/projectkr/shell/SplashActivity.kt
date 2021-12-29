@@ -167,7 +167,7 @@ class SplashActivity : Activity() {
         fun onLogOutput(log: String) {
             handler.post {
                 synchronized(notificationMessageRows) {
-                    if (notificationMessageRows.size > 6) {
+                    if (notificationMessageRows.size > 3) {
                         notificationMessageRows.remove(notificationMessageRows.first())
                         someIgnored = true
                     }
