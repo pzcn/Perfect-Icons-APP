@@ -140,7 +140,7 @@ source $START_DIR/local-scripts/misc/downloader.sh
   var_theme=$sel_theme
   getfiles
   echo "id=MIUIiconsplus
-name=MIUI${string_projectname}
+name=MIUI ${string_projectname}
 author=@PedroZ
 description=${string_moduledescription_1}${theme_name}${string_moduledescription_2}
 version=$(TZ=$(getprop persist.sys.timezone) date '+%Y%m%d%H%M')

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <group>
-    <picker auto-off="true" shell="hidden" icon="pic/style.png">
+    <../picker auto-off="true" shell="hidden" icon="../pic/style.png">
         <title>Theme</title>
         <options>
             <option value="default">Classic</option>
@@ -25,8 +25,8 @@
             echo $sel_theme
         </get>
         <set>echo "sel_theme=$state" &gt; theme_files/theme_config </set>
-    </picker>
-    <switch shell="hidden" icon="pic/addon.png">
+    </../picker>
+    <switch shell="hidden" icon="../pic/addon.png">
         <title>Customized icons?</title>
         <desc>While activated, customized icons will be import into the theme.</desc>
         <get>
@@ -35,7 +35,7 @@
         </get>
         <set>echo "addon=$state" &gt; theme_files/addon_config</set>
     </switch>
-    <action shell="hidden" icon="pic/folder.png">
+    <action shell="hidden" icon="../pic/folder.png">
         <title>Select export path</title>
         <param name="dir" type="folder" value="/sdcard/Download" />
         <summary sh="source theme_files/mtzdir_config ; echo Now at：$mtzdir " />
@@ -43,11 +43,11 @@
     </action>
 </group>
 <group>
-    <page html="https://icons-demo.vercel.app/" title="Themes preview" icon="pic/preview.png"/>
-    <page config="page/mtz.xml" title="Q and A (in Chinese)" icon="pic/qa.png"/>
+    <page html="https://icons-demo.vercel.app/" title="Themes preview" icon="../pic/preview.png"/>
+    <page config="page/mtz.xml" title="Q and A (in Chinese)" icon="../pic/qa.png"/>
 </group>
 <group>
-    <action icon="pic/start.png" reload="@cleancache">
+    <action icon="../pic/start.png" reload="@cleancache">
         <title>Export</title>
         <desc>Check all settings above then tap to export .mtz file.</desc>
         <set>source $START_DIR/local-scripts/misc/mtz.sh</set>
