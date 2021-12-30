@@ -24,6 +24,20 @@
         <set>sh $START_DIR/script/network_check.sh</set>
         <resource file="script/network_check.sh" />
     </action>
+    <title>加入Beta计划</title>
+         <desc>加入Beta计划后，脚本将在启动时自动更新到最新版本，将第一时间体验到最新特性，同时稳定性可能会下降。 </desc>
+        <get>
+        source theme_files/beta_config
+        echo $beta
+        </get>
+        <set>source local-scripts/misc/beta.sh</set>
+    </switch>
+    <action shell="hidden" confirm="true" id="@cleancache" reload="@cleancache">
+        <title>清理缓存</title>
+        <desc>当图标安装后出现奇怪的问题时，可以尝试清理缓存，清理后下次安装时会重新下载资源 </desc>
+        <summary sh="source local-scripts/misc/cache_size.sh"/>
+        <set>source local-scripts/misc/cleancache.sh</set>
+    </action>
 </group>
 
 <group>
@@ -59,6 +73,21 @@ If you have trouble in this page, please contact us.</slice>
         <title>Network check</title>
         <set>sh $START_DIR/script/network_check.sh</set>
         <resource file="script/network_check.sh" />
+    </action>
+     <switch>
+     <title>Beta version</title>
+         <desc>When in beta version, the scripts will automatically update itself, and you will experience the latest features, but with lower stability.</desc>
+        <get>
+        source theme_files/beta_config
+        echo $beta
+        </get>
+        <set>source local-scripts/misc/beta.sh</set>
+    </switch>
+    <action shell="hidden" confirm="true" id="@cleancache" reload="@cleancache">
+        <title>Clear cache</title>
+        <desc>If there's any error while installing, try to clear cache.</desc>
+        <summary sh="source local-scripts/misc/cache_size.sh"/>
+        <set>source local-scripts/misc/cleancache.sh</set>
     </action>
 </group>
 
