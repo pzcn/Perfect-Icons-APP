@@ -3,7 +3,7 @@
   <text>
     <title>Configuration</title>
   </text>
-  <../picker auto-off="true" shell="hidden" icon="../pic/style.png">
+  <picker auto-off="true" shell="hidden" icon="../pic/style.png">
     <title>Theme</title>
     <options>
       <option value="Firmament">Firmament</option>
@@ -27,8 +27,8 @@
     <auto-off>true</auto-off>
     <get>source theme_files/hwt_theme_config echo $sel_theme</get>
     <set>echo "sel_theme=$state" &gt; theme_files/hwt_theme_config</set>
-  </../picker>
-  <../picker auto-off="true" shell="hidden" icon="../pic/style.png">
+  </picker>
+  <picker auto-off="true" shell="hidden" icon="../pic/style.png">
     <title>Icon size</title>
     <options>
       <option value="S">Small</option>
@@ -40,8 +40,8 @@
     <auto-off>true</auto-off>
     <get>source theme_files/hwt_size_config echo $hwt_size</get>
     <set>echo "hwt_size=$state" &gt; theme_files/hwt_size_config</set>
-  </../picker>
-  <../picker auto-off="true" shell="hidden" icon="../pic/style.png">
+  </picker>
+  <picker auto-off="true" shell="hidden" icon="../pic/style.png">
     <title>Icon shape</title>
     <options>
       <option value="Round">Round</option>
@@ -52,7 +52,7 @@
     <auto-off>true</auto-off>
     <get>source theme_files/hwt_shape_config echo $hwt_shape</get>
     <set>echo "hwt_shape=$state" &gt; theme_files/hwt_shape_config</set>
-  </../picker>
+  </picker>
   <page html="https://icons-demo.vercel.app/" title="Themes preview" icon="../pic/preview.png" visible="false" />
   <page config="page/hwt.xml" title="Q and A (in Chinese)" icon="../pic/qa.png" visible="false" />
 </group>

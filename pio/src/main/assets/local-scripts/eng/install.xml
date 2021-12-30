@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
     <group>
-        <../picker auto-off="true" interruptible="false" shell="hidden" icon="../pic/style.png">
+        <picker auto-off="true" interruptible="false" shell="hidden" icon="../pic/style.png">
             <title>Theme</title>
             <options>
                 <option value="default">Classic</option>
@@ -25,7 +25,7 @@
             echo $sel_theme 
             </get>
             <set>echo "sel_theme=$state" &gt; theme_files/theme_config </set>
-        </../picker>
+        </picker>
         <switch shell="hidden" icon="../pic/addon.png">
             <title>Customized icons?</title>
             <desc>While activated, customized icons will be import into the theme.</desc>
