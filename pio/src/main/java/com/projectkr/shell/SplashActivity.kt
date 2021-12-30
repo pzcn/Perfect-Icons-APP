@@ -62,7 +62,7 @@ class SplashActivity : Activity() {
         if (Build.VERSION.SDK_INT >= 23) {
             val decorView = getWindow().getDecorView();
             if (decorView != null) {
-                int vis = decorView.getSystemUiVisibility();
+                val vis = decorView.getSystemUiVisibility();
                 if (context.resources.getBollean(R.bool.is_dark) != true) {
                     vis |= View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR;
                 } else {
