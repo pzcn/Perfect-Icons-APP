@@ -58,6 +58,19 @@ class SplashActivity : Activity() {
             //设置状态栏颜色为透明
             getWindow().setStatusBarColor(Color.TRANSPARENT)
         }
+        
+        if (Build.VERSION.SDK_INT >= 23) {
+            val decorView = getWindow().getDecorView();
+            if (decorView != null) {
+                int vis = decorView.getSystemUiVisibility();
+                if (context.resources.getBollean(R.bool.is_dark) != true) {
+                    vis |= View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR;
+                } else {
+                    vis &= View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR;
+                }
+                decorView.setSystemUiVisibility(vis);
+            }
+        }
     }
 
     private fun getColorAccent(): Int {
