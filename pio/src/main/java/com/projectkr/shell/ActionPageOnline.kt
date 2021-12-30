@@ -21,6 +21,7 @@ import android.view.KeyEvent
 import android.view.View
 import android.view.WindowManager
 import android.webkit.*
+import android.widget.FrameLayout
 import android.widget.Toast
 import com.omarea.common.shared.FilePathResolver
 import com.omarea.common.ui.DialogHelper
@@ -30,6 +31,7 @@ import com.omarea.krscript.WebViewInjector
 import com.omarea.krscript.downloader.Downloader
 import com.omarea.krscript.ui.ParamsFileChooserRender
 import kotlinx.android.synthetic.main.activity_action_page_online.*
+import kotlinx.android.synthetic.main.activity_main.*
 import java.util.*
 
 class ActionPageOnline : AppCompatActivity() {
@@ -53,7 +55,41 @@ class ActionPageOnline : AppCompatActivity() {
             finish()
         }
 
+        val params = kr_online_root.layoutParams as FrameLayout.LayoutParams
+        params.setMargins(0, getStatusBarHeight(this), 0, 0)
+        kr_online_root.layoutParams = params
+
         loadIntentData()
+        updateThemeStyle()
+    }
+
+    private fun getStatusBarHeight(context: Context): Int {
+        var height = 0
+        val res = context.resources
+        val resourceId = res.getIdentifier("status_bar_height", "dimen", "android")
+        if (resourceId > 0) {
+            height = res.getDimensionPixelSize(resourceId)
+        }
+        return height
+    }
+
+    private fun updateThemeStyle() {
+        //  得到当前界面的装饰视图
+        if (Build.VERSION.SDK_INT >= 23) {
+            val decorView = getWindow().getDecorView();
+            //设置状态栏反色
+            if (this.resources.getBoolean(R.bool.is_dark) != true) {
+                val optionfin = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
+                decorView.setSystemUiVisibility(optionfin);
+            } else {
+                val optionfin = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR.inv();
+                decorView.setSystemUiVisibility(optionfin);
+            }
+            //设置状态栏与导航栏沉浸
+            getWindow().addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+            //getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);       //设置沉浸式状态栏，在MIUI系统中，状态栏背景透明。原生系统中，状态栏背景半透明。
+            getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);   //设置沉浸式虚拟键，在MIUI系统中，虚拟键背景透明。原生系统中，虚拟键背景半透明。
+        }
     }
 
     private fun hideWindowTitle() {
@@ -88,8 +124,6 @@ class ActionPageOnline : AppCompatActivity() {
             }
         }
         getWindow().decorView.systemUiVisibility = flags
-
-        kr_online_root.fitsSystemWindows = true
     }
 
     private fun loadIntentData() {
