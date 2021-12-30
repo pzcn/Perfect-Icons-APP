@@ -1,4 +1,5 @@
 #!/system/bin/sh
+[[ $(arch) == "aarch64" ]] || exit 
 chmod -R 777 $TOOLKIT/curl
 source theme_files/beta_config
 
