@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/main_root"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:fitsSystemWindows="true">
+    android:layout_height="match_parent">
 
     <include
         layout="@layout/app_bar_main"
@@ -58,10 +58,10 @@
 
             <TabWidget
                 android:id="@android:id/tabs"
-                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="?android:navigationBarColor" />
+                android:background="?android:navigationBarColor"
+                android:visibility="gone" />
         </LinearLayout>
     </TabHost>
 </RelativeLayout>

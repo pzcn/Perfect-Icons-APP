@@ -4,7 +4,6 @@ import android.Manifest
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
-import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
 import android.os.Handler
@@ -13,6 +12,7 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.PermissionChecker
 import android.util.TypedValue
 import android.view.View
+import android.view.WindowManager
 import android.widget.TextView
 import com.omarea.common.shell.ShellExecutor
 import com.omarea.krscript.executor.ScriptEnvironmen
@@ -42,13 +42,6 @@ class SplashActivity : Activity() {
      * 界面主题样式调整
      */
     private fun updateThemeStyle() {
-        getWindow().setNavigationBarColor(getColorAccent())
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            window.setNavigationBarColor(getColor(R.color.splash_bg_color))
-        } else {
-            window.setNavigationBarColor(resources.getColor(R.color.splash_bg_color))
-        }
-
         //  得到当前界面的装饰视图
         if (Build.VERSION.SDK_INT >= 23) {
             val decorView = getWindow().getDecorView();
@@ -61,11 +54,12 @@ class SplashActivity : Activity() {
                 val optionfin = option and View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR.inv();
                 decorView.setSystemUiVisibility(optionfin);
             }
-            //设置状态栏颜色为透明
-            getWindow().setStatusBarColor(Color.TRANSPARENT)
+            //设置状态栏与导航栏沉浸
+            getWindow().addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+            getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);       //设置沉浸式状态栏，在MIUI系统中，状态栏背景透明。原生系统中，状态栏背景半透明。
+            getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);   //设置沉浸式虚拟键，在MIUI系统中，虚拟键背景透明。原生系统中，虚拟键背景半透明。
         }
     }
-
     private fun getColorAccent(): Int {
         val typedValue = TypedValue()
         this.theme.resolveAttribute(R.attr.colorAccent, typedValue, true)
