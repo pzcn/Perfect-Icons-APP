@@ -1,26 +1,27 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <group>
     <text visible="if [ $(getprop persist.sys.locale) = zh-CN ]; then echo 1; else echo 0; fi">
-        <slice bold="true" align="center" break="true" size="30">⚠️网络连接失败</slice>
+        <slice bold="true" align="center" break="true" size="30">⚠️
+网络连接失败或CPU不支持</slice>
     </text>
     <resource dir="file:///android_asset/local-scripts" />
 </group>
 
 <group>
     <text visible="if [ $(getprop persist.sys.locale) = zh-CN ]; then echo 1; else echo 0; fi">
-        <slice bold="true" break="true" size="14">建议：
+        <slice bold="true" break="true" size="14">未检测到网络或CPU不被支持，点击下方疑难解答获取更多信息
+可能的建议：
 · 检查WLAN或数据网络是否打开
-· 确保APP有联网以及读写内部储存的权限
-· 可以尝试切换不同的网络
-· 当可以正常联网后，重新打开APP即可正常启动
-
-如果多次看到这个页面，请联系开发者。</slice>
+· 确保本应用有联网以及读写内部储存的权限
+· 可以尝试切换不同的网络，重新启动本应用
+· 以上都没有效果，可能是设备不支持
+</slice>
     </text>
 </group>
 
-<group>
-    <action visible="if [ $(getprop persist.sys.locale) = zh-CN ]; then echo 1; else echo 0; fi">
-        <title>网络连接检查</title>
+<group visible="if [ $(getprop persist.sys.locale) = zh-CN ]; then echo 1; else echo 0; fi">
+    <action>
+        <title>疑难解答</title>
         <set>sh $START_DIR/script/network_check.sh</set>
         <resource file="script/network_check.sh" />
     </action>
@@ -52,7 +53,7 @@
 <group>
     <text visible="if [ $(getprop persist.sys.locale) = zh-CN ]; then echo 0; else echo 1; fi">
         <slice bold="true" align="center" break="true" size="30">⚠️
-No Network Detected</slice>
+No Network Detected or Not Support Your Divice</slice>
     </text>
     <resource dir="file:///android_asset/local-scripts" />
 </group>
@@ -62,16 +63,15 @@ No Network Detected</slice>
         <slice bold="true" break="true" size="14">Please：
 · Check if you have your wifi or mobile data activated.
 · Ensure that the app has the permission to network and storage.
-· Try to connect to different kinds of network.
-· When everything is correct, restart the app then it should work well.
-
-If you have trouble in this page, please contact us.</slice>
+· Try to connect to different kinds of network, and restart this app
+· Not Support Your Divice
+</slice>
     </text>
 </group>
 
-<group>
-    <action visible="if [ $(getprop persist.sys.locale) = zh-CN ]; then echo 0; else echo 1; fi">
-        <title>Network check</title>
+<group visible="if [ $(getprop persist.sys.locale) = zh-CN ]; then echo 0; else echo 1; fi">
+    <action>
+        <title>Problem check</title>
         <set>sh $START_DIR/script/network_check.sh</set>
         <resource file="script/network_check.sh" />
     </action>

@@ -1,5 +1,8 @@
 #!/system/bin/sh
 
+[[ $(arch) =~ "aarch64" ]] || exit 
+
+
 if [ -z $language ]; then
    string_init="启动中..."
    string_beta="当前为Beta通道..."
