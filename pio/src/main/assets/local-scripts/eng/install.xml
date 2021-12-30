@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
     <group>
-        <picker auto-off="true" interruptible="false" shell="hidden" icon="pic/style.png">
+        <../picker auto-off="true" interruptible="false" shell="hidden" icon="../pic/style.png">
             <title>Theme</title>
             <options>
                 <option value="default">Classic</option>
@@ -25,8 +25,8 @@
             echo $sel_theme 
             </get>
             <set>echo "sel_theme=$state" &gt; theme_files/theme_config </set>
-        </picker>
-        <switch shell="hidden" icon="pic/addon.png">
+        </../picker>
+        <switch shell="hidden" icon="../pic/addon.png">
             <title>Customized icons?</title>
             <desc>While activated, customized icons will be import into the theme.</desc>
             <get>
@@ -38,17 +38,17 @@
 </group>
 
     <group>
-         <page title="Themes preview" html="https://icons-demo.vercel.app/" icon="pic/preview.png"/>
-         <page config="page/install.xml" title="Q and A (in Chinese)" icon="pic/qa.png"/>
+         <page title="Themes preview" html="https://icons-demo.vercel.app/" icon="../pic/preview.png"/>
+         <page config="page/install.xml" title="Q and A (in Chinese)" icon="../pic/qa.png"/>
     </group>
 
     <group>
-        <action confirm="true" icon="pic/start.png" reload="@install,@cleancache">
+        <action confirm="true" icon="../pic/start.png" reload="@install,@cleancache">
             <title>Start installation</title>
             <desc>Check all settings above then tap to start installation.</desc>
             <set>source $START_DIR/local-scripts/misc/install.sh</set>
         </action>
-        <action confirm="true" icon="pic/reboot.png" shell="hidden" warning="Are you sure to reboot your device?">
+        <action confirm="true" icon="../pic/reboot.png" shell="hidden" warning="Are you sure to reboot your device?">
             <title>Reboot</title>
             <desc>Tap to reboot your device.</desc>
             <set>/system/bin/sync;/system/bin/svc power reboot || reboot</set>

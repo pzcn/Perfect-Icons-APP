@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <group>
-    <action icon="pic/download.png">
+    <action icon="../pic/download.png">
         <title>Download archieved icons</title>
         <desc>This will download archieved icons to /sdcard/Documents/MIUI_Perfect_Icons/Archived_Icons.zip.</desc>
         <script>source local-scripts/misc/Icons_Archiving.sh</script>
@@ -32,13 +32,13 @@ QQ 8.8.0眨眼张嘴帧动画</slice>
     </text>
 </group>
 <group>
-    <action icon="pic/migrate.png" visible="source local-scripts/misc/addon_check.sh" id="@addon" reload="@addon">
+    <action icon="../pic/migrate.png" visible="source local-scripts/misc/addon_check.sh" id="@addon" reload="@addon">
         <title>Update module from Out-of-date addon module</title>
         <desc>Convert old addon module automatically.</desc>
         <script>source $START_DIR/local-scripts/misc/addon_remove.sh</script>
     </action>
 </group>
 <group>
-    <page config="page/addon.xml" title="Icons customise wiki" icon="pic/description.png" />
-    <page config="page/make_icons.xml" title="MIUI Adapted icons wiki" icon="pic/qa.png" />
+    <page config="page/addon.xml" title="Icons customise wiki" icon="../pic/description.png" />
+    <page config="page/make_icons.xml" title="MIUI Adapted icons wiki" icon="../pic/qa.png" />
 </group>

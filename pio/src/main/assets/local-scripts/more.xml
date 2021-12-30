@@ -52,12 +52,5 @@
     <text>
         <title>其他</title>
     </text>
-    <action shell="hidden" confirm="true" id="@cleancache" reload="@cleancache" icon="pic/clean.png">
-        <title>清理缓存</title>
-        <desc>当图标安装后出现奇怪的问题时，可以尝试清理缓存，清理后下次安装时会重新下载资源 </desc>
-        <summary sh="source local-scripts/misc/cache_size.sh"/>
-        <set>source local-scripts/misc/cleancache.sh</set>
-    </action>
-    <page config="page/document.xml" title="一些说明" desc="使用前请高强度阅读说明，大部分问题都能在这里找到答案" icon="pic/tips.png" />
-    <page config="page/about.xml" title="关于" desc="关于本项目、联系我们、加入群组" icon="pic/about.png"/>
+    <page config="page/about.xml" title="设置与帮助" desc="设置、一些说明、联系我们" icon="pic/about.png" />
 </group>

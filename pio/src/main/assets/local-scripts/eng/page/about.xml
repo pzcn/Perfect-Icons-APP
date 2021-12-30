@@ -1,5 +1,6 @@
 <group>
-    <switch>
+    <title>Settings</title>
+     <switch>
      <title>Beta version</title>
          <desc>When in beta version, the scripts will automatically update itself, and you will experience the latest features, but with lower stability.</desc>
         <get>
@@ -8,63 +9,32 @@
         </get>
         <set>source local-scripts/misc/beta.sh</set>
     </switch>
+    <action shell="hidden" confirm="true" id="@cleancache" reload="@cleancache">
+        <title>Clear cache</title>
+        <desc>If there's any error while installing, try to clear cache.</desc>
+        <summary sh="source local-scripts/misc/cache_size.sh"/>
+        <set>source local-scripts/misc/cleancache.sh</set>
+    </action>
+</group>
+
+<group>
+    <title>Tips</title>
+    <page config="icons.xml" title="Perfect icon illustration"/>
+    <page config="make_icons.xml" title="Icon adaptation guide"/>
+    <page config="install.xml" title="Module installation related issues"/>
+    <page config="mtz.xml" title="mtz export related issues"/>
+    <page config="addon.xml" title="Custom icon related issues"/>
+    <page config="download.xml" title="Download related issues"/>
 </group>
 <group>
-    <text>
-        <title>About</title>
-        <slice break="true" size="13" bold="true">This app is open source in Github. Based on [kr-scripts].</slice>
-    </text>
-</group>
-<group>
+    <title>Contact us</title>
     <text>
         <title>Github</title>
         <slice break="true" size="13" bold="true" link="https://github.com/pzcn/Perfect-Icons-Completion-Project" u="true">Perfect-Icons-Completion-Project</slice>
         <slice break="true" size="13" bold="true" link="https://github.com/pzcn/MIUI-Icons-APP" u="true">MIUI-Icons-APP</slice>
-        <slice break="true" size="13" bold="true" link="https://qm.qq.com/cgi-bin/qm/qr?k=_92-RGlaiz3Xm-9i8O3USqTSg29EYg44" u="true">QQ：561180493</slice>
+        <slice break="true" size="13" bold="true" link="https://qm.qq.com/cgi-bin/qm/qr?k=_92-RGlaiz3Xm-9i8O3USqTSg29EYg44" u="true">QQ Group：561180493</slice>
         <slice break="true" size="13" bold="true" link="https://t.me/miuiicons" u="true">Telegram Channel</slice>
         <slice break="true" size="13" bold="true" link="https://t.me/miui_icons_dev" u="true">Telegram Group</slice>
         <slice break="true" size="13" bold="true" link="https://iconsx.vercel.app/privacy.html" u="true">Privacy Agreement</slice>
-    </text>
-</group>
-<group>
-    <text>
-        <title>Perfect Icon Project Group</title>
-        <slice break="true" size="13" bold="true">PedroZ</slice>
-        <slice break="true" size="13" bold="true">Yife Playte</slice>
-        <slice break="true" size="13" bold="true">YuKongA</slice>
-    </text>
-</group>
-<group>
-    <text>
-        <title>Icons Maker</title>
-        <slice break="true" size="13" bold="true">PedroZ</slice>
-        <slice break="true" size="13" bold="true">Yife Playte</slice>
-        <slice break="true" size="13" bold="true">潮留美海かり</slice>
-        <slice break="true" size="13" bold="true">YuKongA</slice>
-        <slice break="true" size="13" bold="true">Mastiff Li</slice>
-        <slice break="true" size="13" bold="true">Eirperuier</slice>
-        <slice break="true" size="13" bold="true">艾欧利娅</slice>
-        <slice break="true" size="13" bold="true">叡煜</slice>
-        <slice break="true" size="13" bold="true">兰博教育</slice>
-        <slice break="true" size="13" bold="true">扫地的喵</slice>
-        <slice break="true" size="13" bold="true">HeMing505</slice>
-        <slice break="true" size="13" bold="true">huoyiming</slice>
-        <slice break="true" size="13" bold="true">与病共存</slice>
-        <slice break="true" size="13" bold="true">Shahzaib Ahmed</slice>
-    </text>
-</group>
-<group>
-    <text>
-        <title>Theme authorization</title>
-        <slice break="true" size="13" bold="true">LRONE-江户川Conan</slice>
-        <slice break="true" size="13" bold="true">Luck7-JellyBeans</slice>
-        <slice break="true" size="13" bold="true">Perfect Curve-栗子汤圆Ria</slice>
-    </text>
-</group>
-<group>
-    <text>
-        <title>Technical Support</title>
-        <slice break="true" size="13" bold="true">相见即是缘</slice>
-        <slice break="true" size="13" bold="true">薛定谔の鼠</slice>
     </text>
 </group>

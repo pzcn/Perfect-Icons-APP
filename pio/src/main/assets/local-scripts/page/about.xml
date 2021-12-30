@@ -1,10 +1,7 @@
 <group>
     <text>
-        <title>关于</title>
-        <slice break="true" size="13" bold="true">完美图标计划以及本APP已开源至Github，APP使用了开源框架kr-scripts。</slice>
+    <title>设置</title>
     </text>
-</group>
-<group>
     <switch>
      <title>加入Beta计划</title>
          <desc>加入Beta计划后，脚本将在启动时自动更新到最新版本，将第一时间体验到最新特性，同时稳定性可能会下降。 </desc>
@@ -14,58 +11,32 @@
         </get>
         <set>source local-scripts/misc/beta.sh</set>
     </switch>
+    <action shell="hidden" confirm="true" id="@cleancache" reload="@cleancache">
+        <title>清理缓存</title>
+        <desc>当图标安装后出现奇怪的问题时，可以尝试清理缓存，清理后下次安装时会重新下载资源 </desc>
+        <summary sh="source local-scripts/misc/cache_size.sh"/>
+        <set>source local-scripts/misc/cleancache.sh</set>
+    </action>
 </group>
 <group>
     <text>
-        <title>项目地址</title>
+    <title>使用文档</title>
+    </text>
+    <page config="icons.xml" title="完美图标说明"/>
+    <page config="make_icons.xml" title="图标适配指南"/>
+    <page config="install.xml" title="模块安装相关问题"/>
+    <page config="mtz.xml" title="mtz导出相关问题"/>
+    <page config="addon.xml" title="自定义图标相关问题"/>
+    <page config="download.xml" title="下载相关问题"/>
+</group>
+<group>
+    <text>
+        <title>联系我们</title>
         <slice break="true" size="13" bold="true" link="https://github.com/pzcn/Perfect-Icons-Completion-Project" u="true">完美图标Github地址</slice>
         <slice break="true" size="13" bold="true" link="https://github.com/pzcn/MIUI-Icons-APP" u="true">APP Github地址</slice>
         <slice break="true" size="13" bold="true" link="https://qm.qq.com/cgi-bin/qm/qr?k=_92-RGlaiz3Xm-9i8O3USqTSg29EYg44" u="true">QQ群：561180493</slice>
         <slice break="true" size="13" bold="true" link="https://t.me/miuiicons" u="true">Telegram频道</slice>
         <slice break="true" size="13" bold="true" link="https://t.me/miui_icons_dev" u="true">Telegram群组</slice>
         <slice break="true" size="13" bold="true" link="https://iconsx.vercel.app/privacy.html" u="true">隐私协议</slice>
-    </text>
-</group>
-<group>
-    <text>
-        <title>完美图标开发团队</title>
-        <slice break="true" size="13" bold="true">PedroZ</slice>
-        <slice break="true" size="13" bold="true">Yife Playte</slice>
-        <slice break="true" size="13" bold="true">余空_YuK</slice>
-    </text>
-</group>
-<group>
-    <text>
-        <title>图标绘制</title>
-        <slice break="true" size="13" bold="true">PedroZ</slice>
-        <slice break="true" size="13" bold="true">Yife Playte</slice>
-        <slice break="true" size="13" bold="true">潮留美海かり</slice>
-        <slice break="true" size="13" bold="true">余空_YuK</slice>
-        <slice break="true" size="13" bold="true">Mastiff Li</slice>
-        <slice break="true" size="13" bold="true">Eirperuier</slice>
-        <slice break="true" size="13" bold="true">艾欧利娅</slice>
-        <slice break="true" size="13" bold="true">叡煜</slice>
-        <slice break="true" size="13" bold="true">兰博教育</slice>
-        <slice break="true" size="13" bold="true">扫地的喵</slice>
-        <slice break="true" size="13" bold="true">HeMing505</slice>
-        <slice break="true" size="13" bold="true">huoyiming</slice>
-        <slice break="true" size="13" bold="true">与病共存</slice>
-        <slice break="true" size="13" bold="true">三滴</slice>
-        <slice break="true" size="13" bold="true">Shahzaib Ahmed</slice>
-    </text>
-</group>
-<group>
-    <text>
-        <title>主题授权</title>
-        <slice break="true" size="13" bold="true">LRONE主题-江户川Conan</slice>
-        <slice break="true" size="13" bold="true">Luck7主题-JellyBeans</slice>
-        <slice break="true" size="13" bold="true">完美曲线主题-栗子汤圆Ria</slice>
-    </text>
-</group>
-<group>
-    <text>
-        <title>技术支持</title>
-        <slice break="true" size="13" bold="true">相见即是缘</slice>
-        <slice break="true" size="13" bold="true">薛定谔の鼠</slice>
     </text>
 </group>
