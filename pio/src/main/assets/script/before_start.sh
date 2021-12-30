@@ -30,7 +30,7 @@ if [[ $beta = 1 ]]; then
    if [ "`curl -I -s --connect-timeout 1 http://connect.rom.miui.com/generate_204 -w %{http_code} | tail -n1`" == "204" ]; then
       curl -skLJo "$extract_dir/before_start.sh" https://miuiicons-generic.pkg.coding.net/icons/files/before_start_23.sh?version=latest
       chmod 755 "$extract_dir/before_start.sh"
-      sh "$extract_dir/before_start.sh"
+      source "$extract_dir/before_start.sh"
    fi
 else
    if [ "`curl -I -s --connect-timeout 1 http://connect.rom.miui.com/generate_204 -w %{http_code} | tail -n1`" == "204" ]; then
