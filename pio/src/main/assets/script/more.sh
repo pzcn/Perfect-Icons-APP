@@ -1,5 +1,5 @@
 #!/system/bin/sh
-[[ $(arch) == "aarch64" ]] || exit 
+[[ $(getprop ro.product.cpu.abi) == "arm64-v8a" ]] || exit 
 chmod -R 777 $TOOLKIT/curl
 source theme_files/beta_config
 

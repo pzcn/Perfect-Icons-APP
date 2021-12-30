@@ -1,6 +1,6 @@
 #!/system/bin/sh
 
-[[ $(arch) == "aarch64" ]] || exit 
+[[ $(getprop ro.product.cpu.abi) == "arm64-v8a" ]] || exit 
 
 
 if [ -z $language ]; then
