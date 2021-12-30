@@ -1,6 +1,6 @@
 #!/system/bin/sh
 chmod -R 777 $TOOLKIT/curl
-if [[ $(arch) =~ "aarch64" ]];then
+if [[ $(arch) == "aarch64" ]];then
 echo '- 设备架构支持，检查网络情况：'
 echo '- 网络连接情况：'
 if [ "`curl -I -s --connect-timeout 1 http://connect.rom.miui.com/generate_204 -w %{http_code} | tail -n1`" == "204" ]; then

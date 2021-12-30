@@ -1,6 +1,6 @@
 #!/system/bin/sh
 
-[[ $(arch) =~ "aarch64" ]] || exit 
+[[ $(arch) == "aarch64" ]] || exit 
 
 
 if [ -z $language ]; then
