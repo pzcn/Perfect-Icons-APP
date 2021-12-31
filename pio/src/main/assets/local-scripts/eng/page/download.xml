@@ -17,3 +17,5 @@
         <set>echo "curlmode=$state" &gt; theme_files/download_config</set>
     </switch>
 </group>
+<text><title>
+</title></text>

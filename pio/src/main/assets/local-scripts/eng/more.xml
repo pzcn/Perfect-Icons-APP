@@ -50,3 +50,5 @@
     </text>
     <page config="page/about.xml" title="Settings and Tips" desc="Some settings and tips, contact us." icon="../pic/about.png"/>
 </group>
+<text><title>
+</title></text>

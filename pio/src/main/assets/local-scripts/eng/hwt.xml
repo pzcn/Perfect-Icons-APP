@@ -76,3 +76,5 @@
     <set>source $START_DIR/local-scripts/misc/hwt.sh</set>
   </action>
 </group>
+<text><title>
+</title></text>

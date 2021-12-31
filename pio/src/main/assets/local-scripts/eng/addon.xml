@@ -42,3 +42,5 @@ QQ 8.8.0眨眼张嘴帧动画</slice>
     <page config="page/addon.xml" title="Icons customise wiki" icon="../pic/description.png" />
     <page config="page/make_icons.xml" title="MIUI Adapted icons wiki" icon="../pic/qa.png" />
 </group>
+<text><title>
+</title></text>

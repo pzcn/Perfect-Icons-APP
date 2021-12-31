@@ -53,3 +53,5 @@
         <set>source $START_DIR/local-scripts/misc/mtz.sh</set>
     </action>
 </group>
+<text><title>
+</title></text>

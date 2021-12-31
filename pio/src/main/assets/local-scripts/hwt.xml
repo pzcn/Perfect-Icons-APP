@@ -31,7 +31,7 @@
     </get>
     <set>echo "sel_theme=$state" &gt; theme_files/hwt_theme_config</set>
   </picker>
-  <picker auto-off="true" shell="hidden" icon="pic/style.png">
+  <picker auto-off="true" shell="hidden" icon="pic/size.png">
     <title>选择图标大小</title>
     <options>
       <option value="S">小</option>
@@ -47,7 +47,7 @@
     </get>
     <set>echo "hwt_size=$state" &gt; theme_files/hwt_size_config</set>
   </picker>
-  <picker auto-off="true" shell="hidden" icon="pic/style.png">
+  <picker auto-off="true" shell="hidden" icon="pic/shape.png">
     <title>选择图标形状</title>
     <options>
       <option value="Round">圆形</option>
@@ -85,3 +85,5 @@
     <set>source $START_DIR/local-scripts/misc/hwt.sh</set>
   </action>
 </group>
+<text><title>
+</title></text>

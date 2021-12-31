@@ -54,3 +54,5 @@
             <set>/system/bin/sync;/system/bin/svc power reboot || reboot</set>
         </action>
 </group>
+<text><title>
+</title></text>

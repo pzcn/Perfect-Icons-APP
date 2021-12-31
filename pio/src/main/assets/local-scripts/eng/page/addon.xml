@@ -39,3 +39,5 @@
 假设Magisk随机后包名为aaa.bbb，那么在/sdcard/Documents/MIUI完美图标自定义/静态图标/内新建一个名为aaa.bbb的文件夹，并在这个文件夹内添加0.png和1.png两张图标图片（图标存档内提供下载）。添加后，安装时打开自定义图标开关重新安装即可使用。</slice>
     </text>
 </group>
+<text><title>
+</title></text>
