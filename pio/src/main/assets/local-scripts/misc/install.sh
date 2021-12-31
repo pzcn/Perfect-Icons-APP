@@ -9,8 +9,8 @@ install() {
     rm -rf $TEMP_DIR/icons
     zip -r $TEMP_DIR/icons.zip $TEMP_DIR/layer_animating_icons >/dev/null
     zip -r $TEMP_DIR/icons.zip $TEMP_DIR/res >/dev/null
-    rm -rf res
-    rm -rf layer_animating_icons
+    rm -rf $TEMP_DIR/res
+    rm -rf $TEMP_DIR/layer_animating_icons
     cd ..
     [ $addon == 1 ] && addon
     mkdir -p $FAKEMODPATH/system/media/theme/default/
