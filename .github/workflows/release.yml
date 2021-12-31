@@ -1,14 +1,11 @@
 name: Android Release
 
 on:
-  push:
-    branches:
   workflow_dispatch:
 jobs:
   build:
     runs-on: ubuntu-latest
-    if: ${{ startsWith(github.event.head_commit.message, '[Release]') }}
-
+  
     steps:
       - uses: actions/checkout@v2
       - name: Setup JDK 1.8
