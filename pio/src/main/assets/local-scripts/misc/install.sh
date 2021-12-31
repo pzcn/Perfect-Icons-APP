@@ -7,11 +7,12 @@ install() {
     mkdir -p $TEMP_DIR/res/drawable-xxhdpi
     mv  $TEMP_DIR/icons/* $TEMP_DIR/res/drawable-xxhdpi 2>/dev/null
     rm -rf $TEMP_DIR/icons
-    zip -r $TEMP_DIR/icons.zip $TEMP_DIR/layer_animating_icons >/dev/null
-    zip -r $TEMP_DIR/icons.zip $TEMP_DIR/res >/dev/null
+    cd $TEMP_DIR
+    zip -r $TEMP_DIR/icons.zip ./layer_animating_icons >/dev/null
+    zip -r $TEMP_DIR/icons.zip ./res >/dev/null
     rm -rf $TEMP_DIR/res
     rm -rf $TEMP_DIR/layer_animating_icons
-    cd ..
+    cd $START_DIR
     [ $addon == 1 ] && addon
     mkdir -p $FAKEMODPATH/system/media/theme/default/
     cp -rf $TEMP_DIR/icons.zip $FAKEMODPATH/system/media/theme/default/icons
