@@ -139,17 +139,7 @@ class ActionPage : AppCompatActivity() {
     }
 
     private fun updateThemeStyle() {
-        //  得到当前界面的装饰视图
         if (Build.VERSION.SDK_INT >= 23) {
-            val decorView = getWindow().getDecorView();
-            //设置状态栏反色
-            if (this.resources.getBoolean(R.bool.is_dark) != true) {
-                val optionfin = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
-                decorView.setSystemUiVisibility(optionfin);
-            } else {
-                val optionfin = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR.inv();
-                decorView.setSystemUiVisibility(optionfin);
-            }
             //设置状态栏与导航栏沉浸
             getWindow().addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
             //getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);       //设置沉浸式状态栏，在MIUI系统中，状态栏背景透明。原生系统中，状态栏背景半透明。
