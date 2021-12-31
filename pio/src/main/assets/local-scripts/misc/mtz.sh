@@ -94,6 +94,7 @@ addon(){
     if [ $new_ver -ne $old_ver ] ;then 
     echo "${string_newverdown_1}${theme_name}${string_newverdown_2}"
         cd theme_files/miui/res/drawable-xxhdpi
+        export LD_LIBRARY_PATH=${START_DIR}/script/toolkit/so: $LD_LIBRARY_PATH
         git pull --rebase >/dev/null
         echo "${string_gitpull}"
     cd ../../../..
