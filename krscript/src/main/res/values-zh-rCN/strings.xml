@@ -1,4 +1,5 @@
 <resources>
+    <string name="LANGUAGE">zh-rCN</string>
     <string name="btn_confirm">确定</string>
     <string name="shell_executor">脚本执行器</string>
     <string name="btn_cancel">取消</string>

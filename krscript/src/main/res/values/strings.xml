@@ -1,4 +1,5 @@
 <resources>
+    <string name="LANGUAGE">en</string>
     <string name="btn_confirm">Confirm</string>
     <string name="shell_executor">Shell executor</string>
     <string name="btn_cancel">Cancel</string>

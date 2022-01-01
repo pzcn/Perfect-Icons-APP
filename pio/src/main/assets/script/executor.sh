@@ -22,6 +22,7 @@ export PACKAGE_NAME="$({PACKAGE_NAME})"
 export PACKAGE_VERSION_NAME="$({PACKAGE_VERSION_NAME})"
 export PACKAGE_VERSION_CODE="$({PACKAGE_VERSION_CODE})"
 export APP_USER_ID="$({APP_USER_ID})"
+export LANGUAGE="$({LANGUAGE})"
 
 # ROOT_PERMISSION 取值为：true 或 false
 export ROOT_PERMISSION=$({ROOT_PERMISSION})
@@ -60,11 +61,11 @@ else
     extract_dir=$START_DIR/local-scripts   
 fi
 
-unset language
-
-[ -z "$(echo $(getprop persist.sys.locale) | grep CN )" ] && language=eng
-
-[ -f "$extract_dir/misc/string$language.ini" ] && source $extract_dir/misc/string$language.ini
+if [ $LANGUAGE == "zh-rCN" ]; then
+  [ -f "$extract_dir/misc/string.ini" ] && source $extract_dir/misc/string.ini
+else
+  [ -f "$extract_dir/misc/stringeng.ini" ] && source $extract_dir/misc/stringeng.ini
+fi
 
 # 运行脚本
 if [[ -f "$script_path" ]]; then
