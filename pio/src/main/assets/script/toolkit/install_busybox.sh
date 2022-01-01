@@ -1,6 +1,4 @@
-if [ -e "$TOOLKIT/sh" ];then
-exit
-else
+if [ ! -e "$TOOLKIT/sh" ];then
 echo "Installing busybox..."
 busybox="$TOOLKIT/busybox1"
 ln -sf $busybox $TOOLKIT/busybox
