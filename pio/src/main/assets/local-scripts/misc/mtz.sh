@@ -93,10 +93,11 @@ addon(){
     new_ver=$theme_version
     if [ $new_ver -ne $old_ver ] ;then 
     echo "${string_newverdown_1}${theme_name}${string_newverdown_2}"
+    echo "${string_gitpull}"
         cd theme_files/miui/res/drawable-xxhdpi
         export LD_LIBRARY_PATH=${START_DIR}/script/toolkit/so: $LD_LIBRARY_PATH
         git pull --rebase >/dev/null
-        echo "${string_gitpull}"
+        cp -rf $TEMP_DIR/${var_theme}.ini ${START_DIR}/theme_files/${var_theme}.ini
     cd ../../../..
     else
     echo "${string_vernoneedtodown_1}${theme_name}${string_vernoneedtodown_2}"

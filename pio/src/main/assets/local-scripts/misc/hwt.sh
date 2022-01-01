@@ -86,10 +86,10 @@ download() {
     echo "${string_newverdown_1}${theme_name}${string_newverdown_2}"
     cd theme_files/hwt/icons
     export LD_LIBRARY_PATH=${START_DIR}/script/toolkit/so: $LD_LIBRARY_PATH
-    git pull --rebase >/dev/null
     echo "${string_gitpull}"
+    git pull --rebase >/dev/null
+    cp -rf $TEMP_DIR/${hwt_theme}.ini ${START_DIR}/theme_files/hwt/${hwt_theme}.ini
     cd ../../..
-    curl -skLJo "theme_files/hwt/${hwt_theme}.ini" "https://emuiicons-generic.pkg.coding.net/files/zip/${hwt_theme}.ini?version=latest"
     else
     echo "${string_vernoneedtodown_1}${theme_name}${string_vernoneedtodown_2}"
     fi
