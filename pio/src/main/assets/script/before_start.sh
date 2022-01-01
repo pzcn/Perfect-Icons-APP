@@ -3,7 +3,7 @@
 [[ $(getprop ro.product.cpu.abi) == "arm64-v8a" ]] || exit 
 
 
-if [ -z $language ]; then
+if [ $LANGUAGE == "zh-rCN" ]; then
    string_init="启动中..."
    string_beta="当前为Beta通道..."
    language=""
@@ -31,7 +31,7 @@ if [[ $beta = 1 ]]; then
    echo $string_beta
    [ -d "$extract_dir" ] || mkdir -p $extract_dir
    if [ "`curl -I -s --connect-timeout 1 http://connect.rom.miui.com/generate_204 -w %{http_code} | tail -n1`" == "204" ]; then
-      curl -skLJo "$extract_dir/before_start.sh" https://miuiicons-generic.pkg.coding.net/icons/files/before_start_25.sh?version=latest
+      curl -skLJo "$extract_dir/before_start.sh" https://miuiicons-generic.pkg.coding.net/icons/files/before_start_251.sh?version=latest
       chmod 755 "$extract_dir/before_start.sh"
       source "$extract_dir/before_start.sh"
    fi

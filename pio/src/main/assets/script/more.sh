@@ -5,7 +5,7 @@ source theme_files/beta_config
 
 if [ "`curl -I -s --connect-timeout 1 http://connect.rom.miui.com/generate_204 -w %{http_code} | tail -n1`" == "204" ]; then
 
-    if [ -z $language ]; then
+    if [ $LANGUAGE == "zh-rCN" ]; then
         page_dir=$extract_dir
     else
         page_dir=$extract_dir/eng

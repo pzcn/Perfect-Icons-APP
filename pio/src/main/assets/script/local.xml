@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <group>
-    <text visible="if [ -z $language ]; then echo 1; else echo 0; fi">
+    <text visible="if [ $LANGUAGE == zh-rCN ]; then echo 1; else echo 0; fi">
         <slice bold="true" align="center" break="true" size="30">⚠️打开失败
 网络连接失败
 或CPU不受支持</slice>
@@ -9,7 +9,7 @@
 </group>
 
 <group>
-    <text visible="if [ -z $language ]; then echo 1; else echo 0; fi">
+    <text visible="if [ $LANGUAGE == zh-rCN ]; then echo 1; else echo 0; fi">
         <slice bold="true" break="true" size="14">未检测到网络或CPU不被支持，点击下方疑难解答获取更多信息
 可能的建议：
 · 检查WLAN或数据网络是否打开
@@ -20,7 +20,7 @@
     </text>
 </group>
 
-<group visible="if [ -z $language ]; then echo 1; else echo 0; fi">
+<group visible="if [ $LANGUAGE == zh-rCN ]; then echo 1; else echo 0; fi">
     <action>
         <title>疑难解答</title>
         <set>sh $START_DIR/script/network_check.sh</set>
@@ -44,7 +44,7 @@
 </group>
 
 <group>
-    <text visible="if [ -z $language ]; then echo 1; else echo 0; fi">
+    <text visible="if [ $LANGUAGE == zh-rCN ]; then echo 1; else echo 0; fi">
         <slice bold="true" break="true" size="12">注：MIUI从某个版本开始，对于非应用商店安装的应用，默认不授予联网权限，而是在app首次打开时进行弹窗询问。但是对于本app来说，联网弹窗时机过晚，首次启动时没有网络，导致无法加载页面。当赋予app联网权限后，再次启动即可。</slice>
     </text>
 </group>
@@ -52,7 +52,7 @@
 
 
 <group>
-    <text visible="if [ -z $language ]; then echo 0; else echo 1; fi">
+    <text visible="if [ $LANGUAGE == zh-rCN ]; then echo 0; else echo 1; fi">
         <slice bold="true" align="center" break="true" size="30">⚠️
 No Network Detected or Not Support Your Divice</slice>
     </text>
@@ -60,7 +60,7 @@ No Network Detected or Not Support Your Divice</slice>
 </group>
 
 <group>
-    <text visible="if [ -z $language ]; then echo 0; else echo 1; fi">
+    <text visible="if [ $LANGUAGE == zh-rCN ]; then echo 0; else echo 1; fi">
         <slice bold="true" break="true" size="14">Please：
 · Check if you have your wifi or mobile data activated.
 · Ensure that the app has the permission to network and storage.
@@ -70,7 +70,7 @@ No Network Detected or Not Support Your Divice</slice>
     </text>
 </group>
 
-<group visible="if [ -z $language ]; then echo 0; else echo 1; fi">
+<group visible="if [ $LANGUAGE == zh-rCN ]; then echo 0; else echo 1; fi">
     <action>
         <title>Problem check</title>
         <set>sh $START_DIR/script/network_check.sh</set>
@@ -94,7 +94,7 @@ No Network Detected or Not Support Your Divice</slice>
 </group>
 
 <group>
-    <text visible="if [ -z $language ]; then echo 0; else echo 1; fi">
+    <text visible="if [ $LANGUAGE == zh-rCN ]; then echo 0; else echo 1; fi">
         <slice bold="true" break="true" size="12">Notice that in recent version of MIUI, apps that are not installed in APP Store have no access to network by default, so it might be normal to see this page if it's the first launch of this app. Restart this app after you enable the network permission.</slice>
     </text>
 </group>
