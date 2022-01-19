@@ -47,10 +47,31 @@
     <page config="page/mtz.xml" title="Q and A (in Chinese)" icon="../pic/qa.png"/>
 </group>
 <group>
-    <action icon="../pic/start.png" reload="@cleancache">
-        <title>Export</title>
-        <desc>Check all settings above then tap to export .mtz file.</desc>
+    <action icon="pic/brush.png" reload="@cleancache" visible="source local-scripts/misc/installer_check.sh noroot" warning="Trial instructions: 1. Due to the use of unofficial api, if you do not have theme anti-restoring cracking, the default theme may be restored at any time after the trial (may be suddenly returned to the home when you play the game). Please switch back to the default theme manually in time. 2. If there is a problem with the font wight after the theme is applied, reboot your device to solve it.">
+        <title>Save mtz file and try it out</title>
+        <desc>Click to apply the theme, and the default will be restored after a period of time. Please switch back to the original theme in time.</desc>
+        <set>source $START_DIR/local-scripts/misc/mtz.sh apply</set>
+    </action>
+    <action icon="pic/save.png" reload="@cleancache">
+        <title>Only save mtz file</title>
+        <desc>After confirming that the above configuration is correct, tap to save mtz file</desc>
         <set>source $START_DIR/local-scripts/misc/mtz.sh</set>
+    </action>
+</group>
+
+<group visible="source local-scripts/misc/installer_check.sh" >
+          <text>
+    <title>Root Required Zone</title>
+    </text>
+    <action icon="pic/su.png">
+        <title>Prevent restoring the default theme</title>
+        <desc>It will become restore after restarting. Only root permission is required, no magisk is required</desc>
+        <set>chmod 731 /data/system/theme; echo "Done!"</set>
+    </action>
+    <action icon="pic/magisk.png">
+        <title>[Magisk]Prevent restoring the default theme</title>
+        <desc>Install Magisk module to prevent restore, it still works after restarting</desc>
+        <set>source $START_DIR/local-scripts/misc/mtcrack.sh</set>
     </action>
 </group>
 <text><title>

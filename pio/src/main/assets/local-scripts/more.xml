@@ -30,9 +30,9 @@
     <text>
         <title>MIUI</title>
     </text>
-    <page visible="source local-scripts/misc/installer_check.sh" id="@install" icon="pic/install.png" before-read="source local-scripts/misc/addon_init.sh" >
+    <page visible="source local-scripts/misc/installer_check.sh" id="@install" icon="pic/magisk.png" before-read="source local-scripts/misc/addon_init.sh" >
         <config>install.xml</config>
-        <title>安装/升级</title>
+        <title>[Magisk]安装/升级</title>
         <desc>以 Magisk 模块形式进行安装图标</desc>
         <summary sh="source local-scripts/misc/get_themes.sh" />
     </page>

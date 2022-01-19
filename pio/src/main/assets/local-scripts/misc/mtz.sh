@@ -20,13 +20,14 @@ install() {
     cp -rf $TEMP_DIR/icons.zip $TEMP_DIR/mtztmp/icons
     sed -i "s/themename/$theme_name/g" $TEMP_DIR/mtztmp/description.xml
     cd $TEMP_DIR/mtztmp
+    rm -rf com.miui.home
+    rm -rf wallpaper
     time=$(TZ=$(getprop persist.sys.timezone) date '+%Y%m%d%H%M')
     zip -r mtz.zip * >/dev/null
-    mv mtz.zip $mtzdir/${theme_name}${string_projectname}-$time.mtz
-    rm -rf $TEMP_DIR/*
-    echo "${string_mtzhasexportto} $mtzdir/${theme_name}${string_projectname}-$time.mtz"
+    mtzfilepath=$mtzdir/${theme_name}${string_projectname}-$time.mtz
+    mv mtz.zip $mtzfilepath
+    echo "${string_mtzhasexportto} $mtzfilepath"
     echo "${string_mtznotice}"
-    exit 0
     }
 
 getfiles() {
@@ -117,6 +118,22 @@ addon(){
   var_theme=$sel_theme
   getfiles
   install
+  if [ "$1" == apply ]; then 
+    echo ${string_mtztrailtimeout}
+    echo ${string_mtztrailwarn}
+    echo 5...
+    sleep 1
+    echo 4...
+    sleep 1
+    echo 3...
+    sleep 1
+    echo 2...
+    sleep 1
+    echo 1...
+    sleep 1
+    sh $START_DIR/local-scripts/misc/am.sh start -a android.intent.action.MAIN -n "com.android.thememanager/.ApplyThemeForScreenshot" --es theme_file_path "$mtzfilepath" --es api_called_from "test" > /dev/null
+  fi
+
   rm -rf $TEMP_DIR/*
   echo "---------------------------------------------"
   exit 0

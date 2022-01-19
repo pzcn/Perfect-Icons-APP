@@ -43,7 +43,7 @@
     </group>
 
     <group>
-        <action confirm="true" icon="pic/start.png" reload="@install,@cleancache">
+        <action confirm="true" icon="pic/install.png" reload="@install,@cleancache">
             <title>开始安装</title>
             <desc>确认上述配置无误后，轻触进行安装</desc>
             <set>source $START_DIR/local-scripts/misc/install.sh</set>

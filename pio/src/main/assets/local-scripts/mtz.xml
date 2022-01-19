@@ -47,10 +47,31 @@
     <page config="page/mtz.xml" title="使用说明及常见问题" icon="pic/qa.png"/>
 </group>
 <group>
-    <action icon="pic/start.png" reload="@cleancache">
-        <title>开始导出mtz</title>
+    <action icon="pic/brush.png" reload="@cleancache" visible="source local-scripts/misc/installer_check.sh noroot" warning="试用须知：1.由于采用了非官方的接口，在没有破解主题自动还原的情况下，试用后随时可能恢复默认主题（可能在你打游戏的时候突然退回到桌面）。请及时手动切换回默认主题。2.如果主题应用后字体有问题，重启即可解决">
+        <title>导出mtz并试用</title>
+        <desc>点击会应用主题，一段时间后会恢复默认。请及时切换回原来的主题。</desc>
+        <set>source $START_DIR/local-scripts/misc/mtz.sh apply</set>
+    </action>
+    <action icon="pic/save.png" reload="@cleancache">
+        <title>仅导出mtz</title>
         <desc>确认上述配置无误后，轻触导出mtz</desc>
         <set>source $START_DIR/local-scripts/misc/mtz.sh</set>
+    </action>
+</group>
+
+<group visible="source local-scripts/misc/installer_check.sh" >
+      <text>
+    <title>Root 专区</title>
+    </text>
+    <action icon="pic/su.png">
+        <title>防止恢复默认主题</title>
+        <desc>仅本次开机有效，重启后失效。仅需root权限，不需要magisk</desc>
+        <set>chmod 731 /data/system/theme; echo "已完成"</set>
+    </action>
+    <action icon="pic/magisk.png">
+        <title>[Magisk]防止恢复默认主题</title>
+        <desc>安装防止恢复的Magisk模块，重启不会失效</desc>
+        <set>source $START_DIR/local-scripts/misc/mtcrack.sh</set>
     </action>
 </group>
 <text><title>
