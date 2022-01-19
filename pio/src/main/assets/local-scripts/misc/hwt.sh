@@ -31,6 +31,7 @@ install() {
     mv $TEMP_DIR/hwt.zip $hwtdir/${theme_name}${string_projectname}.hwt
     rm -rf $TEMP_DIR/*
     echo "${string_hwthasexportto} $hwtdir/${theme_name}${string_projectname}.hwt"
+    echo "${string_hwtapply}"
     exit 0
     }
 
