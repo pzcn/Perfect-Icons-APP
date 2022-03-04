@@ -56,7 +56,7 @@ class Downloader(private var context: Context, private var activity: Activity? =
             // request.setAllowedNetworkTypes(DownloadManager.Request.NETWORK_MOBILE);
             // 设置下载文件保存的路径和文件名
             val outName = if(fileName.isNullOrEmpty()) URLUtil.guessFileName(url, contentDisposition, mimeType) else fileName
-            request.setDestinationInExternalFilesDir(context,Environment.DIRECTORY_DOWNLOADS, outName)
+            request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, outName)
             //        另外可选一下方法，自定义下载路径
             //        request.setDestinationUri()
             //        request.setDestinationInExternalFilesDir()
