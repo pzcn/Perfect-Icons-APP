@@ -48,7 +48,7 @@ class Downloader(private var context: Context, private var activity: Activity? =
             // 允许在计费流量下下载
             request.setAllowedOverMetered(true)
             // 允许该记录在下载管理界面可见
-            request.setVisibleInDownloadsUi(false)
+            request.setVisibleInDownloadsUi(true)
             // 允许漫游时下载
             request.setAllowedOverRoaming(true)
             // 允许下载的网路类型
