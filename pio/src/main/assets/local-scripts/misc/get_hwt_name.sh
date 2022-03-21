@@ -1,4 +1,4 @@
-
+source theme_files/hwt_theme_config
 [ $sel_theme = Aquamarine ] && echo "${string_nowselected}${string_Aquamarine}"
 [ $sel_theme = PoeticRomance ] && echo "${string_nowselected}${string_PoeticRomance}"
 [ $sel_theme = BlushGold ] && echo "${string_nowselected}${string_BlushGold}"
