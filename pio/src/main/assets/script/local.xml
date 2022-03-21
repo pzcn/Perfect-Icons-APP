@@ -19,6 +19,13 @@
 </slice>
     </text>
 </group>
+<group visible="if [ $LANGUAGE == zh-rCN ]; then echo 1; else echo 0; fi">
+    <text>
+        <title>EMUI10以下旧设备专区</title>
+    </text>
+    <page config="script/emui10.xml" title="下载hwt单层图标主题包" desc="EMUI10及以下旧设备可能无法正常使用软件，可在这此处下载资源" />
+    <resource file="script/emui10.xml" />
+</group>
 
 <group visible="if [ $LANGUAGE == zh-rCN ]; then echo 1; else echo 0; fi">
     <action>
