@@ -28,6 +28,9 @@
 </group>
 
 <group visible="if [ $LANGUAGE == zh-rCN ]; then echo 1; else echo 0; fi">
+    <text>
+        <title>其他选项</title>
+    </text>
     <action>
         <title>疑难解答</title>
         <set>sh $START_DIR/script/network_check.sh</set>
