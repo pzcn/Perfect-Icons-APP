@@ -1,4 +1,4 @@
-source theme_files/hwt_theme_config
+
 [ $sel_theme = Aquamarine ] && echo "${string_nowselected}${string_Aquamarine}"
 [ $sel_theme = PoeticRomance ] && echo "${string_nowselected}${string_PoeticRomance}"
 [ $sel_theme = BlushGold ] && echo "${string_nowselected}${string_BlushGold}"
@@ -15,3 +15,6 @@ source theme_files/hwt_theme_config
 [ $sel_theme = ColorOS12 ] && echo "${string_nowselected}${string_ColorOS12}"
 [ $sel_theme = Firmament ] && echo "${string_nowselected}${string_Firmament}"
 [ $sel_theme = MIUI ] && echo "${string_nowselected}${string_MIUI}"
+[ $sel_theme = MistyRealm ] && echo "${string_nowselected}${string_MistyRealm}"
+[ $sel_theme = DuneRealm ] && echo "${string_nowselected}${string_DuneRealm}"
+[ $sel_theme = OceanRealm ] && echo "${string_nowselected}${string_OceanRealm}"

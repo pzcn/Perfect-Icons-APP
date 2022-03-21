@@ -32,8 +32,8 @@
     </text>
     <page visible="source local-scripts/misc/installer_check.sh" id="@install" icon="pic/magisk.png" before-read="source local-scripts/misc/addon_init.sh" >
         <config>install.xml</config>
-        <title>[Magisk]安装/升级</title>
-        <desc>以 Magisk 模块形式进行安装图标</desc>
+        <title>[Magisk]安装/更新</title>
+        <desc>以 Magisk 模块形式进行安装图标，有新版本时可进行安装以更新</desc>
         <summary sh="source local-scripts/misc/get_themes.sh" />
     </page>
     <page config="mtz.xml" title="导出mtz主题包" icon="pic/save.png" desc="导出mtz主题包导出后需要主题破解或MIUI主题设计师账号才能使用" before-read="source local-scripts/misc/addon_init.sh" />

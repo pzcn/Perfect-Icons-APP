@@ -5,18 +5,19 @@
             <options>
                 <option value="default">Classic</option>
                 <option value="coloros12">ColorOS12</option>
-                <option value="explore">MIUI探·界</option>
+                <option value="explore">MIUI Explore</option>
                 <option value="flyme9">Flyme9</option>
+                <option value="iOS">iOS</option>
                 <option value="lrone">Lrone</option>
                 <option value="luck7">Luck7</option>
                 <option value="perfectcurve">Perfect Curve</option>
-                <option value="Aquamarine">HarmonyOS-Aquamarine(Beta)</option>
-                <option value="AmethystLake">EMUI-AmethystLake(Beta)</option>
-                <option value="GoldenBeach">EMUI-GoldenBeach(Beta)</option>
-                <option value="LightWings">EMUI-LightWings(Beta)</option>
-                <option value="Nebulae">EMUI-Nebulae(Beta)</option>
-                <option value="StarrySky">EMUI-StarrySky(Beta)</option>
-                <option value="Reconstruction">EMUI-Reconstruction(Beta)</option>
+                <option value="Aquamarine">HarmonyOS-Aquamarine</option>
+                <option value="AmethystLake">EMUI-AmethystLake</option>
+                <option value="GoldenBeach">EMUI-GoldenBeach</option>
+                <option value="LightWings">EMUI-LightWings</option>
+                <option value="Nebulae">EMUI-Nebulae</option>
+                <option value="StarrySky">EMUI-StarrySky</option>
+                <option value="Reconstruction">EMUI-Reconstruction</option>
             </options>
             <auto-off>true</auto-off>
             <summary sh="source local-scripts/misc/get_seltheme_name.sh" />
