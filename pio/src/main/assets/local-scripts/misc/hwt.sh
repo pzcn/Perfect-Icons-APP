@@ -8,12 +8,12 @@ install() {
     cd theme_files/hwt/icons
     zip -r $TEMP_DIR/icons.zip * -x './.git/*' >/dev/null
     cd ../..
-    tar -xf  $TEMP_DIR/$hwt_theme.tar.xz -C "$TEMP_DIR/hwt/"
+    toybox tar -xf  $TEMP_DIR/$hwt_theme.tar.xz -C "$TEMP_DIR/hwt/"
     mv $TEMP_DIR/hwt/$sel_theme/icons $TEMP_DIR/hwt/$sel_theme/icons.zip
     unzip -qo $TEMP_DIR/hwt/$sel_theme/icons.zip -d $TEMP_DIR/icons
     rm -rf $TEMP_DIR/hwt/$sel_theme/icons.zip
     echo ${string_setsizeshape}
-    tar -xf "$TEMP_DIR/style.tar.xz" -C "$TEMP_DIR/style" >&2
+    toybox tar -xf "$TEMP_DIR/style.tar.xz" -C "$TEMP_DIR/style" >&2
     cp -rf ${TEMP_DIR}/style/${hwt_shape}_${hwt_size}/* $TEMP_DIR/icons
     source ${TEMP_DIR}/style/${hwt_shape}_${hwt_size}/config.ini
     cp -rf $TEMP_DIR/icons
@@ -97,7 +97,7 @@ download() {
   else
     getfiles
     echo "${string_extracting}${theme_name}..."
-    tar -xf "$TEMP_DIR/iconsrepo.tar.xz" -C "theme_files/hwt" >&2
+    toybox tar -xf "$TEMP_DIR/iconsrepo.tar.xz" -C "theme_files/hwt" >&2
     rm -rf $TEMP_DIR/iconsrepo.tar.xz
   fi
   hwt_theme=style

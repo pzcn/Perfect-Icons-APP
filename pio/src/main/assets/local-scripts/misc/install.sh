@@ -3,7 +3,7 @@ install() {
     cd theme_files/miui
     zip -r $TEMP_DIR/icons.zip * -x './res/drawable-xxhdpi/.git/*' >/dev/null
     cd ../..
-    tar -xf "$file" -C "$TEMP_DIR/" >&2
+    toybox tar -xf "$file" -C "$TEMP_DIR/" >&2
     mkdir -p $TEMP_DIR/res/drawable-xxhdpi
     mv  $TEMP_DIR/icons/* $TEMP_DIR/res/drawable-xxhdpi 2>/dev/null
     rm -rf $TEMP_DIR/icons
@@ -68,7 +68,7 @@ addon(){
 
 patch(){
   cd $TEMP_DIR
-    tar -xf "$file" -C "$TEMP_DIR/" >&2
+    toybox tar -xf "$file" -C "$TEMP_DIR/" >&2
     mkdir -p res/drawable-xxhdpi
     mv icons/* res/drawable-xxhdpi 2>/dev/null
     rm icons
@@ -134,7 +134,7 @@ source $START_DIR/local-scripts/misc/downloader.sh
   else
     getfiles
     echo "${string_extracting}${theme_name}..."
-    tar -xf "$TEMP_DIR/iconsrepo.tar.xz" -C "$TEMP_DIR/" >&2
+    toybox tar -xf "$TEMP_DIR/iconsrepo.tar.xz" -C "$TEMP_DIR/" >&2
     mv $TEMP_DIR/icons $TEMP_DIR/icons.zip
     unzip $TEMP_DIR/icons.zip -d theme_files/miui >/dev/null
     rm -rf $TEMP_DIR/icons.zip

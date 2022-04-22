@@ -5,7 +5,7 @@ install() {
     zip -r $TEMP_DIR/icons.zip * -x './res/drawable-xxhdpi/.git/*' >/dev/null
     cd ../..
     cd $TEMP_DIR
-    tar -xf  $TEMP_DIR/$var_theme.tar.xz -C "$TEMP_DIR/"
+    toybox tar -xf  $TEMP_DIR/$var_theme.tar.xz -C "$TEMP_DIR/"
     mkdir -p ./res/drawable-xxhdpi
     mv  icons/* ./res/drawable-xxhdpi 2>/dev/null
     rm -rf icons
@@ -16,7 +16,7 @@ install() {
     cd ..
     [ $addon == 1 ] && addon
     mkdir $TEMP_DIR/mtztmp
-    tar -xf "$TEMP_DIR/mtz.tar.xz" -C "$TEMP_DIR/mtztmp" >&2
+    toybox tar -xf "$TEMP_DIR/mtz.tar.xz" -C "$TEMP_DIR/mtztmp" >&2
     cp -rf $TEMP_DIR/icons.zip $TEMP_DIR/mtztmp/icons
     sed -i "s/themename/$theme_name/g" $TEMP_DIR/mtztmp/description.xml
     cd $TEMP_DIR/mtztmp
@@ -109,7 +109,7 @@ addon(){
   else
     getfiles
         echo "${string_extracting}${theme_name}..."
-    tar -xf "$TEMP_DIR/iconsrepo.tar.xz" -C "$TEMP_DIR/" >&2
+    toybox tar -xf "$TEMP_DIR/iconsrepo.tar.xz" -C "$TEMP_DIR/" >&2
     mv $TEMP_DIR/icons $TEMP_DIR/icons.zip
     unzip $TEMP_DIR/icons.zip -d theme_files/miui >/dev/null
     rm -rf $TEMP_DIR/icons.zip
