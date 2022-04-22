@@ -43,6 +43,11 @@ if [[ -f "$TOOLKIT/install_busybox.sh" ]]; then
     sh "$TOOLKIT/install_busybox.sh"
 fi
 
+# 删除busybox的tar功能
+if [[ -f "$TOOLKIT/tar" ]]; then
+    rm $TOOLKIT/tar
+fi
+
 # 判断是否有指定执行目录，跳转到起始目录
 if [[ "$START_DIR" != "" ]] && [[ -d "$START_DIR" ]]
 then
@@ -52,13 +57,13 @@ fi
 # 语言文件
 if [ -f "$START_DIR/theme_files/beta_config" ]; then
     source $START_DIR/theme_files/beta_config
-    if [ $beta = 1 ]; then 
-        extract_dir=$START_DIR/online-scripts 
-    else 
+    if [ $beta = 1 ]; then
+        extract_dir=$START_DIR/online-scripts
+    else
         extract_dir=$START_DIR/local-scripts
     fi
 else
-    extract_dir=$START_DIR/local-scripts   
+    extract_dir=$START_DIR/local-scripts
 fi
 
 if [ $LANGUAGE == "zh-rCN" ]; then
