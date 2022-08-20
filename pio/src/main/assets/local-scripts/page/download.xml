@@ -16,6 +16,11 @@
         </get>
         <set>echo "curlmode=$state" &gt; theme_files/download_config</set>
     </switch>
+    <action>
+        <title>疑难解答</title>
+        <set>sh $START_DIR/script/network_check.sh</set>
+        <resource file="script/network_check.sh" />
+    </action>
 </group>
 <text><title>
 </title></text>
