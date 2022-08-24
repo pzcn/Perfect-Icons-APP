@@ -5,31 +5,7 @@
         <desc>将会下载一些app的历史图标或者其他样式的图标，您需要自行移动文件夹位置以启用它们。将会下载到/sdcard/Documents/MIUI完美图标自定义/图标存档</desc>
         <script>source local-scripts/misc/Icons_Archiving.sh</script>
     </action>
-    <text>
-        <title>存档存档目前包含</title>
-        <slice bold="true">静态图标：</slice>
-        <slice break="true">京东 历史图标
-京东 10.0 618版本去牛皮癣图标
-哔哩哔哩 历史图标
-知乎 历史图标
-MT管理器 填满版
-Telegram 背景不带圆
-steam 圆形
-QQ 春节图标
-QNotified 白底彩字
-Magisk图标 供随机包名使用
-Zarchiver 标准版和普通版重制
-光遇 历史图标
-上帝模式 重绘
-小米商城 老版本图标以及新Logo版本
-芒果TV 有字版
-BanG Dream! b服3.0图标
-BanG Dream! b服4.0图标其他样式</slice>
-        <slice bold="true" break="true">动态图标：</slice>
-        <slice break="true">MIUI音乐 旧版图标
-微信动态图标 旧版方案
-QQ 8.8.0眨眼张嘴帧动画</slice>
-    </text>
+    <page title="查看已存档图标" html="https://hub.fastgit.xyz/pzcn/Perfect-Icons-Completion-Project/tree/main/addition/Icons_Archiving" icon="pic/preview.png" />
 </group>
 <group>
     <action icon="pic/migrate.png" visible="source local-scripts/misc/addon_check.sh" id="@addon" reload="@addon">

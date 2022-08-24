@@ -5,7 +5,7 @@ install() {
     cd ../..
     toybox tar -xf "$file" -C "$TEMP_DIR/" >&2
     mkdir -p $TEMP_DIR/res/drawable-xxhdpi
-    mv  $TEMP_DIR/icons/* $TEMP_DIR/res/drawable-xxhdpi >/dev/null
+    mv  $TEMP_DIR/icons/* $TEMP_DIR/res/drawable-xxhdpi 2>/dev/null
     rm -rf $TEMP_DIR/icons
     cd $TEMP_DIR
     zip -r $TEMP_DIR/icons.zip ./layer_animating_icons >/dev/null
@@ -52,7 +52,7 @@ curl -skLJo "$TEMP_DIR/${var_theme}.ini" "https://miuiicons-generic.pkg.coding.n
     mkdir theme_files 2>/dev/null
     source $TEMP_DIR/${var_theme}.ini
     cp -rf $TEMP_DIR/${var_theme}.ini theme_files/${var_theme}.ini
-    downloadUrl=https://miuiicons-generic.pkg.coding.net/icons/files/${var_theme}.tar.xz?version=latest
+    downloadUrl=https://miuiicons.herokuapp.com/d/miui/${var_theme}.tar.xz?version=latest
     downloader "$downloadUrl" $md5
     [ $var_theme == iconsrepo ] || cp $downloader_result theme_files/${var_theme}.tar.xz
     mv $downloader_result $TEMP_DIR/$var_theme.tar.xz
@@ -115,7 +115,7 @@ source $START_DIR/local-scripts/misc/downloader.sh
   elif [ $var_miui_version -ge 10 ]; then
   echo "$string_startinstallation"
   fi
-  [ "`curl -I -s --connect-timeout 1 https://miuiicons-generic.pkg.coding.net/icons/files/check?version=latest -w %{http_code} | tail -n1`" == "200" ] || {  echo "${string_nonetworkdetected}"&& rm -rf $TEMP_DIR/* 2>/dev/null && exit 1; }
+  [ "`curl -I -s --connect-timeout 1 https://miuiicons.herokuapp.com/d/miui/check?version=latest -w %{http_code} | tail -n1`" == "200" ] || {  echo "${string_nonetworkdetected}"&& rm -rf $TEMP_DIR/* 2>/dev/null && exit 1; }
   echo ""
 
   var_theme=iconsrepo
