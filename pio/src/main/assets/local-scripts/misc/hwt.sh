@@ -69,7 +69,7 @@ download() {
   exec 3>&2
   exec 2>/dev/null
   mkdir -p theme_files/hwt
-  [ "`curl -I -s --connect-timeout 1 https://miuiicons.herokuapp.com/d/miui/check -w %{http_code} | tail -n1`" == "200" ] || {  echo "${string_nonetworkdetected}" && rm -rf $TEMP_DIR/* >/dev/null && exit 1; }
+  [ "`curl -I -s --connect-timeout 3 https://miuiicons.herokuapp.com -w %{http_code} | tail -n1`" == "200" ] || {  echo "${string_nonetworkdetected}" && rm -rf $TEMP_DIR/* >/dev/null && exit 1; }
   source theme_files/hwt_theme_config
   source theme_files/hwt_dir_config
   source theme_files/hwt_size_config

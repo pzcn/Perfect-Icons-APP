@@ -115,7 +115,7 @@ source $START_DIR/local-scripts/misc/downloader.sh
   elif [ $var_miui_version -ge 10 ]; then
   echo "$string_startinstallation"
   fi
-  [ "`curl -I -s --connect-timeout 1 https://miuiicons.herokuapp.com/d/miui/check -w %{http_code} | tail -n1`" == "200" ] || {  echo "${string_nonetworkdetected}"&& rm -rf $TEMP_DIR/* 2>/dev/null && exit 1; }
+  [ "`curl -I -s --connect-timeout 3 https://miuiicons.herokuapp.com -w %{http_code} | tail -n1`" == "200" ] || {  echo "${string_nonetworkdetected}"&& rm -rf $TEMP_DIR/* 2>/dev/null && exit 1; }
   echo ""
 
   var_theme=iconsrepo
