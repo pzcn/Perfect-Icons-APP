@@ -60,7 +60,7 @@ download() {
     mkdir theme_files 2>/dev/null
     source $TEMP_DIR/${hwt_theme}.ini
     cp -rf $TEMP_DIR/${hwt_theme}.ini theme_files/hwt/${hwt_theme}.ini
-    downloadUrl=https://miuiicons.herokuapp.com/d/emui/${hwt_theme}.tar.xz
+    downloadUrl=${link_emui}/${hwt_theme}.tar.xz
     downloader "$downloadUrl" $md5
     [ $hwt_theme == iconsrepo ] || cp $downloader_result theme_files/hwt/${hwt_theme}.tar.xz
     mv $downloader_result $file
@@ -69,7 +69,9 @@ download() {
   exec 3>&2
   exec 2>/dev/null
   mkdir -p theme_files/hwt
-  [ "`curl -I -s --connect-timeout 3 https://miuiicons.herokuapp.com -w %{http_code} | tail -n1`" == "200" ] || {  echo "${string_nonetworkdetected}" && rm -rf $TEMP_DIR/* >/dev/null && exit 1; }
+  curl -skLJo "$TEMP_DIR/${var_theme}.ini" "https://miuiicons-generic.pkg.coding.net/icons/files/link.ini?version=latest"
+  source $TEMP_DIR/link.ini
+  [ "`curl -I -s --connect-timeout 3 ${link_check} -w %{http_code} | tail -n1`" == "200" ] || {  echo "${string_nonetworkdetected}"&& rm -rf $TEMP_DIR/* 2>/dev/null && exit 1; }
   source theme_files/hwt_theme_config
   source theme_files/hwt_dir_config
   source theme_files/hwt_size_config
