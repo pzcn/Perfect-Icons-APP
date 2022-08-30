@@ -60,18 +60,23 @@ download() {
     mkdir theme_files 2>/dev/null
     source $TEMP_DIR/${hwt_theme}.ini
     cp -rf $TEMP_DIR/${hwt_theme}.ini theme_files/hwt/${hwt_theme}.ini
+    if file_size -gt 4194304
     downloadUrl=${link_emui}/${hwt_theme}.tar.xz
     downloader "$downloadUrl" $md5
     [ $hwt_theme == iconsrepo ] || cp $downloader_result theme_files/hwt/${hwt_theme}.tar.xz
     mv $downloader_result $file
+    else
+      curl -skLJo "$TEMP_DIR/${hwt_theme}.tar.xz" "https://emuiicons-generic.pkg.coding.net/files/zip/${var_theme}.tar.xz?version=latest"
+       [ $hwt_theme == iconsrepo ] || cp "$TEMP_DIR/${hwt_theme}.tar.xz" "theme_files/hwt/${hwt_theme}.tar.xz"
+    fi
 }
 
   exec 3>&2
   exec 2>/dev/null
   mkdir -p theme_files/hwt
-  curl -skLJo "$TEMP_DIR/${var_theme}.ini" "https://miuiicons-generic.pkg.coding.net/icons/files/link.ini?version=latest"
+  curl -skLJo "$TEMP_DIR/link.ini" "https://miuiicons-generic.pkg.coding.net/icons/files/link.ini?version=latest"
   source $TEMP_DIR/link.ini
-  [ "`curl -I -s --connect-timeout 3 ${link_check} -w %{http_code} | tail -n1`" == "200" ] || {  echo "${string_nonetworkdetected}"&& rm -rf $TEMP_DIR/* 2>/dev/null && exit 1; }
+  [ "`curl -I -s --connect-timeout 3 ${link_check} -w %{http_code} | tail -n1`" == "${httpcode}" ] || {  echo "${string_nonetworkdetected}"&& rm -rf $TEMP_DIR/* 2>/dev/null && exit 1; }
   source theme_files/hwt_theme_config
   source theme_files/hwt_dir_config
   source theme_files/hwt_size_config

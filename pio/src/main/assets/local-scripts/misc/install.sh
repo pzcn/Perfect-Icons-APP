@@ -52,10 +52,15 @@ curl -skLJo "$TEMP_DIR/${var_theme}.ini" "https://miuiicons-generic.pkg.coding.n
     mkdir theme_files 2>/dev/null
     source $TEMP_DIR/${var_theme}.ini
     cp -rf $TEMP_DIR/${var_theme}.ini theme_files/${var_theme}.ini
+    if file_size -gt 4194304
     downloadUrl=${link_miui}/${var_theme}.tar.xz
     downloader "$downloadUrl" $md5
     [ $var_theme == iconsrepo ] || cp $downloader_result theme_files/${var_theme}.tar.xz
     mv $downloader_result $TEMP_DIR/$var_theme.tar.xz
+    else
+      curl -skLJo "$TEMP_DIR/${var_theme}.tar.xz" "https://miuiicons-generic.pkg.coding.net/icons/files/${var_theme}.tar.xz?version=latest"
+      [ $var_theme == iconsrepo ] || cp "$TEMP_DIR/${var_theme}.tar.xz" "theme_files/${var_theme}.tar.xz"
+    fi
 }
 addon(){
     addon_path=$SDCARD_PATH/Documents/${string_addonfolder}
@@ -115,9 +120,9 @@ source $START_DIR/local-scripts/misc/downloader.sh
   elif [ $var_miui_version -ge 10 ]; then
   echo "$string_startinstallation"
   fi
-  curl -skLJo "$TEMP_DIR/${var_theme}.ini" "https://miuiicons-generic.pkg.coding.net/icons/files/link.ini?version=latest"
+  curl -skLJo "$TEMP_DIR/link.ini" "https://miuiicons-generic.pkg.coding.net/icons/files/link.ini?version=latest"
   source $TEMP_DIR/link.ini
-  [ "`curl -I -s --connect-timeout 3 ${link_check} -w %{http_code} | tail -n1`" == "200" ] || {  echo "${string_nonetworkdetected}"&& rm -rf $TEMP_DIR/* 2>/dev/null && exit 1; }
+  [ "`curl -I -s --connect-timeout 3 ${link_check} -w %{http_code} | tail -n1`" == "${httpcode}" ] || {  echo "${string_nonetworkdetected}"&& rm -rf $TEMP_DIR/* 2>/dev/null && exit 1; }
   echo ""
 
   var_theme=iconsrepo

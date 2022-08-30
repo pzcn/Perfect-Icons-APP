@@ -53,14 +53,19 @@ fi
 }
 
 download() {
-    curl -skLJo "$TEMP_DIR/${var_theme}.ini" "https://miuiicons-generic.pkg.coding.net/icons/files/${var_theme}.ini?version=latest"
+curl -skLJo "$TEMP_DIR/${var_theme}.ini" "https://miuiicons-generic.pkg.coding.net/icons/files/${var_theme}.ini?version=latest"
     mkdir theme_files 2>/dev/null
     source $TEMP_DIR/${var_theme}.ini
     cp -rf $TEMP_DIR/${var_theme}.ini theme_files/${var_theme}.ini
+    if file_size -gt 4194304
     downloadUrl=${link_miui}/${var_theme}.tar.xz
     downloader "$downloadUrl" $md5
-    cp $downloader_result $file
-    mv $downloader_result theme_files/${var_theme}.tar.xz
+    [ $var_theme == iconsrepo ] || cp $downloader_result theme_files/${var_theme}.tar.xz
+    mv $downloader_result $TEMP_DIR/$var_theme.tar.xz
+    else
+      curl -skLJo "$TEMP_DIR/${var_theme}.tar.xz" "https://miuiicons-generic.pkg.coding.net/icons/files/${var_theme}.tar.xz?version=latest"
+      [ $var_theme == iconsrepo ] || cp "$TEMP_DIR/${var_theme}.tar.xz" "theme_files/${var_theme}.tar.xz"
+    fi
 }
 
 
@@ -81,9 +86,9 @@ addon(){
 }
   exec 3>&2
   exec 2>/dev/null
-  curl -skLJo "$TEMP_DIR/${var_theme}.ini" "https://miuiicons-generic.pkg.coding.net/icons/files/link.ini?version=latest"
+  curl -skLJo "$TEMP_DIR/link.ini" "https://miuiicons-generic.pkg.coding.net/icons/files/link.ini?version=latest"
   source $TEMP_DIR/link.ini
-  [ "`curl -I -s --connect-timeout 1 ${link_check} -w %{http_code} | tail -n1`" == "200" ] ||{  echo "${string_nonetworkdetected}" && rm -rf $TEMP_DIR/* >/dev/null && exit 1; }
+  [ "`curl -I -s --connect-timeout 1 ${link_check} -w %{http_code} | tail -n1`" == "${httpcode}" ] ||{  echo "${string_nonetworkdetected}" && rm -rf $TEMP_DIR/* >/dev/null && exit 1; }
   source theme_files/theme_config
   source theme_files/mtzdir_config
   source theme_files/addon_config
