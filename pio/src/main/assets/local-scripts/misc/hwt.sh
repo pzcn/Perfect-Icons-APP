@@ -60,7 +60,7 @@ download() {
     mkdir theme_files 2>/dev/null
     source $TEMP_DIR/${hwt_theme}.ini
     cp -rf $TEMP_DIR/${hwt_theme}.ini theme_files/hwt/${hwt_theme}.ini
-    if [ $file_size -gt 4194304 ] ;then
+    if [ $file_size -gt 5242880 ] ;then
     downloadUrl=${link_emui}/${hwt_theme}.tar.xz
     downloader "$downloadUrl" $md5
     [ $hwt_theme == iconsrepo ] || cp $downloader_result theme_files/hwt/${hwt_theme}.tar.xz

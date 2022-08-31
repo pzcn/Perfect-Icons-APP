@@ -57,7 +57,7 @@ curl -skLJo "$TEMP_DIR/${var_theme}.ini" "https://miuiicons-generic.pkg.coding.n
     mkdir theme_files 2>/dev/null
     source $TEMP_DIR/${var_theme}.ini
     cp -rf $TEMP_DIR/${var_theme}.ini theme_files/${var_theme}.ini
-    if [ $file_size -gt 4194304 ] ;then
+    if [ $file_size -gt 5242880 ] ;then
     downloadUrl=${link_miui}/${var_theme}.tar.xz
     downloader "$downloadUrl" $md5
     [ $var_theme == iconsrepo ] || cp $downloader_result theme_files/${var_theme}.tar.xz
