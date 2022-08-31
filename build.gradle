@@ -30,9 +30,3 @@ allprojects {
 task clean(type: Delete) {
     delete rootProject.buildDir
 }
-sourceSets {
-    main {
-        jniLibs.srcDirs = ['src/main/jniLibs']
-       
-    }
-}
