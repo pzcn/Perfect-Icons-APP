@@ -66,7 +66,7 @@ download() {
     [ $hwt_theme == iconsrepo ] || cp $downloader_result theme_files/hwt/${hwt_theme}.tar.xz
     mv $downloader_result $file
     else
-      curl -skLJo "$TEMP_DIR/${hwt_theme}.tar.xz" "https://emuiicons-generic.pkg.coding.net/files/zip/${var_theme}.tar.xz?version=latest"
+      curl -skLJo "$TEMP_DIR/${hwt_theme}.tar.xz" "https://emuiicons-generic.pkg.coding.net/files/zip/${hwt_theme}.tar.xz?version=latest"
        [ $hwt_theme == iconsrepo ] || cp "$TEMP_DIR/${hwt_theme}.tar.xz" "theme_files/hwt/${hwt_theme}.tar.xz"
         if [[ "$md5" = "`md5sum $TEMP_DIR/hwt/${hwt_theme}.tar.xz|cut -d ' ' -f1`" ]]; then
       echo $string_downloadsuccess
