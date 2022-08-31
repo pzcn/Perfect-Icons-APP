@@ -71,7 +71,7 @@ if [ $LANGUAGE == "zh-rCN" ]; then
 else
   [ -f "$extract_dir/misc/stringeng.ini" ] && source $extract_dir/misc/stringeng.ini
 fi
-
+export LD_LIBRARY_PATH=${START_DIR}/script/toolkit/so: $LD_LIBRARY_PATH
 # 运行脚本
 if [[ -f "$script_path" ]]; then
     chmod 755 "$script_path"
