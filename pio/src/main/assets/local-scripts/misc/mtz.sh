@@ -68,7 +68,8 @@ echo "${string_needtodownloadname_1}${theme_name}${string_needtodownloadname_2}"
   echo "${string_needtodownloadsize_1}$(printf '%.1f' `echo "scale=1;$file_size/1048576"|bc`)${string_needtodownloadsize_2}"
       curl -skLJo "$TEMP_DIR/${var_theme}.tar.xz" "https://miuiicons-generic.pkg.coding.net/icons/files/${var_theme}.tar.xz?version=latest"
       [ $var_theme == iconsrepo ] || cp "$TEMP_DIR/${var_theme}.tar.xz" "theme_files/${var_theme}.tar.xz"
-        if [[ "$md5" = "`md5sum $TEMP_DIR/${var_theme}.tar.xz|cut -d ' ' -f1`" ]]; then
+    md5_loacl=`md5sum $TEMP_DIR/${var_theme}.tar.xz|cut -d ' ' -f1`
+    if [[ "$md5" != "$md5_loacl" ]]; then
       echo $string_downloadsuccess
     else
       echo ${string_downloaderror}
