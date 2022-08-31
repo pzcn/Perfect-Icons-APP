@@ -127,6 +127,9 @@ source $START_DIR/local-scripts/misc/downloader.sh
   elif [ $var_miui_version -ge 10 ]; then
   echo "$string_startinstallation"
   fi
+  echo "${string_needtodownloadname_1}${theme_name}${string_needtodownloadname_2}"
+  [ $file_size ] || { echo ${string_cannotdownload} && rm -rf $TEMP_DIR/* 2>/dev/null&& exit 1; }
+  echo "${string_needtodownloadsize_1}$(printf '%.1f' `echo "scale=1;$file_size/1048576"|bc`)${string_needtodownloadsize_2}"
   curl -skLJo "$TEMP_DIR/link.ini" "https://miuiicons-generic.pkg.coding.net/icons/files/link.ini?version=latest"
   source $TEMP_DIR/link.ini
   [ "`curl -I -s --connect-timeout 3 ${link_check} -w %{http_code} | tail -n1`" == "${httpcode}" ] || {  echo "${string_nonetworkdetected}"&& rm -rf $TEMP_DIR/* 2>/dev/null && exit 1; }

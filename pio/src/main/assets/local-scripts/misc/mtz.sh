@@ -63,6 +63,9 @@ curl -skLJo "$TEMP_DIR/${var_theme}.ini" "https://miuiicons-generic.pkg.coding.n
     [ $var_theme == iconsrepo ] || cp $downloader_result theme_files/${var_theme}.tar.xz
     mv $downloader_result $TEMP_DIR/$var_theme.tar.xz
     else
+echo "${string_needtodownloadname_1}${theme_name}${string_needtodownloadname_2}"
+  [ $file_size ] || { echo ${string_cannotdownload} && rm -rf $TEMP_DIR/* 2>/dev/null&& exit 1; }
+  echo "${string_needtodownloadsize_1}$(printf '%.1f' `echo "scale=1;$file_size/1048576"|bc`)${string_needtodownloadsize_2}"
       curl -skLJo "$TEMP_DIR/${var_theme}.tar.xz" "https://miuiicons-generic.pkg.coding.net/icons/files/${var_theme}.tar.xz?version=latest"
       [ $var_theme == iconsrepo ] || cp "$TEMP_DIR/${var_theme}.tar.xz" "theme_files/${var_theme}.tar.xz"
         if [[ "$md5" = "`md5sum $TEMP_DIR/${var_theme}.tar.xz|cut -d ' ' -f1`" ]]; then
