@@ -88,7 +88,7 @@ echo "${string_needtodownloadname_1}${theme_name}${string_needtodownloadname_2}"
   curl -skLJo "$TEMP_DIR/link.ini" "https://miuiicons-generic.pkg.coding.net/icons/files/link.ini?version=latest"
   source $TEMP_DIR/link.ini
     if [ "$http_code" != null ];then
-    if [ ! "$httpcode" =~ $http_code ]; then
+    if [[ ! $httpcode == *$http_code* ]]; then
     {  echo "${string_nonetworkdetected}" && rm -rf $TEMP_DIR/* >/dev/null && exit 1; }
     fi
   else
