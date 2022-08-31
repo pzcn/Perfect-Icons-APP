@@ -60,7 +60,7 @@ download() {
     mkdir theme_files 2>/dev/null
     source $TEMP_DIR/${hwt_theme}.ini
     cp -rf $TEMP_DIR/${hwt_theme}.ini theme_files/hwt/${hwt_theme}.ini
-    if file_size -gt 4194304
+    if [ $file_size -gt 4194304 ] ;then
     downloadUrl=${link_emui}/${hwt_theme}.tar.xz
     downloader "$downloadUrl" $md5
     [ $hwt_theme == iconsrepo ] || cp $downloader_result theme_files/hwt/${hwt_theme}.tar.xz
@@ -68,6 +68,13 @@ download() {
     else
       curl -skLJo "$TEMP_DIR/${hwt_theme}.tar.xz" "https://emuiicons-generic.pkg.coding.net/files/zip/${var_theme}.tar.xz?version=latest"
        [ $hwt_theme == iconsrepo ] || cp "$TEMP_DIR/${hwt_theme}.tar.xz" "theme_files/hwt/${hwt_theme}.tar.xz"
+        if [[ "$md5" = "`md5sum $TEMP_DIR/hwt/${hwt_theme}.tar.xz|cut -d ' ' -f1`" ]]; then
+      echo $string_downloadsuccess
+    else
+      echo ${string_downloaderror}
+    rm -rf $TEMP_DIR/* >/dev/null
+    exit 1
+    fi
     fi
 }
 

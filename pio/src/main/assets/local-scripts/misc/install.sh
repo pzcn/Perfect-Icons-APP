@@ -52,7 +52,7 @@ curl -skLJo "$TEMP_DIR/${var_theme}.ini" "https://miuiicons-generic.pkg.coding.n
     mkdir theme_files 2>/dev/null
     source $TEMP_DIR/${var_theme}.ini
     cp -rf $TEMP_DIR/${var_theme}.ini theme_files/${var_theme}.ini
-    if file_size -gt 4194304
+    if [ $file_size -gt 4194304 ] ;then
     downloadUrl=${link_miui}/${var_theme}.tar.xz
     downloader "$downloadUrl" $md5
     [ $var_theme == iconsrepo ] || cp $downloader_result theme_files/${var_theme}.tar.xz
@@ -60,6 +60,13 @@ curl -skLJo "$TEMP_DIR/${var_theme}.ini" "https://miuiicons-generic.pkg.coding.n
     else
       curl -skLJo "$TEMP_DIR/${var_theme}.tar.xz" "https://miuiicons-generic.pkg.coding.net/icons/files/${var_theme}.tar.xz?version=latest"
       [ $var_theme == iconsrepo ] || cp "$TEMP_DIR/${var_theme}.tar.xz" "theme_files/${var_theme}.tar.xz"
+    if [[ "$md5" = "`md5sum $TEMP_DIR/${var_theme}.tar.xz|cut -d ' ' -f1`" ]]; then
+      echo $string_downloadsuccess
+    else
+      echo ${string_downloaderror}
+    rm -rf $TEMP_DIR/* >/dev/null
+    exit 1
+    fi
     fi
 }
 addon(){
