@@ -87,7 +87,13 @@ echo "${string_needtodownloadname_1}${theme_name}${string_needtodownloadname_2}"
   mkdir -p theme_files/hwt
   curl -skLJo "$TEMP_DIR/link.ini" "https://miuiicons-generic.pkg.coding.net/icons/files/link.ini?version=latest"
   source $TEMP_DIR/link.ini
-  [ "`curl -I -s --connect-timeout 3 ${link_check} -w %{http_code} | tail -n1`" == "${httpcode}" ] || {  echo "${string_nonetworkdetected}"&& rm -rf $TEMP_DIR/* 2>/dev/null && exit 1; }
+    if [ "$http_code" != null ];then
+    if [ ! "$httpcode" =~ $http_code ]; then
+    {  echo "${string_nonetworkdetected}" && rm -rf $TEMP_DIR/* >/dev/null && exit 1; }
+    fi
+  else
+    {  echo "${string_nonetworkdetected}" && rm -rf $TEMP_DIR/* >/dev/null && exit 1; }
+  fi
   source theme_files/hwt_theme_config
   source theme_files/hwt_dir_config
   source theme_files/hwt_size_config
