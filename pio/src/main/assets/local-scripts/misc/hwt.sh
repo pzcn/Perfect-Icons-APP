@@ -72,7 +72,7 @@ echo "${string_needtodownloadname_1}${theme_name}${string_needtodownloadname_2}"
       curl -skLJo "$TEMP_DIR/${hwt_theme}.tar.xz" "https://emuiicons-generic.pkg.coding.net/files/zip/${hwt_theme}.tar.xz?version=latest"
        [ $hwt_theme == iconsrepo ] || cp "$TEMP_DIR/${hwt_theme}.tar.xz" "theme_files/hwt/${hwt_theme}.tar.xz"
     md5_loacl=`md5sum $TEMP_DIR/hwt/${hwt_theme}.tar.xz|cut -d ' ' -f1`
-    if [[ "$md5" != "$md5_loacl" ]]; then
+    if [[ "$md5" = "$md5_loacl" ]]; then
       echo $string_downloadsuccess
     else
       echo ${string_downloaderror}
