@@ -2,7 +2,7 @@
     <text>
     <title>设置</title>
     </text>
-    <switch>
+    <switch icon="../pic/beta.png">
      <title>加入Beta计划</title>
          <desc>加入Beta计划后，脚本将在启动时自动更新到最新版本，将第一时间体验到最新特性，同时稳定性可能会下降。 </desc>
         <get>
@@ -11,7 +11,7 @@
         </get>
         <set>source local-scripts/misc/beta.sh</set>
     </switch>
-    <action shell="hidden" confirm="true" id="@cleancache" reload="@cleancache">
+    <action shell="hidden" confirm="true" id="@cleancache" reload="@cleancache" icon="../pic/clean.png">
         <title>清理缓存</title>
         <desc>当图标安装后出现奇怪的问题时，可以尝试清理缓存，清理后下次安装时会重新下载资源 </desc>
         <summary sh="source local-scripts/misc/cache_size.sh"/>

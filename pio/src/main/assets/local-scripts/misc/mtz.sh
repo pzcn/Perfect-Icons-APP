@@ -1,3 +1,19 @@
+disable_dynamicicon() {
+test=`head -n 1 ${START_DIR}/theme_files/denylist`
+if [ "$test" = "all" ] ; then
+  echo "- 禁用所有动态图标..."
+  rm -rf $TEMP_DIR/layer_animating_icons
+elif [ "$test" = "" ] ; then
+  :
+else
+  echo "- 禁用下列app的动态图标："
+  list=`cat ${START_DIR}/theme_files/denylist`
+  for p in $list
+  do
+    [ -d "$TEMP_DIR/layer_animating_icons/$p" ] && rm -rf  $TEMP_DIR/layer_animating_icons/$p && echo "  ""$p"
+  done
+fi
+}
 
 install() {
     echo "${string_exporting}$theme_name..."
@@ -9,6 +25,7 @@ install() {
     mkdir -p ./res/drawable-xxhdpi
     mv  icons/* ./res/drawable-xxhdpi 2>/dev/null
     rm -rf icons
+    [ -f ${START_DIR}/theme_files/denylist ] && disable_dynamicicon
     zip -r icons.zip ./layer_animating_icons >/dev/null
     zip -r icons.zip ./res >/dev/null
     rm -rf res

@@ -27,6 +27,11 @@
         </get>
         <set>echo "sel_theme=$state" &gt; theme_files/theme_config </set>
     </picker>
+    <page icon="pic/disabledynamic.png">
+        <config>page/disabledynamicicons.xml</config>
+        <title>禁用动态图标</title>
+        <desc>可禁用某些或全部图标的动画效果</desc>
+    </page>
     <switch shell="hidden" icon="pic/addon.png">
         <title>是否启用自定义图标</title>
         <desc>开启后，导出的mtz将会包含您的自定义图标</desc>
