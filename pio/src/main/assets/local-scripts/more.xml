@@ -20,7 +20,7 @@
         <title>更新日志</title>
         <desc>查看近期更新日志</desc>
     </page>
-    <page html="https://iconsx.vercel.app/push.html"  icon="pic/push.png">
+    <page html="https://iconsx.pedroz.eu.org/push.html"  icon="pic/push.png">
         <title>订阅新版本通知</title>
         <desc>通过微信订阅后，有新版本会推送通知</desc>
     </page>

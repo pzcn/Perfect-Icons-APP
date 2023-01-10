@@ -49,7 +49,7 @@
     </action>
 </group>
 <group>
-    <page html="https://icons-demo.vercel.app/" title="预览主题图标" icon="pic/preview.png"/>
+    <page html="https://icons-demo.pedroz.eu.org/" title="预览主题图标" icon="pic/preview.png"/>
     <page config="page/mtz.xml" title="使用说明及常见问题" icon="pic/qa.png"/>
 </group>
 <group>
