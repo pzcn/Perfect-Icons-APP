@@ -1,5 +1,7 @@
 version=20230123
 busybox_install() {
+	rm -rf $TOOLKIT/*
+	cp -rf $toolkit_dir/* $TOOLKIT
 	ln -sf $TOOLKIT/busybox1 $TOOLKIT/busybox
 	$TOOLKIT/busybox1 --install -s $TOOLKIT
 	echo $version >>$TOOLKIT/busybox.version
