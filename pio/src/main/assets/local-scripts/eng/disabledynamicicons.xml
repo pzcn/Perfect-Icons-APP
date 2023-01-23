@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<group>
+    <text>
+        <title>Dynamic icon disabled list:</title>
+        <desc sh="source local-scripts/misc/get_denylist.sh list"/>
+    </text>
+</group>
+
+<group>
+        <text>
+            <title>Disable dynamic icons for some apps</title>
+            <desc>Select the app you want to disable the animated icon below, and it will be automatically disabled during subsequent installations. Please select according to your needs. If you need to disable all, please use Disable All below. It is not recommended to use the select all function in the list (it will reduce the installation efficiency). All apps will be displayed in the list, which does not mean that the apps in the list use dynamic icons.
+Again, choose according to your needs, don't choose all!</desc>
+        </text>
+        <action reload="page" shell="hidden" icon="pic/android.png">
+            <title>select app</title>
+            <desc>Support multiple selection, select the app you want to disable and reinstall it.</desc>
+            <param
+                name="package_name"
+                value-sh="source local-scripts/misc/get_denylist.sh sel"
+                type="app"
+                multiple="multiple"
+                options-sh="pm list package | cut -f2 -d ':'" />
+            <set>echo "$package_name" &gt; theme_files/denylist</set>
+        </action>
+    </group>
+
+<group>
+    <text>
+        <title>Disable dynamic icons for all apps</title>
+        <desc>After clicking, all dynamic icons will be disabled, and can be automatically disabled during subsequent installations.</desc>
+    </text>
+        <action reload="page" shell="hidden" icon="pic/disable.png">
+            <title>disable all</title>
+            <set>echo "all" &gt; theme_files/denylist</set>
+        </action>
+</group>
+
+<group>
+        <action reload="page" shell="hidden" icon="pic/clean.png">
+            <title>Clear disabled list</title>
+            <desc>Click to restore the disabled state of the setting</desc>
+            <set>rm -rf theme_files/denylist</set>
+        </action>
+</group>
+

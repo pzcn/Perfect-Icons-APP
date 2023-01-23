@@ -263,7 +263,7 @@ if [[ -d theme_files/miui/res/drawable-xxhdpi/.git ]]; then
     echo "${string_gitpull}"
     cd theme_files/miui/res/drawable-xxhdpi
     export LD_LIBRARY_PATH=${START_DIR}/script/toolkit/so: $LD_LIBRARY_PATH
-    git pull --rebase >/dev/null
+    git rebase >/dev/null 2>&1 
     cp -rf $TEMP_DIR/${var_theme}.ini ${START_DIR}/theme_files/${var_theme}.ini
     cd ../../../..
   else

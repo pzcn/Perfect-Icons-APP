@@ -16,7 +16,7 @@
         <desc>将会下载一些app的历史图标或者其他样式的图标，您需要自行移动文件夹位置以启用它们。将会下载到/sdcard/Documents/MIUI完美图标自定义/图标存档</desc>
         <script>source local-scripts/misc/Icons_Archiving.sh</script>
     </action>
-    <page title="查看已存档图标" html="https://kgithub.com//pzcn/Perfect-Icons-Completion-Project/tree/main/addition/Icons_Archiving" icon="pic/preview.png" />
+    <page title="查看已存档图标" html="https://kgithub.com/pzcn/Perfect-Icons-Completion-Project/tree/main/addition/Icons_Archiving" icon="pic/preview.png" />
 </group>
 <group>
     <action icon="pic/migrate.png" visible="source local-scripts/misc/addon_check.sh" id="@addon" reload="@addon">

@@ -26,14 +26,18 @@
     <text visible="local-scripts/misc/announce_check.sh">
         <title>MIUI</title>
     </text>
-    <page visible="source local-scripts/misc/installer_check.sh" id="@install" icon="../pic/install.png" before-read="source local-scripts/misc/addon_init.sh" >
+    <page id="@install" icon="pic/module.png" before-read="source local-scripts/misc/addon_init.sh" visible="source local-scripts/misc/installer_check.sh" >
         <config>install.xml</config>
         <title>Install / Update</title>
-        <desc>Install MIUI Perfect Icons with Magisk module.</desc>
+        <desc>Install MIUI Perfect Icons module with Magisk or KernelSU</desc>
         <summary sh="source local-scripts/misc/get_themes.sh" />
     </page>
+    <page id="@install" icon="pic/module.png" before-read="source local-scripts/misc/addon_init.sh" visible="source local-scripts/misc/installer_check.sh norootcheck" >
+        <config>install.xml</config>
+        <title>Download module</title>
+        <desc>Download module, support install with Magisk or KernelSU</desc>
+    </page>
     <page config="mtz.xml" title="Export .mtz file" icon="../pic/download.png" desc="Export .mtz file for importing MIUI Perfect Icons in Themes app manually." before-read="source local-scripts/misc/addon_init.sh" />
-    <page config="addon.xml" title="Icons customise" icon="../pic/addon.png" desc="Check out how to customize icons and download archieved icons for customization." before-read="source local-scripts/misc/addon_init.sh" />
 </group>
 
 <group>
