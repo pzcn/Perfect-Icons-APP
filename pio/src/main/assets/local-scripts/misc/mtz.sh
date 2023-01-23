@@ -40,7 +40,7 @@ install() {
     rm -rf com.miui.home
     rm -rf wallpaper
   fi
-  time=$(TZ=$(getprop persist.sys.timezone) date '+%Y%m%d%H%M')
+  time=$(TZ=$(getprop persist.sys.timezone) date '+%m%d%H%M')
   zip -r mtz.zip * >/dev/null
   mtzfilepath=$mtzdir/${theme_name}${string_projectname}-$time.mtz
   mv mtz.zip $mtzfilepath
