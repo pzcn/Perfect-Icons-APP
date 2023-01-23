@@ -1,5 +1,6 @@
 version=20230123
 busybox_install() {
+	rm -rf $TOOLKIT/*
 	$TOOLKIT/busybox --install -s $TOOLKIT
 	echo $version >>$TOOLKIT/busybox.version
 	chmod -R 777 $TOOLKIT
