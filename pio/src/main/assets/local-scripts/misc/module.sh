@@ -178,6 +178,7 @@ download() {
   curl -skLJo "$TEMP_DIR/${var_theme}.ini" "https://miuiicons-generic.pkg.coding.net/icons/files/${var_theme}.ini?version=latest"
   mkdir theme_files 2>/dev/null
   source $TEMP_DIR/${var_theme}.ini
+  source $START_DIR/local-scripts/misc/get_theme_name.sh
   cp -rf $TEMP_DIR/${var_theme}.ini theme_files/${var_theme}.ini
   if [ $file_size -gt 5242880 ]; then
     downloadUrl=${link_miui}/${var_theme}.tar.xz
@@ -255,6 +256,7 @@ if [[ -d theme_files/miui/res/drawable-xxhdpi/.git ]]; then
   old_ver=$theme_version
   curl -skLJo "$TEMP_DIR/${var_theme}.ini" "https://miuiicons-generic.pkg.coding.net/icons/files/${var_theme}.ini?version=latest"
   source $TEMP_DIR/${var_theme}.ini
+  source $START_DIR/local-scripts/misc/get_theme_name.sh
   new_ver=$theme_version
   if [ $new_ver -ne $old_ver ]; then
     echo "${string_newverdown_1}${theme_name}${string_newverdown_2}"
