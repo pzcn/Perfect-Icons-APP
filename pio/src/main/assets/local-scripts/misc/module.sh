@@ -1,3 +1,94 @@
+module_files() {
+  mkdir -p $TEMP_DIR/moduletmp/META-INF/com/google/android
+  echo "#MAGISK" >>$TEMP_DIR/moduletmp/META-INF/com/google/android/updater-script
+  cat >$TEMP_DIR/moduletmp/META-INF/com/google/android/update-binary <<'EOF'
+#!/sbin/sh
+
+#################
+# Initialization
+#################
+
+umask 022
+
+# echo before loading util_functions
+ui_print() { echo "$1"; }
+
+require_new_magisk() {
+  ui_print "*******************************"
+  ui_print " Please install Magisk v20.4+! "
+  ui_print "*******************************"
+  exit 1
+}
+
+#########################
+# Load util_functions.sh
+#########################
+
+OUTFD=$2
+ZIPFILE=$3
+
+mount /data 2>/dev/null
+
+[ -f /data/adb/magisk/util_functions.sh ] || require_new_magisk
+. /data/adb/magisk/util_functions.sh
+[ $MAGISK_VER_CODE -lt 20400 ] && require_new_magisk
+
+install_module
+exit 0
+EOF
+
+  cat >$TEMP_DIR/moduletmp/customize.sh <<'EOF'
+#!/sbin/sh
+SKIPUNZIP=1
+
+ui_print "---------------------------------------------"
+ui_print "  MIUI完美图标补全计划"
+ui_print "  MIUI-Adapted-Icons-Complement-Project"
+ui_print "---------------------------------------------"
+ui_print "- 本模块下载自【完美图标计划】APP"
+ui_print "- 在酷安搜索【完美图标计划】获取更多信息"
+ui_print "- QQ群：561180493"
+ui_print "---------------------------------------------"
+var_version="`getprop ro.build.version.release`"
+var_miui_version="`getprop ro.miui.ui.version.code`"
+
+if [ $var_version -lt 10 ]; then 
+  abort "- 您的 Android 版本不符合要求，即将退出安装。"
+elif [ $var_version -lt 13 ] ;then
+  mediapath=system/media/theme
+else
+  mediapath=system/product/media/theme
+fi
+if [ $var_miui_version -lt 11 ]; then 
+  abort "- 您的 MIUI 版本不符合要求，即将退出安装。"
+fi
+echo "- 安装中..."
+mkdir -p $MODPATH/$mediapath/default/
+mktouch $MODPATH/$mediapath/miui_mod_icons/.replace
+unzip -oj "$ZIPFILE" icons -d $MODPATH/$mediapath/default >&2
+mv $TMPDIR/module.prop $MODPATH/module.prop
+settings put global is_default_icon 0
+echo ""
+echo "√ 安装成功，请重启设备"
+echo "---------------------------------------------"
+EOF
+
+  echo "id=MIUIiconsplus
+name=MIUI ${string_projectname}
+author=@PedroZ
+description=${string_moduledescription_1}${theme_name}${string_moduledescription_2}
+version=$(TZ=$(getprop persist.sys.timezone) date '+%Y%m%d%H%M')
+theme=$theme_name
+themeid=$var_theme" >>$TEMP_DIR/moduletmp/module.prop
+}
+
+save() {
+  time=$(TZ=$(getprop persist.sys.timezone) date '+%m%d%H%M')
+  modulefilepath=${zipoutdir}/${theme_name}${string_projectname}模块-$time.zip
+  mv $TEMP_DIR/moduletmp/module.zip ${modulefilepath}
+  echo "√ 模块已保存至""$modulefilepath"
+}
+
 disable_dynamicicon() {
   test=$(head -n 1 ${START_DIR}/theme_files/denylist)
   if [ "$test" = "all" ]; then
@@ -16,42 +107,55 @@ disable_dynamicicon() {
 
 install() {
   echo "${string_exporting}$theme_name..."
-  cd theme_files/miui
+  cd ${START_DIR}/theme_files/miui
   zip -r $TEMP_DIR/icons.zip * -x './res/drawable-xxhdpi/.git/*' >/dev/null
-  cd ../..
   cd $TEMP_DIR
   toybox tar -xf $TEMP_DIR/$var_theme.tar.xz -C "$TEMP_DIR/"
-  mkdir -p ./res/drawable-xxhdpi
-  mv icons/* ./res/drawable-xxhdpi 2>/dev/null
-  rm -rf icons
+  mkdir -p $TEMP_DIR/res/drawable-xxhdpi
+  mv $TEMP_DIR/icons/* $TEMP_DIR/res/drawable-xxhdpi 2>/dev/null
+  rm -rf $TEMP_DIR/icons
   [ -f ${START_DIR}/theme_files/denylist ] && disable_dynamicicon
   zip -r icons.zip ./layer_animating_icons >/dev/null
   zip -r icons.zip ./res >/dev/null
-  rm -rf res
-  rm -rf layer_animating_icons
-  cd ..
+  rm -rf $TEMP_DIR/res
+  rm -rf $TEMP_DIR/layer_animating_icons
   [ $addon == 1 ] && addon
-  mkdir $TEMP_DIR/mtztmp
-  toybox tar -xf "$TEMP_DIR/mtz.tar.xz" -C "$TEMP_DIR/mtztmp" >&2
-  cp -rf $TEMP_DIR/icons.zip $TEMP_DIR/mtztmp/icons
-  sed -i "s/themename/$theme_name/g" $TEMP_DIR/mtztmp/description.xml
-  cd $TEMP_DIR/mtztmp
-  if [ "$1" == apply ]; then
-    rm -rf com.miui.home
-    rm -rf wallpaper
+  mkdir $TEMP_DIR/moduletmp
+  cp -rf $TEMP_DIR/icons.zip $TEMP_DIR/moduletmp/icons
+  cd $TEMP_DIR/moduletmp
+  module_files
+  zip -r module.zip * >/dev/null
+  if [ "$1" == kernelsu ]; then
+    if [ -f "$TOOLKIT/mount" ]; then
+      rm $TOOLKIT/mount
+    fi
+    if [ -f "$TOOLKIT/losetup" ]; then
+      rm $TOOLKIT/losetup
+    fi
+    if [ -f "/data/adb/ksud" ]; then
+      /data/adb/ksud module install $TEMP_DIR/moduletmp/module.zip >/dev/null
+      echo "√ 已安装为KernelSU模块，重启后生效"
+    else
+      echo "× 无法安装模块，模块即将导出，请手动安装。"
+      save
+    fi
+  elif [ "$1" == magisk ]; then
+    if [ $(magisk -V) -ge 20400 ]; then
+      magisk --install-module $TEMP_DIR/moduletmp/module.zip >/dev/null
+      echo "√ 已安装为Magisk模块，重启后生效"
+    else
+      echo "× 无法安装模块，模块即将导出，请手动安装。"
+      save
+    fi
+  else
+    save
   fi
-  time=$(TZ=$(getprop persist.sys.timezone) date '+%Y%m%d%H%M')
-  zip -r mtz.zip * >/dev/null
-  mtzfilepath=$mtzdir/${theme_name}${string_projectname}-$time.mtz
-  mv mtz.zip $mtzfilepath
-  echo "${string_mtzhasexportto} $mtzfilepath"
-  echo "${string_mtznotice}"
 }
 
 getfiles() {
   file=$TEMP_DIR/$var_theme.tar.xz
-  if [ -f "theme_files/${var_theme}.tar.xz" ]; then
-    source theme_files/${var_theme}.ini
+  if [ -f "${START_DIR}/theme_files/${var_theme}.tar.xz" ]; then
+    source ${START_DIR}/theme_files/${var_theme}.ini
     old_ver=$theme_version
     curl -skLJo "$TEMP_DIR/${var_theme}.ini" "https://miuiicons-generic.pkg.coding.net/icons/files/${var_theme}.ini?version=latest"
     source $TEMP_DIR/${var_theme}.ini
@@ -113,6 +217,22 @@ addon() {
 }
 exec 3>&2
 exec 2>/dev/null
+
+if [ -n "$1" ]; then
+  var_version="$(getprop ro.build.version.release)"
+  var_miui_version="$(getprop ro.miui.ui.version.code)"
+  if [ $var_version -lt 10 ]; then
+    echo "- 您的 Android 版本不符合要求，即将退出安装。"
+    rm -rf $TEMP_DIR/*
+    exit 1
+  fi
+  if [ $var_miui_version -lt 11 ]; then
+    echo "- 您的 MIUI 版本不符合要求或者不是MIUI，即将退出安装。"
+    rm -rf $TEMP_DIR/*
+    exit 1
+  fi
+fi
+
 curl -skLJo "$TEMP_DIR/link.ini" "https://miuiicons-generic.pkg.coding.net/icons/files/link.ini?version=latest"
 source $TEMP_DIR/link.ini
 http_code="$(curl -I -s --connect-timeout 1 ${link_check} -w %{http_code} | tail -n1)"
@@ -125,10 +245,10 @@ else
 fi
 
 source theme_files/theme_config
-source theme_files/mtzdir_config
+source theme_files/zipoutdir_config
 source theme_files/addon_config
 source $START_DIR/local-scripts/misc/downloader.sh
-[ -d "$mtzdir" ] || { echo ${string_dirnotexist} && rm -rf $TEMP_DIR/* >/dev/null && exit 1; }
+[ -d "$zipoutdir" ] || { echo ${string_dirnotexist} && rm -rf $TEMP_DIR/* >/dev/null && exit 1; }
 var_theme=iconsrepo
 if [[ -d theme_files/miui/res/drawable-xxhdpi/.git ]]; then
   source theme_files/${var_theme}.ini
@@ -157,27 +277,9 @@ else
   rm -rf $TEMP_DIR/icons.zip
   rm -rf $TEMP_DIR/iconsrepo.tar.xz
 fi
-var_theme=mtz
-getfiles
 var_theme=$sel_theme
 getfiles
-install
-if [ "$1" == apply ]; then
-  echo ${string_mtztrailtimeout}
-  echo ${string_mtztrailwarn}
-  echo 5...
-  sleep 1
-  echo 4...
-  sleep 1
-  echo 3...
-  sleep 1
-  echo 2...
-  sleep 1
-  echo 1...
-  sleep 1
-  sh $START_DIR/local-scripts/misc/am.sh start -a android.intent.action.MAIN -n "com.android.thememanager/.ApplyThemeForScreenshot" --es theme_file_path "$mtzfilepath" --es api_called_from "test" >/dev/null
-fi
-
+install $1
 rm -rf $TEMP_DIR/*
 echo "---------------------------------------------"
 exit 0

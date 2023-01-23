@@ -18,11 +18,7 @@
     </action>
     <page config-sh="source local-scripts/misc/get_changelog.sh" icon="pic/changelog.png">
         <title>更新日志</title>
-        <desc>查看近期更新日志</desc>
-    </page>
-    <page html="https://iconsx.pedroz.eu.org/push.html"  icon="pic/push.png">
-        <title>订阅新版本通知</title>
-        <desc>通过微信订阅后，有新版本会推送通知</desc>
+        <desc>查看近期更新日志，获取更新通知</desc>
     </page>
 </group>
 
@@ -30,14 +26,18 @@
     <text>
         <title>MIUI</title>
     </text>
-    <page visible="source local-scripts/misc/installer_check.sh" id="@install" icon="pic/magisk.png" before-read="source local-scripts/misc/addon_init.sh" >
+    <page id="@install" icon="pic/module.png" before-read="source local-scripts/misc/addon_init.sh" visible="source local-scripts/misc/installer_check.sh" >
         <config>install.xml</config>
-        <title>[Magisk]安装/更新</title>
-        <desc>以 Magisk 模块形式进行安装图标，有新版本时可进行安装以更新</desc>
+        <title>下载/安装模块</title>
+        <desc>以模块形式进行安装图标，支持Magisk和KernelSU</desc>
         <summary sh="source local-scripts/misc/get_themes.sh" />
     </page>
-    <page config="mtz.xml" title="导出mtz主题包" icon="pic/save.png" desc="导出mtz主题包导出后需要主题破解或MIUI主题设计师账号才能使用" before-read="source local-scripts/misc/addon_init.sh" />
-    <page config="addon.xml" title="图标自定义" icon="pic/addon.png" desc="图标存档下载，以及关于自定义图标的一些杂项" before-read="source local-scripts/misc/addon_init.sh" />
+    <page id="@install" icon="pic/module.png" before-read="source local-scripts/misc/addon_init.sh" visible="source local-scripts/misc/installer_check.sh norootcheck" >
+        <config>install.xml</config>
+        <title>下载模块包</title>
+        <desc>下载图标包模块，支持Magisk和KernelSU</desc>
+    </page>
+    <page config="mtz.xml" title="下载mtz主题包" icon="pic/save.png" desc="导出mtz主题包导出后需要MIUI主题设计师账号才能使用" before-read="source local-scripts/misc/addon_init.sh" />
 </group>
 
 <group>
