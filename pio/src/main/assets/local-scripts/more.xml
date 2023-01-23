@@ -54,6 +54,3 @@
     </text>
     <page config="page/about.xml" title="设置与帮助" desc="设置、一些说明、联系我们" icon="pic/about.png" />
 </group>
-<text><title>
-</title></text>
-
