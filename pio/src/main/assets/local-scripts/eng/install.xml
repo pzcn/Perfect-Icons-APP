@@ -59,37 +59,37 @@
         <desc>Note: If you install modules to Magisk and KernelSU at the same time, please handle the priority relationship between the two. Advice modules should only be used in one root scenario.</desc>
     </text>
         <action confirm="true" icon="pic/magisk.png" reload="@install,@cleancache" before-read="source local-scripts/misc/addon_init.sh" visible="source local-scripts/misc/installer_check.sh magisk">
-            <title>Install module（Magisk）</title>
+            <title>Install module(Magisk)</title>
             <desc>After confirming that the above configuration is correct, Perfect Icon will be installed as a Magisk module.</desc>
             <set>source $START_DIR/local-scripts/misc/module.sh magisk</set>
         </action>
 
         <action confirm="true" icon="pic/kernelsu.png" reload="@install,@cleancache" before-read="source local-scripts/misc/addon_init.sh" visible="source local-scripts/misc/installer_check.sh kernelsu">
-            <title>安装模块（KernelSU）</title>
-            <desc>确认上述配置无误后，将以 KernelSU 模块方式安装完美图标。</desc>
+            <title>Install module(KernelSU)</title>
+            <desc>After confirming that the above configuration is correct, Perfect Icon will be installed as a KernelSU module.</desc>
             <set>source $START_DIR/local-scripts/misc/module.sh kernelsu</set>
         </action>
 
         <action confirm="true" icon="pic/reboot.png" shell="hidden" warning="确认重启？">
-            <title>重启设备</title>
-            <desc>轻触重启</desc>
+            <title>Restart the device</title>
+            <desc>restart</desc>
             <set>/system/bin/sync;/system/bin/svc power reboot || reboot</set>
         </action>
 </group>
 
 <group>
   <text>
-    <title>导出模块</title>
+    <title>Save module</title>
   </text>
     <action shell="hidden" icon="pic/folder.png">
-        <title>选择文件保存位置</title>
+        <title>Choose where to save the file</title>
         <param name="dir" type="folder" value="/sdcard/Download" />
-        <summary sh="source theme_files/zipoutdir_config ; echo 当前路径为：$zipoutdir " />
+        <summary sh="source theme_files/zipoutdir_config ; echo The current path is:$zipoutdir " />
         <set>echo "zipoutdir=$dir" &gt; theme_files/zipoutdir_config</set>
     </action>
     <action icon="pic/save.png" reload="@cleancache">
-        <title>导出模块包</title>
-        <desc>确认上述配置无误后，导出模块后可自行进行安装</desc>
+        <title>Save module zip</title>
+        <desc>After confirming that the above configuration is correct, save the module and install it yourself</desc>
         <set>source $START_DIR/local-scripts/misc/module.sh</set>
     </action>
 </group>

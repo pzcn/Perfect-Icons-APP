@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <group>
+  <text>
+    <title>Coifig</title>
+  </text>
     <picker auto-off="true" shell="hidden" icon="../pic/style.png">
         <title>Theme</title>
         <options>
@@ -7,6 +10,7 @@
             <option value="coloros12">ColorOS12</option>
             <option value="explore">MIUI探·界</option>
             <option value="flyme9">Flyme9</option>
+            <option value="iOS">iOS</option>
             <option value="lrone">Lrone</option>
             <option value="luck7">Luck7</option>
             <option value="perfectcurve">Perfect Curve</option>
@@ -26,15 +30,16 @@
         </get>
         <set>echo "sel_theme=$state" &gt; theme_files/theme_config </set>
     </picker>
-    <switch shell="hidden" icon="../pic/addon.png">
+    <page icon="pic/addon.png" before-read="source local-scripts/misc/addon_init.sh">
+        <config>addon.xml</config>
         <title>Customized icons?</title>
         <desc>While activated, customized icons will be import into the theme.</desc>
-        <get>
-            source theme_files/addon_config
-            echo $addon
-        </get>
-        <set>echo "addon=$state" &gt; theme_files/addon_config</set>
-    </switch>
+    </page>
+    <page icon="pic/disabledynamic.png">
+        <config>disabledynamicicons.xml</config>
+        <title>Disable dynamic icons</title>
+        <desc>Ability to disable animation effects for some or all icons</desc>
+    </page>
     <action shell="hidden" icon="../pic/folder.png">
         <title>Select export path</title>
         <param name="dir" type="folder" value="/sdcard/Download" />
