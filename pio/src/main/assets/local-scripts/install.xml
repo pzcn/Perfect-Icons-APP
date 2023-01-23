@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
     <group>
+  <text>
+    <title>配置</title>
+  </text>
         <picker auto-off="true" interruptible="false" shell="hidden" icon="pic/style.png">
             <title>选择主题图标</title>
             <options>
@@ -27,38 +30,68 @@
             </get>
             <set>echo "sel_theme=$state" &gt; theme_files/theme_config </set>
         </picker>
+    <page icon="pic/addon.png" before-read="source local-scripts/misc/addon_init.sh">
+        <config>addon.xml</config>
+        <title>图标自定义</title>
+        <desc>图标自定义的开关、配置说明及图标存档下载</desc>
+    </page>
     <page icon="pic/disabledynamic.png">
-        <config>page/disabledynamicicons.xml</config>
+        <config>disabledynamicicons.xml</config>
         <title>禁用动态图标</title>
         <desc>可禁用某些或全部图标的动画效果</desc>
     </page>
-        <switch shell="hidden" icon="pic/addon.png">
-            <title>是否启用自定义图标</title>
-            <desc>开启后，安装时将会导入您的自定义图标。</desc>
-            <get>
-            source theme_files/addon_config
-            echo $addon
-            </get>
-            <set>echo "addon=$state" &gt; theme_files/addon_config</set>
-        </switch>
 </group>
 
-    <group>
+<group>
+  <text>
+    <title>其他</title>
+  </text>
          <page title="预览主题图标" html="https://icons-demo.pedroz.eu.org/" icon="pic/preview.png"/>
          <page config="page/install.xml" title="使用说明及常见问题" icon="pic/qa.png"/>
-    </group>
+</group>
 
-    <group>
-        <action confirm="true" icon="pic/install.png" reload="@install,@cleancache">
-            <title>开始安装</title>
-            <desc>确认上述配置无误后，轻触进行安装</desc>
-            <set>source $START_DIR/local-scripts/misc/install.sh</set>
+<group visible="source local-scripts/misc/installer_check.sh">
+  <text visible="source local-scripts/misc/installer_check.sh notboth">
+    <title>安装模块</title>
+  </text>
+    <text visible="source local-scripts/misc/installer_check.sh both">
+        <title>安装模块</title>
+        <desc>注意：如果您同时将模块安装到Magisk和KernelSU，请自行处理二者优先级关系。建议模块仅应用在一种root方案中。</desc>
+    </text>
+        <action confirm="true" icon="pic/magisk.png" reload="@install,@cleancache" before-read="source local-scripts/misc/addon_init.sh" visible="source local-scripts/misc/installer_check.sh magisk">
+            <title>安装模块（Magisk）</title>
+            <desc>确认上述配置无误后，将以 Magisk 模块方式安装完美图标。</desc>
+            <set>source $START_DIR/local-scripts/misc/module.sh magisk</set>
         </action>
+
+        <action confirm="true" icon="pic/kernelsu.png" reload="@install,@cleancache" before-read="source local-scripts/misc/addon_init.sh" visible="source local-scripts/misc/installer_check.sh kernelsu">
+            <title>安装模块（KernelSU）</title>
+            <desc>确认上述配置无误后，将以 KernelSU 模块方式安装完美图标。</desc>
+            <set>source $START_DIR/local-scripts/misc/module.sh kernelsu</set>
+        </action>
+
         <action confirm="true" icon="pic/reboot.png" shell="hidden" warning="确认重启？">
             <title>重启设备</title>
             <desc>轻触重启</desc>
             <set>/system/bin/sync;/system/bin/svc power reboot || reboot</set>
         </action>
+</group>
+
+<group>
+  <text>
+    <title>导出模块</title>
+  </text>
+    <action shell="hidden" icon="pic/folder.png">
+        <title>选择文件保存位置</title>
+        <param name="dir" type="folder" value="/sdcard/Download" />
+        <summary sh="source theme_files/zipoutdir_config ; echo 当前路径为：$zipoutdir " />
+        <set>echo "zipoutdir=$dir" &gt; theme_files/zipoutdir_config</set>
+    </action>
+    <action icon="pic/save.png" reload="@cleancache">
+        <title>导出模块包</title>
+        <desc>确认上述配置无误后，导出模块后可自行进行安装</desc>
+        <set>source $START_DIR/local-scripts/misc/module.sh</set>
+    </action>
 </group>
 
 <text><title>

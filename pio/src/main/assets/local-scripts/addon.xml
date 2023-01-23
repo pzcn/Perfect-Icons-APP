@@ -1,5 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <group>
+    <switch shell="hidden" icon="pic/addon.png">
+        <title>是否启用自定义图标</title>
+        <desc>开启后，导出的mtz将会包含您的自定义图标</desc>
+        <get>
+            source theme_files/addon_config
+            echo $addon
+        </get>
+        <set>echo "addon=$state" &gt; theme_files/addon_config</set>
+    </switch>
+ </group>
+<group>
     <action icon="pic/download.png">
         <title>下载图标存档</title>
         <desc>将会下载一些app的历史图标或者其他样式的图标，您需要自行移动文件夹位置以启用它们。将会下载到/sdcard/Documents/MIUI完美图标自定义/图标存档</desc>
