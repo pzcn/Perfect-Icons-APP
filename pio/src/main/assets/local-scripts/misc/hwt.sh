@@ -7,12 +7,12 @@ install() {
   cd theme_files/hwt/icons
   zip -r $TEMP_DIR/icons.zip * -x './.git/*' >/dev/null
   cd ../..
-  toybox tar -xf $TEMP_DIR/$hwt_theme.tar.xz -C "$TEMP_DIR/hwt/"
+  tar -xf $TEMP_DIR/$hwt_theme.tar.xz -C "$TEMP_DIR/hwt/"
   mv $TEMP_DIR/hwt/$sel_theme/icons $TEMP_DIR/hwt/$sel_theme/icons.zip
   unzip -qo $TEMP_DIR/hwt/$sel_theme/icons.zip -d $TEMP_DIR/icons
   rm -rf $TEMP_DIR/hwt/$sel_theme/icons.zip
   echo ${string_setsizeshape}
-  toybox tar -xf "$TEMP_DIR/style.tar.xz" -C "$TEMP_DIR/style" >&2
+  tar -xf "$TEMP_DIR/style.tar.xz" -C "$TEMP_DIR/style" >&2
   cp -rf ${TEMP_DIR}/style/${hwt_shape}_${hwt_size}/* $TEMP_DIR/icons
   source ${TEMP_DIR}/style/${hwt_shape}_${hwt_size}/config.ini
   cp -rf $TEMP_DIR/icons
@@ -111,7 +111,7 @@ if [[ -d theme_files/hwt/icons/.git ]]; then
   if [ $new_ver -ne $old_ver ]; then
     echo "${string_newverdown_1}${theme_name}${string_newverdown_2}"
     cd theme_files/hwt/icons
-    export LD_LIBRARY_PATH=${START_DIR}/script/toolkit/so: $LD_LIBRARY_PATH
+    export LD_LIBRARY_PATH=$TOOLKIT/so: $LD_LIBRARY_PATH
     echo "${string_gitpull}"
     git pull --rebase >/dev/null
     cp -rf $TEMP_DIR/${hwt_theme}.ini ${START_DIR}/theme_files/hwt/${hwt_theme}.ini
@@ -122,7 +122,7 @@ if [[ -d theme_files/hwt/icons/.git ]]; then
 else
   getfiles
   echo "${string_extracting}${theme_name}..."
-  toybox tar -xf "$TEMP_DIR/iconsrepo.tar.xz" -C "theme_files/hwt" >&2
+  tar -xf "$TEMP_DIR/iconsrepo.tar.xz" -C "theme_files/hwt" >&2
   rm -rf $TEMP_DIR/iconsrepo.tar.xz
 fi
 hwt_theme=style

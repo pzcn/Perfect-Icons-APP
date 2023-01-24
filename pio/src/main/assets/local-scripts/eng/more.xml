@@ -1,13 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
 <group>
-    <text visible="source local-scripts/misc/announce_check.sh">
-        <title>Announcement</title>
-        <desc sh="cat 'theme_files/announce.txt' "/>
-    </text>
-</group>
-
-<group>
     <text>
         <title>Update</title>
     </text>

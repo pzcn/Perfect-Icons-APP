@@ -110,7 +110,7 @@ install() {
   cd ${START_DIR}/theme_files/miui
   zip -r $TEMP_DIR/icons.zip * -x './res/drawable-xxhdpi/.git/*' >/dev/null
   cd $TEMP_DIR
-  toybox tar -xf $TEMP_DIR/$var_theme.tar.xz -C "$TEMP_DIR/"
+  tar -xf $TEMP_DIR/$var_theme.tar.xz -C "$TEMP_DIR/"
   mkdir -p $TEMP_DIR/res/drawable-xxhdpi
   mv $TEMP_DIR/icons/* $TEMP_DIR/res/drawable-xxhdpi 2>/dev/null
   rm -rf $TEMP_DIR/icons
@@ -262,7 +262,7 @@ if [[ -d theme_files/miui/res/drawable-xxhdpi/.git ]]; then
     echo "${string_newverdown_1}${theme_name}${string_newverdown_2}"
     echo "${string_gitpull}"
     cd theme_files/miui/res/drawable-xxhdpi
-    export LD_LIBRARY_PATH=${START_DIR}/script/toolkit/so: $LD_LIBRARY_PATH
+    export LD_LIBRARY_PATH=$TOOLKIT/so: $LD_LIBRARY_PATH
     git pull >/dev/null 2>&1 
     cp -rf $TEMP_DIR/${var_theme}.ini ${START_DIR}/theme_files/${var_theme}.ini
     cd ../../../..
@@ -273,7 +273,7 @@ if [[ -d theme_files/miui/res/drawable-xxhdpi/.git ]]; then
 else
   getfiles
   echo "${string_extracting}${theme_name}..."
-  toybox tar -xf "$TEMP_DIR/iconsrepo.tar.xz" -C "$TEMP_DIR/" >&2
+  tar -xf "$TEMP_DIR/iconsrepo.tar.xz" -C "$TEMP_DIR/" >&2
   mv $TEMP_DIR/icons $TEMP_DIR/icons.zip
   unzip $TEMP_DIR/icons.zip -d theme_files/miui >/dev/null
   rm -rf $TEMP_DIR/icons.zip
