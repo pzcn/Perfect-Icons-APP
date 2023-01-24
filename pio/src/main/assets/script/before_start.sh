@@ -38,6 +38,6 @@ if [[ $beta = 1 ]]; then
    fi
 else
    if [ "`curl -I -s --connect-timeout 1 http://connect.rom.miui.com/generate_204 -w %{http_code} | tail -n1`" == "204" ]; then
-      curl -skLJo "theme_files/announce.txt" "https://miuiicons-generic.pkg.coding.net/icons/files/announce280${language}.txt?version=latest"
+      curl -skLJo "theme_files/announce.txt" "https://miuiicons-generic.pkg.coding.net/icons/files/announce2100${language}.txt?version=latest"
    fi
 fi
