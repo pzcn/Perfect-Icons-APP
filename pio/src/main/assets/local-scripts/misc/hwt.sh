@@ -86,10 +86,14 @@ exec 3>&2
 exec 2>/dev/null
 mkdir -p theme_files/hwt
 curl -skLJo "$TEMP_DIR/link.ini" "https://miuiicons-generic.pkg.coding.net/icons/files/link.ini?version=latest"
-source $TEMP_DIR/link.ini
-http_code="$(curl -I -s --connect-timeout 1 ${link_check} -w %{http_code} | tail -n1)"
-if [ "$http_code" != null ]; then
-  if [[ ! $httpcode == *$http_code* ]]; then
+if [ -f $TEMP_DIR/link.ini ]; then
+  source $TEMP_DIR/link.ini
+  http_code="$(curl -I -s --connect-timeout 1 ${link_check} -w %{http_code} | tail -n1)"
+  if [ "$http_code" != null ]; then
+    if [[ ! $httpcode == *$http_code* ]]; then
+      { echo "${string_nonetworkdetected}" && rm -rf $TEMP_DIR/* >/dev/null && exit 1; }
+    fi
+  else
     { echo "${string_nonetworkdetected}" && rm -rf $TEMP_DIR/* >/dev/null && exit 1; }
   fi
 else

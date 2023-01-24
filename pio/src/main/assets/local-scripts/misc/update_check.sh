@@ -1,5 +1,18 @@
 install_count=0
-[ "$(curl -I -s --connect-timeout 1 https://miuiicons-generic.pkg.coding.net/icons/files/check?version=latest -w %{http_code} | tail -n1)" == "200" ] || (echo "× 未检测到网络连接... " && rm -rf $TEMP_DIR/* 2>/dev/null && exit 1)
+curl -skLJo "$TEMP_DIR/link.ini" "https://miuiicons-generic.pkg.coding.net/icons/files/link.ini?version=latest"
+if [ -f $TEMP_DIR/link.ini ]; then
+  source $TEMP_DIR/link.ini
+  http_code="$(curl -I -s --connect-timeout 1 ${link_check} -w %{http_code} | tail -n1)"
+  if [ "$http_code" != null ]; then
+    if [[ ! $httpcode == *$http_code* ]]; then
+      { echo "${string_nonetworkdetected}" && rm -rf $TEMP_DIR/* >/dev/null && exit 1; }
+    fi
+  else
+    { echo "${string_nonetworkdetected}" && rm -rf $TEMP_DIR/* >/dev/null && exit 1; }
+  fi
+else
+  { echo "${string_nonetworkdetected}" && rm -rf $TEMP_DIR/* >/dev/null && exit 1; }
+fi
 
 check() {
 	curl -skLJo "$TEMP_DIR/$f" "$url/$f?version=latest"
