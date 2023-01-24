@@ -43,15 +43,15 @@ if [[ -f "$TOOLKIT/install_busybox.sh" ]]; then
     sh "$TOOLKIT/install_busybox.sh"
 fi
 
-# 删除busybox的tar功能
-if [[ -f "$TOOLKIT/tar" ]]; then
-    rm $TOOLKIT/tar
-fi
-
 # 判断是否有指定执行目录，跳转到起始目录
 if [[ "$START_DIR" != "" ]] && [[ -d "$START_DIR" ]]
 then
     cd "$START_DIR"
+fi
+
+# 删除旧的toolkit文件夹
+if [[ -d "${START_DIR}/script/toolkit" ]]; then
+    rm -rf ${START_DIR}/script/toolkit
 fi
 
 # 语言文件
