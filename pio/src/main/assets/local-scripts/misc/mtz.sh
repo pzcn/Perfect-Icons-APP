@@ -83,7 +83,7 @@ download() {
     mv $downloader_result $TEMP_DIR/$var_theme.tar.xz
   else
     echo "${string_needtodownloadname_1}${theme_name}${string_needtodownloadname_2}"
-    [ $file_size ] || { echo ${string_cannotdownload} && rm -rf $TEMP_DIR/* 2>/dev/null && exit 1; }
+    [ $file_size ] || { echo ${string_cannotdownload} && cleanall 2>/dev/null && exit 1; }
     echo "${string_needtodownloadsize_1}$(printf '%.1f' $(echo "scale=1;$file_size/1048576" | bc))${string_needtodownloadsize_2}"
     curl -skLJo "$TEMP_DIR/${var_theme}.tar.xz" "https://miuiicons-generic.pkg.coding.net/icons/files/${var_theme}.tar.xz?version=latest"
     [ $var_theme == iconsrepo ] || cp "$TEMP_DIR/${var_theme}.tar.xz" "theme_files/${var_theme}.tar.xz"
@@ -92,7 +92,7 @@ download() {
       echo $string_downloadsuccess
     else
       echo ${string_downloaderror}
-      rm -rf $TEMP_DIR/* >/dev/null
+      cleanall >/dev/null
       exit 1
     fi
   fi
@@ -121,20 +121,20 @@ if [ -f $TEMP_DIR/link.ini ]; then
   http_code="$(curl -I -s --connect-timeout 1 ${link_check} -w %{http_code} | tail -n1)"
   if [ "$http_code" != null ]; then
     if [[ ! $httpcode == *$http_code* ]]; then
-      { echo "${string_nonetworkdetected}" && rm -rf $TEMP_DIR/* >/dev/null && exit 1; }
+      { echo "${string_nonetworkdetected}" && cleanall >/dev/null && exit 1; }
     fi
   else
-    { echo "${string_nonetworkdetected}" && rm -rf $TEMP_DIR/* >/dev/null && exit 1; }
+    { echo "${string_nonetworkdetected}" && cleanall >/dev/null && exit 1; }
   fi
 else
-  { echo "${string_nonetworkdetected}" && rm -rf $TEMP_DIR/* >/dev/null && exit 1; }
+  { echo "${string_nonetworkdetected}" && cleanall >/dev/null && exit 1; }
 fi
 
 source theme_files/theme_config
 source theme_files/mtzdir_config
 source theme_files/addon_config
 source $START_DIR/local-scripts/misc/downloader.sh
-[ -d "$mtzdir" ] || { echo ${string_dirnotexist} && rm -rf $TEMP_DIR/* >/dev/null && exit 1; }
+[ -d "$mtzdir" ] || { echo ${string_dirnotexist} && cleanall >/dev/null && exit 1; }
 var_theme=iconsrepo
 if [[ -d theme_files/miui/res/drawable-xxhdpi/.git ]]; then
   source theme_files/${var_theme}.ini
@@ -185,6 +185,6 @@ if [ "$1" == apply ]; then
   sh $START_DIR/local-scripts/misc/am.sh start -a android.intent.action.MAIN -n "com.android.thememanager/.ApplyThemeForScreenshot" --es theme_file_path "$mtzfilepath" --es api_called_from "test" >/dev/null
 fi
 
-rm -rf $TEMP_DIR/*
+cleanall
 echo "---------------------------------------------"
 exit 0

@@ -187,7 +187,7 @@ download() {
     mv $downloader_result $TEMP_DIR/$var_theme.tar.xz
   else
     echo "${string_needtodownloadname_1}${theme_name}${string_needtodownloadname_2}"
-    [ $file_size ] || { echo ${string_cannotdownload} && rm -rf $TEMP_DIR/* 2>/dev/null && exit 1; }
+    [ $file_size ] || { echo ${string_cannotdownload} && cleanall 2>/dev/null && exit 1; }
     echo "${string_needtodownloadsize_1}$(printf '%.1f' $(echo "scale=1;$file_size/1048576" | bc))${string_needtodownloadsize_2}"
     curl -skLJo "$TEMP_DIR/${var_theme}.tar.xz" "https://miuiicons-generic.pkg.coding.net/icons/files/${var_theme}.tar.xz?version=latest"
     [ $var_theme == iconsrepo ] || cp "$TEMP_DIR/${var_theme}.tar.xz" "theme_files/${var_theme}.tar.xz"
@@ -196,7 +196,7 @@ download() {
       echo $string_downloadsuccess
     else
       echo ${string_downloaderror}
-      rm -rf $TEMP_DIR/* >/dev/null
+      cleanall >/dev/null
       exit 1
     fi
   fi
@@ -224,12 +224,12 @@ if [ -n "$1" ]; then
   var_miui_version="$(getprop ro.miui.ui.version.code)"
   if [ $var_version -lt 10 ]; then
     echo "- 您的 Android 版本不符合要求，即将退出安装。"
-    rm -rf $TEMP_DIR/*
+    cleanall
     exit 1
   fi
   if [ $var_miui_version -lt 11 ]; then
     echo "- 您的 MIUI 版本不符合要求或者不是MIUI，即将退出安装。"
-    rm -rf $TEMP_DIR/*
+    cleanall
     exit 1
   fi
 fi
@@ -240,20 +240,20 @@ if [ -f $TEMP_DIR/link.ini ]; then
   http_code="$(curl -I -s --connect-timeout 1 ${link_check} -w %{http_code} | tail -n1)"
   if [ "$http_code" != null ]; then
     if [[ ! $httpcode == *$http_code* ]]; then
-      { echo "${string_nonetworkdetected}" && rm -rf $TEMP_DIR/* >/dev/null && exit 1; }
+      { echo "${string_nonetworkdetected}" && cleanall >/dev/null && exit 1; }
     fi
   else
-    { echo "${string_nonetworkdetected}" && rm -rf $TEMP_DIR/* >/dev/null && exit 1; }
+    { echo "${string_nonetworkdetected}" && cleanall >/dev/null && exit 1; }
   fi
 else
-  { echo "${string_nonetworkdetected}" && rm -rf $TEMP_DIR/* >/dev/null && exit 1; }
+  { echo "${string_nonetworkdetected}" && cleanall >/dev/null && exit 1; }
 fi
 
 source theme_files/theme_config
 source theme_files/zipoutdir_config
 source theme_files/addon_config
 source $START_DIR/local-scripts/misc/downloader.sh
-[ -d "$zipoutdir" ] || { echo ${string_dirnotexist} && rm -rf $TEMP_DIR/* >/dev/null && exit 1; }
+[ -d "$zipoutdir" ] || { echo ${string_dirnotexist} && cleanall >/dev/null && exit 1; }
 var_theme=iconsrepo
 if [[ -d theme_files/miui/res/drawable-xxhdpi/.git ]]; then
   source theme_files/${var_theme}.ini
@@ -286,6 +286,6 @@ fi
 var_theme=$sel_theme
 getfiles
 install $1
-rm -rf $TEMP_DIR/*
+cleanall
 echo "---------------------------------------------"
 exit 0
