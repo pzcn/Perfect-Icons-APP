@@ -82,6 +82,7 @@ else
 fi
 
 # 清理
+cleanall() {
 if [[ -d "${START_DIR}/downloader" ]]; then
   rm -rf ${START_DIR}/downloader/*
 fi
@@ -91,3 +92,4 @@ fi
 if [[ -d "${TEMP_DIR}" ]]; then
   rm -rf ${TEMP_DIR}/*
 fi
+}
