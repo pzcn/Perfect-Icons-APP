@@ -80,16 +80,3 @@ if [[ -f "$script_path" ]]; then
 else
     echo "${script_path} 已丢失" 1>&2
 fi
-
-# 清理
-cleanall() {
-if [[ -d "${START_DIR}/downloader" ]]; then
-  rm -rf ${START_DIR}/downloader/*
-fi
-if [[ -d "${START_DIR}/kr-script" ]]; then
-  rm -rf ${START_DIR}/kr-script/*
-fi
-if [[ -d "${TEMP_DIR}" ]]; then
-  rm -rf ${TEMP_DIR}/*
-fi
-}
