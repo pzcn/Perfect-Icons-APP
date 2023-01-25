@@ -14,3 +14,4 @@ source theme_files/theme_config
 [ $sel_theme = StarrySky ] && echo "${string_nowselected}${string_EMUIStarrySky}"
 [ $sel_theme = Reconstruction ] && echo "${string_nowselected}${string_EMUIReconstruction}"
 [ $sel_theme = iOS ] && echo "${string_nowselected}${string_iOS}"
+[ $sel_theme = coloros13 ] && echo "${string_nowselected}ColorOS13"

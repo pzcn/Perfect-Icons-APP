@@ -6,21 +6,22 @@
     <picker auto-off="true" shell="hidden" icon="pic/style.png">
         <title>选择主题图标</title>
         <options>
-            <option value="default">MIUI经典</option>
-            <option value="coloros12">ColorOS12</option>
-            <option value="explore">MIUI探·界</option>
-            <option value="flyme9">Flyme9</option>
-            <option value="iOS">iOS</option>
-            <option value="lrone">Lrone</option>
-            <option value="luck7">Luck7</option>
-            <option value="perfectcurve">完美曲线</option>
-            <option value="Aquamarine">鸿蒙-润泽(Beta)</option>
-            <option value="AmethystLake">EMUI-紫晶湖(Beta)</option>
-            <option value="GoldenBeach">EMUI-碧海金沙(Beta)</option>
-            <option value="LightWings">EMUI-光之翼(Beta)</option>
-            <option value="Nebulae">EMUI-宇宙之眼(Beta)</option>
-            <option value="StarrySky">EMUI-星夜彩绘(Beta)</option>
-            <option value="Reconstruction">EMUI-未来之翼(Beta)</option>
+                <option value="default">MIUI经典(推荐)</option>
+                <option value="explore">MIUI探·界(推荐)</option>
+                <option value="coloros12">ColorOS13(推荐)</option>
+                <option value="coloros12">ColorOS12(推荐)</option>
+                <option value="flyme9">Flyme9(推荐)</option>
+                <option value="iOS">iOS(Beta)</option>
+                <option value="lrone">Lrone</option>
+                <option value="luck7">Luck7</option>
+                <option value="perfectcurve">完美曲线</option>
+                <option value="Aquamarine">鸿蒙-润泽</option>
+                <option value="AmethystLake">EMUI-紫晶湖</option>
+                <option value="GoldenBeach">EMUI-碧海金沙</option>
+                <option value="LightWings">EMUI-光之翼</option>
+                <option value="Nebulae">EMUI-宇宙之眼</option>
+                <option value="StarrySky">EMUI-星夜彩绘</option>
+                <option value="Reconstruction">EMUI-未来之翼</option>
         </options>
         <summary sh="source local-scripts/misc/get_seltheme_name.sh" />
         <auto-off>true</auto-off>

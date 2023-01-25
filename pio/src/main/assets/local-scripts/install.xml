@@ -8,6 +8,7 @@
             <options>
                 <option value="default">MIUI经典(推荐)</option>
                 <option value="explore">MIUI探·界(推荐)</option>
+                <option value="coloros12">ColorOS13(推荐)</option>
                 <option value="coloros12">ColorOS12(推荐)</option>
                 <option value="flyme9">Flyme9(推荐)</option>
                 <option value="iOS">iOS(Beta)</option>
