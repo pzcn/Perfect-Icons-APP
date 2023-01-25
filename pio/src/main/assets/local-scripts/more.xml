@@ -14,7 +14,7 @@
     <action icon="pic/update.png">
         <title>检查更新</title>
         <set>source $START_DIR/local-scripts/misc/update_check.sh</set>
-        <desc>轻触查看资源更新情况</desc>
+        <desc sh="source local-scripts/misc/get_count.sh"/>
     </action>
     <page config-sh="source local-scripts/misc/get_changelog.sh" icon="pic/changelog.png">
         <title>更新日志</title>

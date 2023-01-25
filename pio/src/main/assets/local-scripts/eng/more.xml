@@ -7,7 +7,7 @@
     <action icon="../pic/update.png">
         <title>Check for icons update</title>
         <set>source $START_DIR/local-scripts/misc/update_check.sh</set>
-        <desc>Tap to see if there's an update for resources.</desc>
+        <desc sh="source local-scripts/misc/get_count.sh"/>
     </action>
     <page config-sh="source local-scripts/misc/get_changelog.sh" icon="../pic/changelog.png">
         <title>Change logs</title>
