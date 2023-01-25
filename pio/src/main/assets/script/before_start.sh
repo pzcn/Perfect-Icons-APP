@@ -28,6 +28,10 @@ echo $string_init
 [ -f "theme_files/beta_config" ] || ( touch theme_files/beta_config && echo "beta=0" > theme_files/beta_config && beta=0 )
 [ -f "theme_files/announce.txt" ] || ( touch theme_files/announce.txt )
 
+if [ "`curl -I -s --connect-timeout 1 http://connect.rom.miui.com/generate_204 -w %{http_code} | tail -n1`" == "204" ]; then
+   curl -skLJo "theme_files/iconscount.txt" "https://miuiicons-generic.pkg.coding.net/icons/files/iconscount${language}.txt?version=latest"
+fi
+
 if [[ $beta = 1 ]]; then
    echo $string_beta
    [ -d "$extract_dir" ] || mkdir -p $extract_dir
