@@ -14,6 +14,7 @@ get_theme_name() {
 	[ $themeid = StarrySky ] && name=${string_EMUIStarrySky}
 	[ $themeid = Reconstruction ] && name=${string_EMUIReconstruction}
 	[ $themeid = iOS ] && name=${string_iOS}
+	[ $themeid = coloros13 ] && name=ColorOS13
 }
 
 if [ -d "/data/adb/modules_update/MIUIiconsplus" ]; then
