@@ -15,162 +15,29 @@ module_files() {
   echo "#MAGISK" >>$TEMP_DIR/moduletmp/META-INF/com/google/android/updater-script
   cat >$TEMP_DIR/moduletmp/META-INF/com/google/android/update-binary <<'EOF'
 #!/sbin/sh
-
-TMPDIR=/dev/tmp
-MOUNTPATH=/dev/magisk_img
-
-# Default permissions
 umask 022
-
-# Initial cleanup
-rm -rf $TMPDIR 2>/dev/null
-mkdir -p $TMPDIR
-
-# echo before loading util_functions
 ui_print() { echo "$1"; }
 
 require_new_magisk() {
-  ui_print "***********************************"
-  ui_print " Please install the latest Magisk! "
-  ui_print "***********************************"
+  ui_print "*******************************"
+  ui_print " Please install Magisk v20.4+! "
+  ui_print "*******************************"
   exit 1
 }
-
-imageless_magisk() {
-  [ $MAGISK_VER_CODE -gt 18100 ]
-  return $?
-}
-
-##########################################################################################
-# Environment
-##########################################################################################
-
 OUTFD=$2
 ZIPFILE=$3
 
 mount /data 2>/dev/null
 
-# Load utility functions
-if [ -f /data/adb/magisk/util_functions.sh ]; then
-  . /data/adb/magisk/util_functions.sh
-  NVBASE=/data/adb
-else
-  require_new_magisk
-fi
-
-# Preperation for flashable zips
-setup_flashable
-
-# Mount partitions
-mount_partitions
-
-# Detect version and architecture
-api_level_arch_detect
-
-# Setup busybox and binaries
-$BOOTMODE && boot_actions || recovery_actions
-
-##########################################################################################
-# Preparation
-##########################################################################################
-
-# Extract common files
-unzip -oj "$ZIPFILE" module.prop install.sh uninstall.sh 'common/*' -d $TMPDIR >&2
-
-[ ! -f $TMPDIR/install.sh ] && abort "! Unable to extract zip file!"
-# Load install script
-. $TMPDIR/install.sh
-
-if imageless_magisk; then
-  $BOOTMODE && MODDIRNAME=modules_update || MODDIRNAME=modules
-  MODULEROOT=$NVBASE/$MODDIRNAME
-else
-  $BOOTMODE && IMGNAME=magisk_merge.img || IMGNAME=magisk.img
-  IMG=$NVBASE/$IMGNAME
-  request_zip_size_check "$ZIPFILE"
-  mount_magisk_img
-  MODULEROOT=$MOUNTPATH
-fi
-
-MODID=`grep_prop id $TMPDIR/module.prop`
-MODPATH=$MODULEROOT/$MODID
-
-print_modname
-
-ui_print "******************************"
-ui_print "Powered by Magisk (@topjohnwu)"
-ui_print "******************************"
-
-##########################################################################################
-# Install
-##########################################################################################
-
-# Create mod paths
-rm -rf $MODPATH 2>/dev/null
-mkdir -p $MODPATH
-
-on_install
-
-# Remove placeholder
-rm -f $MODPATH/system/placeholder 2>/dev/null
-
-# Custom uninstaller
-[ -f $TMPDIR/uninstall.sh ] && cp -af $TMPDIR/uninstall.sh $MODPATH/uninstall.sh
-
-# Auto Mount
-if imageless_magisk; then
-  $SKIPMOUNT && touch $MODPATH/skip_mount
-else
-  $SKIPMOUNT || touch $MODPATH/auto_mount
-fi
-
-# prop files
-$PROPFILE && cp -af $TMPDIR/system.prop $MODPATH/system.prop
-
-# Module info
-cp -af $TMPDIR/module.prop $MODPATH/module.prop
-if $BOOTMODE; then
-  # Update info for Magisk Manager
-  if imageless_magisk; then
-    mktouch $NVBASE/modules/$MODID/update
-    cp -af $TMPDIR/module.prop $NVBASE/modules/$MODID/module.prop
-  else
-    mktouch /sbin/.magisk/img/$MODID/update
-    cp -af $TMPDIR/module.prop /sbin/.magisk/img/$MODID/module.prop
-  fi
-fi
-
-# post-fs-data mode scripts
-$POSTFSDATA && cp -af $TMPDIR/post-fs-data.sh $MODPATH/post-fs-data.sh
-
-# service mode scripts
-$LATESTARTSERVICE && cp -af $TMPDIR/service.sh $MODPATH/service.sh
-
-# Handle replace folders
-for TARGET in $REPLACE; do
-  mktouch $MODPATH$TARGET/.replace
-done
-
-ui_print "- Setting permissions"
-set_permissions
-
-##########################################################################################
-# Finalizing
-##########################################################################################
-
-cd /
-imageless_magisk || unmount_magisk_img
-$BOOTMODE || recovery_cleanup
-rm -rf $TMPDIR $MOUNTPATH
-
-ui_print "- Done"
+[ -f /data/adb/magisk/util_functions.sh ] || require_new_magisk
+. /data/adb/magisk/util_functions.sh
+[ $MAGISK_VER_CODE -lt 20400 ] && require_new_magisk
+install_module
 exit 0
-
 EOF
 
-  cat >$TEMP_DIR/moduletmp/install.sh <<'EOF'
+  cat >$TEMP_DIR/moduletmp/customize.sh <<'EOF'
 #!/sbin/sh
-SKIPUNZIP=1
 
 ui_print "---------------------------------------------"
 ui_print "  MIUI完美图标补全计划"
@@ -180,9 +47,10 @@ ui_print "- 本模块下载自【完美图标计划】APP"
 ui_print "- 在酷安搜索【完美图标计划】获取更多信息"
 ui_print "- QQ群：561180493"
 ui_print "---------------------------------------------"
+
+SKIPUNZIP=1
 var_version="`getprop ro.build.version.release`"
 var_miui_version="`getprop ro.miui.ui.version.code`"
-
 if [ $var_version -lt 10 ]; then 
   abort "- 您的 Android 版本不符合要求，即将退出安装。"
 elif [ $var_version -lt 13 ] ;then
@@ -193,13 +61,17 @@ fi
 if [ $var_miui_version -lt 10 ]; then 
   abort "- 您的 MIUI 版本不符合要求，即将退出安装。"
 fi
+
+REPLACE="/$mediapath/miui_mod_icons"
+
 echo "- 安装中..."
 mkdir -p $MODPATH/$mediapath/default/
-mktouch $MODPATH/$mediapath/miui_mod_icons/.replace
-unzip -oj "$ZIPFILE" icons -d $MODPATH/$mediapath/default >&2
-mv $TMPDIR/module.prop $MODPATH/module.prop
+unzip -oj "$ZIPFILE" icons -d $MODPATH/$mediapath/default/ >&2
+unzip -oj "$ZIPFILE" module.prop -d $MODPATH/ >&2
 settings put global is_default_icon 0
-echo ""
+set_perm_recursive $MODPATH 0 0 0755 0644
+
+rm -rf /data/system/package_cache/*
 echo "√ 安装成功，请重启设备"
 echo "---------------------------------------------"
 EOF
