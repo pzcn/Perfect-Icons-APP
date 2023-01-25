@@ -13,4 +13,4 @@
 [ $theme_name = StarrySky ] && theme_name=${string_EMUIStarrySky}${string_themepack}
 [ $theme_name = Reconstruction ] && theme_name=${string_EMUIReconstruction}${string_themepack}
 [ $theme_name = iOS ] && theme_name=${string_iOS}${string_themepack}
-[ $sel_theme = coloros13 ] && echo "${string_nowselected}ColorOS13"${string_themepack}
+[ $theme_name = coloros13 ] && theme_name=ColorOS13${string_themepack}
