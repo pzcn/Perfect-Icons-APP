@@ -45,7 +45,7 @@ if [ ! -z "$flist" ]; then
 	echo ${string_checkingmiuires}
 	echo
 	url=https://miuiicons-generic.pkg.coding.net/icons/files/
-	for f in $flist; do
+	for f in "$flist"; do
 		source ./$f
 		old_ver=$theme_version
 		check
@@ -57,7 +57,7 @@ else
 fi
 
 #EMUI资源
-if [ -d hwt ] && cd hwt && flist=$(ls | grep \.ini$) && [ ! -z "$flist" ]; then
+if [ -d "./hwt" ] && cd hwt && flist=$(ls | grep \.ini$) && [ ! -z "$flist" ]; then
 	echo ${string_checkingemuires}
 	echo
 	url=https://emuiicons-generic.pkg.coding.net/files/zip/

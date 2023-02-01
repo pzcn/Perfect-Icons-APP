@@ -26,13 +26,13 @@
     <text>
         <title>MIUI</title>
     </text>
-    <page id="@install" icon="pic/module.png" before-read="source local-scripts/misc/addon_init.sh" visible="source local-scripts/misc/installer_check.sh" >
+    <page id="@install" icon="pic/module.png" visible="source local-scripts/misc/installer_check.sh" >
         <config>install.xml</config>
         <title>下载/安装模块</title>
         <desc>以模块形式进行安装图标，支持Magisk和KernelSU</desc>
         <summary sh="source local-scripts/misc/get_themes.sh" />
     </page>
-    <page id="@install" icon="pic/module.png" before-read="source local-scripts/misc/addon_init.sh" visible="source local-scripts/misc/installer_check.sh norootcheck" >
+    <page id="@install" icon="pic/module.png" visible="source local-scripts/misc/installer_check.sh norootcheck" >
         <config>install.xml</config>
         <title>下载模块包</title>
         <desc>下载图标包模块，支持Magisk和KernelSU</desc>
