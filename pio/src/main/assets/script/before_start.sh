@@ -46,6 +46,7 @@ else
    fi
 fi
 var_miui_version="$(getprop ro.miui.ui.version.code)"
+addon_path=$SDCARD_PATH/Documents/${string_addonfolder}
 if [ -n "$var_miui_version" ]; then
 [ -d "$addon_path/$string_staticicons" ] || mkdir -p $addon_path/$string_staticicons
 [ -d "$addon_path/$string_animatingicons" ] || mkdir -p $addon_path/$string_animatingicons
