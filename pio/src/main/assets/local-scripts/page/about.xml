@@ -18,6 +18,33 @@
         <set>source local-scripts/misc/cleancache.sh</set>
     </action>
 </group>
+
+<group>
+    <text>
+    <title>网络状态</title>
+    </text>
+        <action>
+            <title>检查服务器连通性</title>
+            <set>  
+curl -skLJo "$TEMP_DIR/link.ini" "https://miuiicons-generic.pkg.coding.net/icons/files/link.ini?version=latest"
+if [ -f $TEMP_DIR/link.ini ]; then
+  source $TEMP_DIR/link.ini
+  http_code="$(curl -I -s --connect-timeout 1 ${link_check} -w %{http_code} | tail -n1)"
+  if [ "$http_code" != null ]; then
+    if [[ ! $httpcode == *$http_code* ]]; then
+      echo "× 无法连接到文件储存服务器"
+      else
+      echo "√ 服务器连通性正常"
+    fi
+  else
+    echo "× 连接到文件储存服务器过程中出现错误"
+  fi
+else
+  echo "× 您无法连接到配置文件服务器"
+fi
+</set>
+        </action>
+    <page title="查看服务器状态" link="https://status.pedroz.eu.org/status/icons"/>
 <group>
     <text>
     <title>使用文档</title>

@@ -1,18 +1,26 @@
 install_count=0
-curl -skLJo "$TEMP_DIR/link.ini" "https://miuiicons-generic.pkg.coding.net/icons/files/link.ini?version=latest"
+a=0
+b=0
+while [ "$b" -lt 3 ]
+do
+      let "b = $b + 1"
+  curl -skLJo "$TEMP_DIR/link.ini" "https://miuiicons-generic.pkg.coding.net/icons/files/link.ini?version=latest"
 if [ -f $TEMP_DIR/link.ini ]; then
   source $TEMP_DIR/link.ini
   http_code="$(curl -I -s --connect-timeout 1 ${link_check} -w %{http_code} | tail -n1)"
   if [ "$http_code" != null ]; then
     if [[ ! $httpcode == *$http_code* ]]; then
-      { echo "${string_nonetworkdetected}" && rm -rf $TEMP_DIR/* >/dev/null && exit 1; }
+      let "a = $a + 1"
     fi
   else
-    { echo "${string_nonetworkdetected}" && rm -rf $TEMP_DIR/* >/dev/null && exit 1; }
+    let "a = $a + 1"
   fi
 else
-  { echo "${string_nonetworkdetected}" && rm -rf $TEMP_DIR/* >/dev/null && exit 1; }
+  let "a = $a + 1"
 fi
+[ "$a" -ne "$b" ] && b=3
+done
+[ "$a" = 3 ] &&  echo "${string_nonetworkdetected}" && cleanall >/dev/null && exit 1
 
 check() {
 	curl -skLJo "$TEMP_DIR/$f" "$url/$f?version=latest"

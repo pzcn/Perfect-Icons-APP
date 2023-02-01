@@ -67,6 +67,7 @@ REPLACE="/$mediapath/miui_mod_icons"
 echo "- 安装中..."
 mkdir -p $MODPATH/$mediapath/default/
 unzip -oj "$ZIPFILE" icons -d $MODPATH/$mediapath/default/ >&2
+unzip -oj "$ZIPFILE" addons/* -d $MODPATH/$mediapath/default/ >&2
 unzip -oj "$ZIPFILE" module.prop -d $MODPATH/ >&2
 settings put global is_default_icon 0
 set_perm_recursive $MODPATH 0 0 0755 0644
@@ -122,8 +123,8 @@ install() {
   zip -r icons.zip ./res >/dev/null
   rm -rf $TEMP_DIR/res
   rm -rf $TEMP_DIR/layer_animating_icons
-  [ $addon == 1 ] && addon
   mkdir $TEMP_DIR/moduletmp
+  [ $addon == 1 ] && addon
   cp -rf $TEMP_DIR/icons.zip $TEMP_DIR/moduletmp/icons
   cd $TEMP_DIR/moduletmp
   module_files
@@ -209,10 +210,12 @@ addon() {
   addon_path=$SDCARD_PATH/Documents/${string_addonfolder}
   if [ -d "$addon_path" ]; then
     echo "${string_importaddonicons}"
-    mkdir -p $TEMP_DIR/res/drawable-xxhdpi/
+    mkdir -p $TEMP_DIR/res/drawable-xxhdpi
     mkdir -p $TEMP_DIR/layer_animating_icons
-    cp -rf $addon_path/${string_animatingicons}/* $TEMP_DIR/layer_animating_icons/ >/dev/null
-    cp -rf $addon_path/${string_staticicons}/* $TEMP_DIR/res/drawable-xxhdpi/ >/dev/null
+    mkdir -p $TEMP_DIR/moduletmp/addons
+    [ -d "$addon_path/${string_animatingicons}" ] && cp -rf $addon_path/${string_animatingicons}/* $TEMP_DIR/layer_animating_icons/ >/dev/null
+    [ -d "$addon_path/${string_staticicons}" ] && cp -rf $addon_path/${string_staticicons}/* $TEMP_DIR/res/drawable-xxhdpi/ >/dev/null
+    [ -d "$addon_path/${string_advancedaddons}" ] && cp -rf $addon_path/${string_advancedaddons}/* $TEMP_DIR/moduletmp/addons/ 2>/dev/null
     cd $TEMP_DIR
     zip -r icons.zip res >/dev/null
     zip -r icons.zip layer_animating_icons >/dev/null
@@ -237,20 +240,28 @@ if [ -n "$1" ]; then
   fi
 fi
 
-curl -skLJo "$TEMP_DIR/link.ini" "https://miuiicons-generic.pkg.coding.net/icons/files/link.ini?version=latest"
+a=0
+b=0
+while [ "$b" -lt 3 ]
+do
+      let "b = $b + 1"
+  curl -skLJo "$TEMP_DIR/link.ini" "https://miuiicons-generic.pkg.coding.net/icons/files/link.ini?version=latest"
 if [ -f $TEMP_DIR/link.ini ]; then
   source $TEMP_DIR/link.ini
   http_code="$(curl -I -s --connect-timeout 1 ${link_check} -w %{http_code} | tail -n1)"
   if [ "$http_code" != null ]; then
     if [[ ! $httpcode == *$http_code* ]]; then
-      { echo "${string_nonetworkdetected}" && cleanall >/dev/null && exit 1; }
+      let "a = $a + 1"
     fi
   else
-    { echo "${string_nonetworkdetected}" && cleanall >/dev/null && exit 1; }
+    let "a = $a + 1"
   fi
 else
-  { echo "${string_nonetworkdetected}" && cleanall >/dev/null && exit 1; }
+  let "a = $a + 1"
 fi
+[ "$a" -ne "$b" ] && b=3
+done
+[ "$a" = 3 ] &&  echo "${string_nonetworkdetected}" && cleanall >/dev/null && exit 1
 
 source theme_files/theme_config
 source theme_files/zipoutdir_config
