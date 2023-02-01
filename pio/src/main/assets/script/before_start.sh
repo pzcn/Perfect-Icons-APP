@@ -45,3 +45,10 @@ else
       curl -skLJo "theme_files/announce.txt" "https://miuiicons-generic.pkg.coding.net/icons/files/announce2100${language}.txt?version=latest"
    fi
 fi
+var_miui_version="$(getprop ro.miui.ui.version.code)"
+if [ -n "$var_miui_version" ]; then
+[ -d "$addon_path/$string_staticicons" ] || mkdir -p $addon_path/$string_staticicons
+[ -d "$addon_path/$string_animatingicons" ] || mkdir -p $addon_path/$string_animatingicons
+[ -d "$addon_path/$string_advancedaddons" ] || mkdir -p $addon_path/$string_advancedaddons
+[ -f "$addon_path/.nomedia" ] || echo " " >  $addon_path/.nomedia
+fi
