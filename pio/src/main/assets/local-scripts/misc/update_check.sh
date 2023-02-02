@@ -45,7 +45,7 @@ if [ ! -z "$flist" ]; then
 	echo ${string_checkingmiuires}
 	echo
 	url=https://miuiicons-generic.pkg.coding.net/icons/files/
-	for f in "$flist"; do
+	for f in $flist; do
 		source ./$f
 		old_ver=$theme_version
 		check
