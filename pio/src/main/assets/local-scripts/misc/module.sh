@@ -51,23 +51,31 @@ ui_print "---------------------------------------------"
 SKIPUNZIP=1
 var_version="`getprop ro.build.version.release`"
 var_miui_version="`getprop ro.miui.ui.version.code`"
+
+
 if [ $var_version -lt 10 ]; then 
   abort "- 您的 Android 版本不符合要求，即将退出安装。"
-elif [ $var_version -lt 13 ] ;then
-  mediapath=system/media/theme
-else
-  mediapath=system/product/media/theme
 fi
 if [ $var_miui_version -lt 10 ]; then 
   abort "- 您的 MIUI 版本不符合要求，即将退出安装。"
 fi
 
-REPLACE="/$mediapath/miui_mod_icons"
+if [ -L "/system/media" ] ;then
+  mediapath=/system$(realpath /system/media)
+else
+  if [ -d "/system/media" ]; then 
+    mediapath=/system/media
+  else
+    abort "- ROM似乎有问题，无法安装。"
+  fi
+fi
+
+REPLACE="$mediapath/theme/miui_mod_icons"
 
 echo "- 安装中..."
-mkdir -p $MODPATH/$mediapath/default/
-unzip -oj "$ZIPFILE" icons -d $MODPATH/$mediapath/default/ >&2
-unzip -oj "$ZIPFILE" addons/* -d $MODPATH/$mediapath/default/ >&2
+mkdir -p ${MODPATH}${mediapath}/theme/default/
+unzip -oj "$ZIPFILE" icons -d $MODPATH/$mediapath/theme/default/ >&2
+unzip -oj "$ZIPFILE" addons/* -d $MODPATH/$mediapath/theme/default/ >&2
 unzip -oj "$ZIPFILE" module.prop -d $MODPATH/ >&2
 settings put global is_default_icon 0
 set_perm_recursive $MODPATH 0 0 0755 0644

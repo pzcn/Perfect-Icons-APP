@@ -1,3 +1,15 @@
+cleanall() {
+if [[ -d "${START_DIR}/downloader" ]]; then
+  rm -rf ${START_DIR}/downloader/*
+fi
+if [[ -d "${START_DIR}/kr-script" ]]; then
+  rm -rf ${START_DIR}/kr-script/*
+fi
+if [[ -d "${TEMP_DIR}" ]]; then
+  rm -rf ${TEMP_DIR}/*
+fi
+}
+
 install_count=0
 a=0
 b=0
