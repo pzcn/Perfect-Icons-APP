@@ -36,6 +36,16 @@ install_module
 exit 0
 EOF
 
+  cat >$TEMP_DIR/moduletmp/post-fs-data.sh <<'EOF'
+MODDIR="${0%/*}"
+for i in /data/user/0/com.xiaomi.market/files/download_icon /data/user/0/com.xiaomi.market/cache/icons; do
+  if [ -d $i ]; then
+    rm -rf $i/*
+    chattr +i $i
+  fi
+done
+EOF
+
   cat >$TEMP_DIR/moduletmp/customize.sh <<'EOF'
 #!/sbin/sh
 
@@ -77,6 +87,7 @@ mkdir -p ${MODPATH}${mediapath}/theme/default/
 unzip -oj "$ZIPFILE" icons -d $MODPATH/$mediapath/theme/default/ >&2
 unzip -oj "$ZIPFILE" addons/* -d $MODPATH/$mediapath/theme/default/ >&2
 unzip -oj "$ZIPFILE" module.prop -d $MODPATH/ >&2
+unzip -oj "$ZIPFILE" post-fs-data.sh -d $MODPATH/ >&2
 settings put global is_default_icon 0
 set_perm_recursive $MODPATH 0 0 0755 0644
 
