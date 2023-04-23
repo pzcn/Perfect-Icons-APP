@@ -6,6 +6,7 @@
   <picker auto-off="true" shell="hidden" icon="../pic/style.png">
     <title>Theme</title>
     <options>
+      <option value="Wonderfulmove">Wonderfulmove Blue Bv</option>
       <option value="Firmament">Firmament</option>
       <option value="MIUI">MIUI12</option>
       <option value="ColorOS12">ColorOS12</option>

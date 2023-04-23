@@ -18,3 +18,4 @@ source theme_files/hwt_theme_config
 [ $sel_theme = MistyRealm ] && echo "${string_nowselected}${string_MistyRealm}"
 [ $sel_theme = DuneRealm ] && echo "${string_nowselected}${string_DuneRealm}"
 [ $sel_theme = OceanRealm ] && echo "${string_nowselected}${string_OceanRealm}"
+[ $sel_theme = Wonderfulmove ] && echo "${string_nowselected}${string_Wonderfulmove}"

@@ -6,6 +6,7 @@
   <picker auto-off="true" shell="hidden" icon="pic/style.png">
     <title>选择主题图标</title>
     <options>
+      <option value="Wonderfulmove">蔚蓝海</option>
       <option value="MistyRealm">光之镜</option>
       <option value="DuneRealm">沙之镜</option>
       <option value="OceanRealm">海之镜</option>
