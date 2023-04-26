@@ -3,6 +3,7 @@ get_theme_name() {
 	[ $themeid = coloros12 ] && name=${string_ColorOS12}
 	[ $themeid = explore ] && name=${string_explore}
 	[ $themeid = flyme9 ] && name=${string_Flyme9}
+	[ $themeid = flyme10 ] && name=${string_Flyme10}
 	[ $themeid = lrone ] && name=${string_lrone}
 	[ $themeid = luck7 ] && name=${string_luck7}
 	[ $themeid = perfectcurve ] && name=${string_perfectcurve}
