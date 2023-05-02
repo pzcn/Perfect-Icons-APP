@@ -2,12 +2,10 @@ package com.projectkr.shell
 
 import android.Manifest
 import android.app.Activity
-import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.os.Environment
-import android.util.Log
 import android.view.KeyEvent
 import android.view.View
 import android.widget.Toast
@@ -16,8 +14,8 @@ import androidx.appcompat.widget.Toolbar
 import androidx.core.app.ActivityCompat
 import androidx.core.content.PermissionChecker
 import com.omarea.common.ui.ProgressBarDialog
+import com.projectkr.shell.databinding.ActivityFileSelectorBinding
 import com.projectkr.shell.ui.AdapterFileSelector
-import kotlinx.android.synthetic.main.activity_file_selector.*
 import java.io.File
 
 class ActivityFileSelector : AppCompatActivity() {
@@ -27,6 +25,7 @@ class ActivityFileSelector : AppCompatActivity() {
     }
 
     private var adapterFileSelector: AdapterFileSelector? = null
+    private lateinit var binding: ActivityFileSelectorBinding
     var extension = ""
     var mode = MODE_FILE
 
@@ -34,7 +33,8 @@ class ActivityFileSelector : AppCompatActivity() {
         // TODO:ThemeSwitch.switchTheme(this)
 
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_file_selector)
+        binding = ActivityFileSelectorBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         val toolbar = findViewById<View>(R.id.toolbar) as Toolbar
         setSupportActionBar(toolbar)
@@ -48,16 +48,16 @@ class ActivityFileSelector : AppCompatActivity() {
         }
 
         intent.extras?.run {
-            if (containsKey("extension") == true) {
-                extension = "" + intent.extras.getString("extension")
+            if (containsKey("extension")) {
+                extension = "" + intent.extras!!.getString("extension")
                 if (!extension.startsWith(".")) {
                     extension = ".$extension"
                 }
                 if (extension.isNotEmpty()) {
-                    title = title.toString() + "($extension)"
+                    title = "$title($extension)"
                 }
             }
-            if (containsKey("mode") == true) {
+            if (containsKey("mode")) {
                 mode = getInt("mode")
                 if (mode == MODE_FOLDER) {
                     title = getString(R.string.title_activity_folder_selector)
@@ -86,7 +86,7 @@ class ActivityFileSelector : AppCompatActivity() {
         }
 
         if (requestCode == 111) {
-            if (grant == false) {
+            if (!grant) {
                 Toast.makeText(applicationContext, "没有读取文件的权限！", Toast.LENGTH_LONG).show()
             } else {
                 loadData()
@@ -126,7 +126,7 @@ class ActivityFileSelector : AppCompatActivity() {
                     AdapterFileSelector.FileChooser(sdcard, onSelected, ProgressBarDialog(this), extension)
                 }
 
-                file_selector_list.adapter = adapterFileSelector
+                binding.fileSelectorList.adapter = adapterFileSelector
             }
         } else {
             requestPermissions()

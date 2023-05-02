@@ -15,6 +15,7 @@ import com.omarea.krscript.executor.ScriptEnvironmen
 import com.omarea.krscript.model.*
 import org.xmlpull.v1.XmlPullParser
 import java.io.InputStream
+import java.util.Locale
 
 /**
  * Created by Hello on 2018/04/01.
@@ -126,68 +127,80 @@ class PageConfigReader {
                             }
                             group = null
                         } else if (group != null) {
-                            if ("page" == parser.name) {
-                                tagEndInPage(page, parser)
-                                if (page != null) {
-                                    group.children.add(page)
+                            when (parser.name) {
+                                "page" -> {
+                                    tagEndInPage(page, parser)
+                                    if (page != null) {
+                                        group.children.add(page)
+                                    }
+                                    page = null
                                 }
-                                page = null
-                            } else if ("action" == parser.name) {
-                                tagEndInAction(action, parser)
-                                if (action != null) {
-                                    group.children.add(action)
+                                "action" -> {
+                                    tagEndInAction(action, parser)
+                                    if (action != null) {
+                                        group.children.add(action)
+                                    }
+                                    action = null
                                 }
-                                action = null
-                            } else if ("switch" == parser.name) {
-                                tagEndInSwitch(switch, parser)
-                                if (switch != null) {
-                                    group.children.add(switch)
+                                "switch" -> {
+                                    tagEndInSwitch(switch, parser)
+                                    if (switch != null) {
+                                        group.children.add(switch)
+                                    }
+                                    switch = null
                                 }
-                                switch = null
-                            } else if ("picker" == parser.name) {
-                                tagEndInPicker(picker, parser)
-                                if (picker != null) {
-                                    group.children.add(picker)
+                                "picker" -> {
+                                    tagEndInPicker(picker, parser)
+                                    if (picker != null) {
+                                        group.children.add(picker)
+                                    }
+                                    picker = null
                                 }
-                                picker = null
-                            } else if ("text" == parser.name) {
-                                tagEndInText(text, parser)
-                                if (text != null) {
-                                    group.children.add(text)
+                                "text" -> {
+                                    tagEndInText(text, parser)
+                                    if (text != null) {
+                                        group.children.add(text)
+                                    }
+                                    text = null
                                 }
-                                text = null
                             }
                         } else {
-                            if ("page" == parser.name) {
-                                tagEndInPage(page, parser)
-                                if (page != null) {
-                                    mainList.add(page)
+                            when (parser.name) {
+                                "page" -> {
+                                    tagEndInPage(page, parser)
+                                    if (page != null) {
+                                        mainList.add(page)
+                                    }
+                                    page = null
                                 }
-                                page = null
-                            } else if ("action" == parser.name) {
-                                tagEndInAction(action, parser)
-                                if (action != null) {
-                                    mainList.add(action)
+                                "action" -> {
+                                    tagEndInAction(action, parser)
+                                    if (action != null) {
+                                        mainList.add(action)
+                                    }
+                                    action = null
                                 }
-                                action = null
-                            } else if ("switch" == parser.name) {
-                                tagEndInSwitch(switch, parser)
-                                if (switch != null) {
-                                    mainList.add(switch)
+                                "switch" -> {
+                                    tagEndInSwitch(switch, parser)
+                                    if (switch != null) {
+                                        mainList.add(switch)
+                                    }
+                                    switch = null
                                 }
-                                switch = null
-                            } else if ("picker" == parser.name) {
-                                tagEndInPicker(picker, parser)
-                                if (picker != null) {
-                                    mainList.add(picker)
+                                "picker" -> {
+                                    tagEndInPicker(picker, parser)
+                                    if (picker != null) {
+                                        mainList.add(picker)
+                                    }
+                                    picker = null
                                 }
-                                picker = null
-                            } else if ("text" == parser.name) {
-                                tagEndInText(text, parser)
-                                if (text != null) {
-                                    mainList.add(text)
+                                "text" -> {
+                                    tagEndInText(text, parser)
+                                    if (text != null) {
+                                        mainList.add(text)
+                                    }
+                                    text = null
                                 }
-                                text = null
                             }
                         }
                 }
@@ -234,9 +247,9 @@ class PageConfigReader {
                     attrName == "title" -> actionParamInfo.title = attrValue
                     attrName == "desc" -> actionParamInfo.desc = attrValue
                     attrName == "value" -> actionParamInfo.value = attrValue
-                    attrName == "type" -> actionParamInfo.type = attrValue.toLowerCase().trim { it <= ' ' }
+                    attrName == "type" -> actionParamInfo.type = attrValue.lowercase(Locale.ROOT).trim { it <= ' ' }
                     attrName == "suffix" -> {
-                        val suffix = attrValue.toLowerCase().trim { it <= ' ' }
+                        val suffix = attrValue.lowercase(Locale.ROOT).trim { it <= ' ' }
 
                         if (actionParamInfo.mime.isEmpty()) {
                             actionParamInfo.mime = Suffix2Mime().toMime(suffix)
@@ -245,10 +258,10 @@ class PageConfigReader {
                         actionParamInfo.suffix = suffix
                     }
                     attrName == "mime" -> {
-                        actionParamInfo.mime = attrValue.toLowerCase()
+                        actionParamInfo.mime = attrValue.lowercase(Locale.ROOT)
                     }
                     attrName == "readonly" -> {
-                        val value = attrValue.toLowerCase().trim { it <= ' ' }
+                        val value = attrValue.lowercase(Locale.ROOT).trim { it <= ' ' }
                         actionParamInfo.readonly = (value == "readonly" || value == "true" || value == "1")
                     }
                     attrName == "maxlength" -> actionParamInfo.maxLength = Integer.parseInt(attrValue)
@@ -256,14 +269,12 @@ class PageConfigReader {
                     attrName == "max" -> actionParamInfo.max = Integer.parseInt(attrValue)
                     attrName == "required" -> actionParamInfo.required = attrValue == "true" || attrValue == "1" || attrValue == "required"
                     attrName == "value-sh" || attrName == "value-su" -> {
-                        val script = attrValue
-                        actionParamInfo.valueShell = script
+                        actionParamInfo.valueShell = attrValue
                     }
                     attrName == "options-sh" || attrName == "option-sh" || attrName == "options-su" -> {
                         if (actionParamInfo.options == null)
-                            actionParamInfo.options = ArrayList<SelectItem>()
-                        val script = attrValue
-                        actionParamInfo.optionsSh = script
+                            actionParamInfo.options = ArrayList()
+                        actionParamInfo.optionsSh = attrValue
                     }
                     attrName == "support" || attrName == "visible" -> {
                         if (executeResultRoot(context, attrValue) != "1") {
@@ -340,7 +351,7 @@ class PageConfigReader {
                                 option.isFab = parser.getAttributeValue(i) == "fab"
                             }
                             "suffix" -> {
-                                val suffix = parser.getAttributeValue(i).toLowerCase().trim { it <= ' ' }
+                                val suffix = parser.getAttributeValue(i).toLowerCase(Locale.ROOT).trim { it <= ' ' }
 
                                 if (option.mime.isEmpty()) {
                                     option.mime = Suffix2Mime().toMime(suffix)
@@ -349,7 +360,7 @@ class PageConfigReader {
                                 option.suffix = suffix
                             }
                             "mime" -> {
-                                option.mime = parser.getAttributeValue(i).toLowerCase()
+                                option.mime = parser.getAttributeValue(i).lowercase(Locale.ROOT)
                             }
                         }
                     }
@@ -428,7 +439,7 @@ class PageConfigReader {
                     "auto-off", "auto-close" -> clickableNode.autoOff = (attrValue == "auto-close" || attrValue == "auto-off" || attrValue == "true" || attrValue == "1")
                     "auto-finish" -> clickableNode.autoFinish = (attrValue == "auto-finish" || attrValue == "true" || attrValue == "1")
                     "interruptible", "interruptable" -> clickableNode.interruptable = (
-                            attrValue.isEmpty() || attrValue == "interruptable" || attrValue == "interruptable" || attrValue == "true" || attrValue == "1")
+                            attrValue.isEmpty() || attrValue == "interruptable" || attrValue == "true" || attrValue == "1")
                     "reload-page" -> {
                         if (attrValue == "reload-page" || attrValue == "reload" || attrValue == "page" || attrValue == "true" || attrValue == "1") {
                             clickableNode.reloadPage = true
@@ -566,7 +577,7 @@ class PageConfigReader {
     private fun tagEndInSwitch(switchNode: SwitchNode?, parser: XmlPullParser) {
         if (switchNode != null) {
             val shellResult = executeResultRoot(context, switchNode.getState)
-            switchNode.checked = shellResult != "error" && (shellResult == "1" || shellResult.toLowerCase() == "true")
+            switchNode.checked = shellResult != "error" && (shellResult == "1" || shellResult.lowercase(Locale.ROOT) == "true")
             if (switchNode.setState == null) {
                 switchNode.setState = ""
             }
@@ -574,23 +585,19 @@ class PageConfigReader {
     }
 
     private fun tagStartInText(textNode: TextNode, parser: XmlPullParser) {
-        if ("title" == parser.name) {
-            textNode.title = parser.nextText()
-        } else if ("desc" == parser.name) {
-            descNode(textNode, parser)
-        } else if ("summary" == parser.name) {
-            summaryNode(textNode, parser)
-        } else if ("slice" == parser.name) {
-            rowNode(textNode, parser)
-        } else if ("resource" == parser.name) {
-            resourceNode(parser)
+        when (parser.name) {
+            "title" -> textNode.title = parser.nextText()
+            "desc" -> descNode(textNode, parser)
+            "summary" -> summaryNode(textNode, parser)
+            "slice" -> rowNode(textNode, parser)
+            "resource" -> resourceNode(parser)
         }
     }
 
     private fun rowNode(textNode: TextNode, parser: XmlPullParser) {
         val textRow = TextNode.TextRow()
         for (i in 0 until parser.attributeCount) {
-            val attrName = parser.getAttributeName(i).toLowerCase()
+            val attrName = parser.getAttributeName(i).lowercase(Locale.ROOT)
             val attrValue = parser.getAttributeValue(i)
             try {
                 when (attrName) {
@@ -612,17 +619,17 @@ class PageConfigReader {
                     "align" -> {
                         when (attrValue) {
                             "left" -> if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
-                                textRow.align = Layout.Alignment.ALIGN_LEFT
+                                textRow.align = Layout.Alignment.ALIGN_NORMAL
                             }
                             "right" -> if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
-                                textRow.align = Layout.Alignment.ALIGN_RIGHT
+                                textRow.align = Layout.Alignment.ALIGN_OPPOSITE
                             }
                             "center" -> textRow.align = Layout.Alignment.ALIGN_CENTER
                             "normal" -> textRow.align = Layout.Alignment.ALIGN_NORMAL
                         }
                     }
                 }
-            } catch (ex: Exception) {
+            } catch (_: Exception) {
             }
         }
         textRow.text = "" + parser.nextText()

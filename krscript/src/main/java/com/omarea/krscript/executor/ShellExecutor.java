@@ -41,7 +41,7 @@ public class ShellExecutor {
                 onExit.run();
             }
         } else {
-            final Runnable forceStopRunnable = (nodeInfo.getInterruptable() || nodeInfo.getShell().equals(RunnableNode.Companion.getShellModeBgTask()))? (new Runnable() {
+            final Runnable forceStopRunnable = (nodeInfo.getInterruptable() || nodeInfo.getShell().equals(RunnableNode.shellModeBgTask))? (new Runnable() {
                 @Override
                 public void run() {
                     /*

@@ -1,7 +1,7 @@
 package com.projectkr.shell.permissions
 
 import android.Manifest
-import android.app.AlertDialog
+import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Build
 import android.os.Handler
@@ -18,17 +18,18 @@ import kotlin.system.exitProcess
  */
 
 public class CheckRootStatus(var context: Context, private var next: Runnable? = null) {
-    var myHandler: Handler = Handler(Looper.getMainLooper())
+    private var myHandler: Handler = Handler(Looper.getMainLooper())
 
-    var therad: Thread? = null
-    public fun forceGetRoot() {
+    var thread: Thread? = null
+    @SuppressLint("SuspiciousIndentation")
+    fun forceGetRoot() {
         if (lastCheckResult) {
             if (next != null) {
-                myHandler.post(next)
+                myHandler.post(next!!)
             }
         } else {
             var completed = false
-            therad = Thread {
+            thread = Thread {
                 rootStatus = KeepShellPublic.checkRoot()
                 if (completed) {
                     return@Thread
@@ -37,33 +38,34 @@ public class CheckRootStatus(var context: Context, private var next: Runnable? =
                 completed = true
 
                     if (next != null) {
-                        myHandler.post(next)
+                        myHandler.post(next!!)
                 }
             }
-            therad!!.start()
-            Thread(Runnable {
+            thread!!.start()
+            Thread {
                 Thread.sleep(1000 * 15)
 
                 if (!completed) {
                     KeepShellPublic.tryExit()
                     myHandler.post {
                         DialogHelper.confirm(context,
-                        context.getString(R.string.error_root),
-                        context.getString(R.string.error_su_timeout),
-                        null,
-                        DialogHelper.DialogButton(context.getString(R.string.btn_retry), {
-                            if (therad != null && therad!!.isAlive && !therad!!.isInterrupted) {
-                                therad!!.interrupt()
-                                therad = null
-                            }
-                            forceGetRoot()
-                        }),
-                        DialogHelper.DialogButton(context.getString(R.string.btn_exit), {
-                            exitProcess(0)
-                        }))
+                            context.getString(R.string.error_root),
+                            context.getString(R.string.error_su_timeout),
+                            null,
+                            DialogHelper.DialogButton(context.getString(R.string.btn_retry), {
+                                if (thread != null && thread!!.isAlive && !thread!!.isInterrupted) {
+                                    thread!!.interrupt()
+                                    thread = null
+                                }
+                                forceGetRoot()
+                            }),
+                            DialogHelper.DialogButton(context.getString(R.string.btn_exit), {
+                                exitProcess(0)
+                            })
+                        )
                     }
                 }
-            }).start()
+            }.start()
         }
     }
 
