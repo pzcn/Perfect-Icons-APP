@@ -4,12 +4,6 @@ apply plugin: 'kotlin-android'
 android {
     compileSdkVersion 31
 
-    //从gradle.properties文件中读取appVerName和appVerCode
-    Properties properties = new Properties()
-    properties.load(project.rootProject.file('gradle.properties').newDataInputStream())
-    def appVerName = properties.getProperty('appVerName')
-    def appVerCode = properties.getProperty('appVerCode')
-
     defaultConfig {
         applicationId "dev.miuiicons.pedroz"
         minSdkVersion 21
