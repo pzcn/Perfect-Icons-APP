@@ -1,13 +1,11 @@
 apply plugin: 'com.android.library'
-apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-android'
 
 android {
-    compileSdkVersion 28
+    compileSdkVersion 31
 
     defaultConfig {
         minSdkVersion 21
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
     buildTypes {
@@ -20,20 +18,27 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+    kotlinOptions {
+        jvmTarget = '17'
+    }
+    buildFeatures {
+        viewBinding true
+    }
+    namespace 'com.omarea.common'
 
 }
 
 dependencies {
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.9"
     // implementation fileTree(include: ['*.jar'], dir: 'libs')
-    implementation 'androidx.appcompat:appcompat:1.2.0'
+    implementation 'androidx.appcompat:appcompat:1.4.1'
     // testImplementation 'junit:junit:4.13-beta-3'
     // androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     // androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     api files('libs/overscroll-release-v1.1-20160904.jar')
     // implementation files('libs/fastscroll_v1.2_20160903.jar')
-}
-repositories {
-    mavenCentral()
 }

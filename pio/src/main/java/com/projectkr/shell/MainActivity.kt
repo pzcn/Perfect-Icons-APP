@@ -1,6 +1,7 @@
 package com.projectkr.shell
 
 import android.Manifest
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.ComponentName
 import android.content.Context
@@ -19,9 +20,9 @@ import android.view.View
 import android.view.WindowManager
 import android.widget.CompoundButton
 import android.widget.FrameLayout
-import android.widget.RelativeLayout
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.content.res.AppCompatResources
 import androidx.appcompat.widget.Toolbar
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
@@ -35,21 +36,23 @@ import com.omarea.krscript.model.*
 import com.omarea.krscript.ui.ActionListFragment
 import com.omarea.krscript.ui.ParamsFileChooserRender
 import com.omarea.vtools.FloatMonitor
+import com.projectkr.shell.databinding.ActivityMainBinding
 import com.projectkr.shell.permissions.CheckRootStatus
 import com.projectkr.shell.ui.TabIconHelper
-import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
     private val progressBarDialog = ProgressBarDialog(this)
     private var handler = Handler()
     private var krScriptConfig = KrScriptConfig()
+    private lateinit var binding: ActivityMainBinding
 
     private fun checkPermission(permission: String): Boolean = PermissionChecker.checkSelfPermission(this, permission) == PermissionChecker.PERMISSION_GRANTED
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         ThemeModeState.switchTheme(this)
-        setContentView(R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         //supportActionBar!!.elevation = 0f
         val toolbar = findViewById<View>(R.id.toolbar) as Toolbar
@@ -58,23 +61,23 @@ class MainActivity : AppCompatActivity() {
 
         krScriptConfig = KrScriptConfig()
 
-        val params = main_root.layoutParams as FrameLayout.LayoutParams
+        val params = binding.mainRoot.layoutParams as FrameLayout.LayoutParams
         params.setMargins(0, getStatusBarHeight(this), 0, 0)
-        main_root.layoutParams = params
+        binding.mainRoot.layoutParams = params
 
-        main_tabhost.setup()
-        val tabIconHelper = TabIconHelper(main_tabhost, this)
+        binding.mainTabhost.setup()
+        val tabIconHelper = TabIconHelper(binding.mainTabhost, this)
         if (CheckRootStatus.lastCheckResult && krScriptConfig.allowHomePage) {
-            tabIconHelper.newTabSpec(getString(R.string.tab_home), getDrawable(R.drawable.tab_home)!!, R.id.main_tabhost_cpu)
+            tabIconHelper.newTabSpec(getString(R.string.tab_home), AppCompatResources.getDrawable(this, R.drawable.tab_home)!!, R.id.main_tabhost_cpu)
         } else {
-            main_tabhost_cpu.visibility = View.GONE
+            binding.mainTabhostCpu.visibility = View.GONE
         }
-        main_tabhost.setOnTabChangedListener {
+        binding.mainTabhost.setOnTabChangedListener {
             tabIconHelper.updateHighlight()
         }
 
         progressBarDialog.showDialog(getString(R.string.please_wait))
-        Thread(Runnable {
+        Thread {
             val page2Config = krScriptConfig.pageListConfig
             val favoritesConfig = krScriptConfig.favoriteConfig
 
@@ -87,17 +90,17 @@ class MainActivity : AppCompatActivity() {
                     updateFavoritesTab(favorites, favoritesConfig)
                     tabIconHelper.newTabSpec(getString(R.string.tab_favorites), ContextCompat.getDrawable(this, R.drawable.tab_favorites)!!, R.id.main_tabhost_2)
                 } else {
-                    main_tabhost_2.visibility = View.GONE
+                    binding.mainTabhost2.visibility = View.GONE
                 }
 
                 if (pages != null && pages.size > 0) {
                     updateMoreTab(pages, page2Config)
                     tabIconHelper.newTabSpec(getString(R.string.tab_pages), ContextCompat.getDrawable(this, R.drawable.tab_pages)!!, R.id.main_tabhost_3)
                 } else {
-                    main_tabhost_3.visibility = View.GONE
+                    binding.mainTabhost3.visibility = View.GONE
                 }
             }
-        }).start()
+        }.start()
 
         if (CheckRootStatus.lastCheckResult && krScriptConfig.allowHomePage) {
             val home = FragmentHome()
@@ -108,10 +111,11 @@ class MainActivity : AppCompatActivity() {
         }
 
         if (!(checkPermission(Manifest.permission.READ_EXTERNAL_STORAGE) && checkPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE))) {
-            ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE), 111);
+            ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE), 111)
         }
         updateThemeStyle()
     }
+    @SuppressLint("InternalInsetResource")
     private fun getStatusBarHeight(context: Context): Int {
         var height = 0
         val res = context.resources
@@ -124,9 +128,9 @@ class MainActivity : AppCompatActivity() {
     private fun updateThemeStyle() {
         if (Build.VERSION.SDK_INT >= 23) {
             //设置状态栏与导航栏沉浸
-            getWindow().addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
             //getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);       //设置沉浸式状态栏，在MIUI系统中，状态栏背景透明。原生系统中，状态栏背景半透明。
-            getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);   //设置沉浸式虚拟键，在MIUI系统中，虚拟键背景透明。原生系统中，虚拟键背景半透明。
+            window.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION)   //设置沉浸式虚拟键，在MIUI系统中，虚拟键背景透明。原生系统中，虚拟键背景半透明。
         }
     }
     private fun getItems(pageNode: PageNode): ArrayList<NodeInfoBase>? {
@@ -153,7 +157,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun reloadFavoritesTab() {
-        Thread(Runnable {
+        Thread {
             val favoritesConfig = krScriptConfig.favoriteConfig
             val favorites = getItems(favoritesConfig)
             favorites?.run {
@@ -161,11 +165,11 @@ class MainActivity : AppCompatActivity() {
                     updateFavoritesTab(this, favoritesConfig)
                 }
             }
-        }).start()
+        }.start()
     }
 
     private fun reloadMoreTab() {
-        Thread(Runnable {
+        Thread {
             val page2Config = krScriptConfig.pageListConfig
             val pages = getItems(page2Config)
 
@@ -174,7 +178,7 @@ class MainActivity : AppCompatActivity() {
                     updateMoreTab(this, page2Config)
                 }
             }
-        }).start()
+        }.start()
     }
 
     private fun getKrScriptActionHandler(pageNode: PageNode, isFavoritesTab: Boolean): KrScriptActionHandler {
@@ -193,12 +197,10 @@ class MainActivity : AppCompatActivity() {
             }
 
             override fun addToFavorites(clickableNode: ClickableNode, addToFavoritesHandler: KrScriptActionHandler.AddToFavoritesHandler) {
-                val page = if (clickableNode is PageNode) {
-                    clickableNode
-                } else if (clickableNode is RunnableNode) {
-                    pageNode
-                } else {
-                    return
+                val page = when (clickableNode) {
+                    is PageNode -> clickableNode
+                    is RunnableNode -> pageNode
+                    else -> return
                 }
 
                 val intent = Intent()
@@ -216,7 +218,7 @@ class MainActivity : AppCompatActivity() {
             }
 
             override fun onSubPageClick(pageNode: PageNode) {
-                _openPage(pageNode)
+                openPage(pageNode)
             }
 
             override fun openFileChooser(fileSelectedInterface: ParamsFileChooserRender.FileSelectedInterface): Boolean {
@@ -234,7 +236,7 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(this, ActivityFileSelector::class.java)
             intent.putExtra("extension", extension)
             startActivityForResult(intent, ACTION_FILE_PATH_CHOOSER_INNER)
-        } catch (ex: java.lang.Exception) {
+        } catch (ex: Exception) {
             Toast.makeText(this, "启动内置文件选择器失败！", Toast.LENGTH_SHORT).show()
         }
     }
@@ -242,32 +244,33 @@ class MainActivity : AppCompatActivity() {
     private fun chooseFilePath(fileSelectedInterface: ParamsFileChooserRender.FileSelectedInterface): Boolean {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
             Toast.makeText(this, getString(R.string.kr_write_external_storage), Toast.LENGTH_LONG).show()
-            requestPermissions(arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE), 2);
+            requestPermissions(arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE), 2)
             return false
         } else {
             return try {
                 val suffix = fileSelectedInterface.suffix()
-                if (suffix != null && suffix.isNotEmpty()) {
+                if (!suffix.isNullOrEmpty()) {
                     chooseFilePath(suffix)
                 } else {
-                    val intent = Intent(Intent.ACTION_GET_CONTENT);
+                    val intent = Intent(Intent.ACTION_GET_CONTENT)
                     val mimeType = fileSelectedInterface.mimeType()
                     if (mimeType != null) {
                         intent.type = mimeType
                     } else {
                         intent.type = "*/*"
                     }
-                    intent.addCategory(Intent.CATEGORY_OPENABLE);
-                    startActivityForResult(intent, ACTION_FILE_PATH_CHOOSER);
+                    intent.addCategory(Intent.CATEGORY_OPENABLE)
+                    startActivityForResult(intent, ACTION_FILE_PATH_CHOOSER)
                 }
                 this.fileSelectedInterface = fileSelectedInterface
-                true;
+                true
             } catch (ex: java.lang.Exception) {
                 false
             }
         }
     }
 
+    @Deprecated("Deprecated in Java")
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (requestCode == ACTION_FILE_PATH_CHOOSER) {
             val result = if (data == null || resultCode != Activity.RESULT_OK) null else data.data
@@ -289,14 +292,14 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun getPath(uri: Uri): String? {
-        try {
-            return FilePathResolver().getPath(this, uri)
+        return try {
+            FilePathResolver().getPath(this, uri)
         } catch (ex: Exception) {
-            return null
+            null
         }
     }
 
-    fun _openPage(pageNode: PageNode) {
+    fun openPage(pageNode: PageNode) {
         OpenPageHelper(this).openPage(pageNode)
     }
 
@@ -309,7 +312,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.main, menu)
 
-        menu.findItem(R.id.action_graph).isVisible = (main_tabhost_cpu.visibility == View.VISIBLE)
+        menu.findItem(R.id.action_graph).isVisible = (binding.mainTabhostCpu.visibility == View.VISIBLE)
 
         return true
     }
@@ -319,7 +322,7 @@ class MainActivity : AppCompatActivity() {
             R.id.option_menu_info -> {
                 val layoutInflater = LayoutInflater.from(this)
                 val layout = layoutInflater.inflate(R.layout.dialog_about, null)
-                val transparentUi = layout.findViewById<CompoundButton>(R.id.transparent_ui);
+                val transparentUi = layout.findViewById<CompoundButton>(R.id.transparent_ui)
                 val themeConfig = ThemeConfig(this)
                 transparentUi.setOnClickListener {
                     val isChecked = (it as CompoundButton).isChecked
@@ -359,7 +362,7 @@ class MainActivity : AppCompatActivity() {
 
                         try {
                             startActivity(intent)
-                        } catch (ex: Exception) {
+                        } catch (_: Exception) {
                         }
                     }
                 } else {

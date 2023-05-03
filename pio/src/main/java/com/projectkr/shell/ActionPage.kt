@@ -1,16 +1,19 @@
 package com.projectkr.shell
 
 import android.Manifest.permission.READ_EXTERNAL_STORAGE
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.ActivityManager
 import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.graphics.Color
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.os.Handler
+import android.os.Looper
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -31,21 +34,22 @@ import com.omarea.krscript.model.*
 import com.omarea.krscript.shortcut.ActionShortcutManager
 import com.omarea.krscript.ui.ActionListFragment
 import com.omarea.krscript.ui.DialogLogFragment
-import com.omarea.krscript.ui.ParamsFileChooserRender
 import com.omarea.krscript.ui.PageMenuLoader
-import kotlinx.android.synthetic.main.activity_action_page.*
-import kotlinx.android.synthetic.main.activity_main.*
+import com.omarea.krscript.ui.ParamsFileChooserRender
+import com.projectkr.shell.databinding.ActivityActionPageBinding
 
 
 class ActionPage : AppCompatActivity() {
     private val progressBarDialog = ProgressBarDialog(this)
     private var actionsLoaded = false
-    private var handler = Handler()
+    private var handler = Handler(Looper.getMainLooper())
     private lateinit var currentPageConfig: PageNode
     private var autoRunItemId = ""
+    private lateinit var binding: ActivityActionPageBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
 
         // 如果应用还没启动，就直接打开了actionPage(通常是PIO的快捷方式)，先跳转到启动页面
         if (!ScriptEnvironmen.isInited()) {
@@ -62,7 +66,8 @@ class ActionPage : AppCompatActivity() {
 
         ThemeModeState.switchTheme(this)
 
-        setContentView(R.layout.activity_action_page)
+        binding = ActivityActionPageBinding.inflate(layoutInflater)
+        setContentView(binding.root)
         val toolbar = findViewById<View>(R.id.toolbar) as Toolbar
         setSupportActionBar(toolbar)
         setTitle(R.string.app_name)
@@ -101,7 +106,7 @@ class ActionPage : AppCompatActivity() {
                                 addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
                                 putExtra("config", page.onlineHtmlPage)
                             })
-                        } catch (ex: Exception) {
+                        } catch (_: Exception) {
                         }
                     }
 
@@ -121,13 +126,14 @@ class ActionPage : AppCompatActivity() {
             finish()
         }
 
-        val params = action_page_root.layoutParams as FrameLayout.LayoutParams
+        val params = binding.actionPageRoot.layoutParams as FrameLayout.LayoutParams
         params.setMargins(0, getStatusBarHeight(this), 0, 0)
-        action_page_root.layoutParams = params
+        binding.actionPageRoot.layoutParams = params
 
         updateThemeStyle()
     }
 
+    @SuppressLint("InternalInsetResource")
     private fun getStatusBarHeight(context: Context): Int {
         var height = 0
         val res = context.resources
@@ -141,9 +147,9 @@ class ActionPage : AppCompatActivity() {
     private fun updateThemeStyle() {
         if (Build.VERSION.SDK_INT >= 23) {
             //设置状态栏与导航栏沉浸
-            getWindow().addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
             //getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);       //设置沉浸式状态栏，在MIUI系统中，状态栏背景透明。原生系统中，状态栏背景半透明。
-            getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);   //设置沉浸式虚拟键，在MIUI系统中，虚拟键背景透明。原生系统中，虚拟键背景半透明。
+            window.navigationBarColor = Color.TRANSPARENT   //设置沉浸式虚拟键，在MIUI系统中，虚拟键背景透明。原生系统中，虚拟键背景半透明。
         }
     }
 
@@ -180,7 +186,7 @@ class ActionPage : AppCompatActivity() {
         }
 
         override fun onSubPageClick(pageNode: PageNode) {
-            _openPage(pageNode)
+            openPage(pageNode)
         }
 
         override fun openFileChooser(fileSelectedInterface: ParamsFileChooserRender.FileSelectedInterface): Boolean {
@@ -236,7 +242,7 @@ class ActionPage : AppCompatActivity() {
     }
 
     private fun addFab(menuOption: PageMenuOption) {
-        action_page_fab.run {
+        binding.actionPageFab.run {
             visibility = View.VISIBLE
             setOnClickListener {
                 onMenuItemClick(menuOption)
@@ -301,12 +307,12 @@ class ActionPage : AppCompatActivity() {
 
         val darkMode = ThemeModeState.getThemeMode().isDarkMode
         val dialog = DialogLogFragment.create(
-                menuOption,
-                Runnable {  },
-                onDismiss,
-                currentPageConfig.pageHandlerSh,
-                params,
-                darkMode)
+            menuOption,
+            {  },
+            onDismiss,
+            currentPageConfig.pageHandlerSh,
+            params,
+            darkMode)
         dialog.show(supportFragmentManager, "")
         dialog.isCancelable = false
     }
@@ -316,7 +322,7 @@ class ActionPage : AppCompatActivity() {
             override fun onFileSelected(path: String?) {
                 if (path != null) {
                     handler.post {
-                        menuItemExecute(menuOption, HashMap<String, String>().apply{
+                        menuItemExecute(menuOption, HashMap<String, String>().apply {
                             put("state", menuOption.key)
                             put("menu_id", menuOption.key)
                             put("file", path)
@@ -328,11 +334,11 @@ class ActionPage : AppCompatActivity() {
 
             // TODO:文件类型过滤
             override fun mimeType(): String? {
-                return if (menuOption.mime.isEmpty()) null else menuOption.mime
+                return menuOption.mime.ifEmpty { null }
             }
 
             override fun suffix(): String? {
-                return if (menuOption.suffix.isEmpty()) null else menuOption.suffix
+                return menuOption.suffix.ifEmpty { null }
             }
 
             override fun type(): Int {
@@ -378,6 +384,7 @@ class ActionPage : AppCompatActivity() {
         }
     }
 
+    @Deprecated("Deprecated in Java")
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (requestCode == ACTION_FILE_PATH_CHOOSER) {
             val result = if (data == null || resultCode != Activity.RESULT_OK) null else data.data
@@ -429,7 +436,7 @@ class ActionPage : AppCompatActivity() {
     private fun loadPageConfig() {
         val activity = this
 
-        Thread(Runnable {
+        Thread {
             currentPageConfig.run {
                 if (beforeRead.isNotEmpty()) {
                     showDialog(getString(R.string.kr_page_before_load))
@@ -487,10 +494,10 @@ class ActionPage : AppCompatActivity() {
                     finish()
                 }
             }
-        }).start()
+        }.start()
     }
 
-    fun _openPage(pageNode: PageNode) {
+    fun openPage(pageNode: PageNode) {
         OpenPageHelper(this).openPage(pageNode)
     }
 
@@ -508,7 +515,7 @@ class ActionPage : AppCompatActivity() {
                         task.setExcludeFromRecents(true)
                     }
                 }
-            } catch (ex: Exception) {
+            } catch (_: Exception) {
             }
         }
     }

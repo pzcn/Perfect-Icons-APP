@@ -40,10 +40,10 @@ open class DialogFullScreen(private val layout: Int, private val darkMode: Boole
     private lateinit var currentView: View
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            return Dialog(activity!!, if (themeResId != 0) themeResId else R.style.dialog_full_screen_light)
+        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            Dialog(requireActivity(), if (themeResId != 0) themeResId else R.style.dialog_full_screen_light)
         } else {
-            return Dialog(activity!!, -1)
+            Dialog(requireActivity(), -1)
         }
     }
 
@@ -62,6 +62,7 @@ open class DialogFullScreen(private val layout: Int, private val darkMode: Boole
         }
     }
 
+    @Deprecated("Deprecated in Java")
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
     }

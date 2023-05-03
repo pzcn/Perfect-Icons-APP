@@ -151,6 +151,7 @@ class DialogItemChooser(
         this.dismiss()
     }
 
+    @Deprecated("Deprecated in Java")
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
     }

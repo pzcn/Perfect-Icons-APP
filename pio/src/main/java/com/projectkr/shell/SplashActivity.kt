@@ -16,12 +16,14 @@ import android.view.WindowManager
 import android.widget.TextView
 import com.omarea.common.shell.ShellExecutor
 import com.omarea.krscript.executor.ScriptEnvironmen
+import com.projectkr.shell.databinding.ActivitySplashBinding
 import com.projectkr.shell.permissions.CheckRootStatus
-import kotlinx.android.synthetic.main.activity_splash.*
 import java.io.BufferedReader
 import java.io.DataOutputStream
 
 class SplashActivity : Activity() {
+
+    private lateinit var binding: ActivitySplashBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -32,7 +34,8 @@ class SplashActivity : Activity() {
             return
         }
 
-        setContentView(R.layout.activity_splash)
+        binding = ActivitySplashBinding.inflate(layoutInflater)
+        setContentView(binding.root)
         updateThemeStyle()
 
         checkPermissions()
@@ -44,20 +47,20 @@ class SplashActivity : Activity() {
     private fun updateThemeStyle() {
         //  得到当前界面的装饰视图
         if (Build.VERSION.SDK_INT >= 23) {
-            val decorView = getWindow().getDecorView();
+            val decorView = window.decorView;
             //让应用主题内容占用系统状态栏的空间,注意:下面两个参数必须一起使用 stable 牢固的
             val option = View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN or View.SYSTEM_UI_FLAG_LAYOUT_STABLE
-            if (this.resources.getBoolean(R.bool.is_dark) != true) {
+            if (!this.resources.getBoolean(R.bool.is_dark)) {
                 val optionfin = option or View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
-                decorView.setSystemUiVisibility(optionfin);
+                decorView.systemUiVisibility = optionfin;
             } else {
                 val optionfin = option and View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR.inv();
-                decorView.setSystemUiVisibility(optionfin);
+                decorView.systemUiVisibility = optionfin;
             }
             //设置状态栏与导航栏沉浸
-            getWindow().addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-            getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);       //设置沉浸式状态栏，在MIUI系统中，状态栏背景透明。原生系统中，状态栏背景半透明。
-            getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);   //设置沉浸式虚拟键，在MIUI系统中，虚拟键背景透明。原生系统中，虚拟键背景半透明。
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+            window.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);       //设置沉浸式状态栏，在MIUI系统中，状态栏背景透明。原生系统中，状态栏背景半透明。
+            window.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);   //设置沉浸式虚拟键，在MIUI系统中，虚拟键背景透明。原生系统中，虚拟键背景半透明。
         }
     }
     private fun getColorAccent(): Int {
@@ -70,9 +73,9 @@ class SplashActivity : Activity() {
      * 开始检查必需权限
      */
     private fun checkPermissions() {
-        start_logo.visibility = View.VISIBLE
-        checkRoot(Runnable {
-            start_state_text.text = getString(R.string.pio_permission_checking)
+        binding.startLogo.visibility = View.VISIBLE
+        checkRoot {
+            binding.startStateText.text = getString(R.string.pio_permission_checking)
             hasRoot = true
 
             /*
@@ -81,7 +84,7 @@ class SplashActivity : Activity() {
             })
             */
             startToFinish()
-        })
+        }
     }
 
     private fun checkPermission(permission: String): Boolean = PermissionChecker.checkSelfPermission(this.applicationContext, permission) == PermissionChecker.PERMISSION_GRANTED
@@ -90,42 +93,42 @@ class SplashActivity : Activity() {
      * 检查权限 主要是文件读写权限
      */
     private fun checkFileWrite(next: Runnable) {
-        Thread(Runnable {
+        Thread {
             CheckRootStatus.grantPermission(this)
             if (!(checkPermission(Manifest.permission.READ_EXTERNAL_STORAGE) && checkPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE))) {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                     ActivityCompat.requestPermissions(
-                            this@SplashActivity,
-                            arrayOf(
-                                    Manifest.permission.READ_EXTERNAL_STORAGE,
-                                    Manifest.permission.WRITE_EXTERNAL_STORAGE,
-                                    Manifest.permission.MOUNT_UNMOUNT_FILESYSTEMS,
-                                    Manifest.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS,
-                                    Manifest.permission.WAKE_LOCK
-                            ),
-                            0x11
+                        this@SplashActivity,
+                        arrayOf(
+                            Manifest.permission.READ_EXTERNAL_STORAGE,
+                            Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                            Manifest.permission.MOUNT_UNMOUNT_FILESYSTEMS,
+                            Manifest.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS,
+                            Manifest.permission.WAKE_LOCK
+                        ),
+                        0x11
                     )
                 } else {
                     ActivityCompat.requestPermissions(
-                            this@SplashActivity,
-                            arrayOf(
-                                    Manifest.permission.READ_EXTERNAL_STORAGE,
-                                    Manifest.permission.WRITE_EXTERNAL_STORAGE,
-                                    Manifest.permission.MOUNT_UNMOUNT_FILESYSTEMS,
-                                    Manifest.permission.WAKE_LOCK
-                            ),
-                            0x11
+                        this@SplashActivity,
+                        arrayOf(
+                            Manifest.permission.READ_EXTERNAL_STORAGE,
+                            Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                            Manifest.permission.MOUNT_UNMOUNT_FILESYSTEMS,
+                            Manifest.permission.WAKE_LOCK
+                        ),
+                        0x11
                     )
                 }
             }
             myHandler.post {
                 next.run()
             }
-        }).start()
+        }.start()
     }
 
     private var hasRoot = false
-    private var myHandler = Handler()
+    private var myHandler = Handler(Looper.getMainLooper())
 
     private fun checkRoot(next: Runnable) {
         CheckRootStatus(this, next).forceGetRoot()
@@ -135,13 +138,13 @@ class SplashActivity : Activity() {
      * 启动完成
      */
     private fun startToFinish() {
-        start_state_text.text = getString(R.string.pop_started)
+        binding.startStateText.text = getString(R.string.pop_started)
 
         val config = KrScriptConfig().init(this)
         if (config.beforeStartSh.isNotEmpty()) {
-            BeforeStartThread(this, config, UpdateLogViewHandler(start_state_text, Runnable {
+            BeforeStartThread(this, config, UpdateLogViewHandler(binding.startStateText) {
                 gotoHome()
-            })).start()
+            }).start()
         } else {
             gotoHome()
         }
@@ -183,7 +186,7 @@ class SplashActivity : Activity() {
     }
 
     private class BeforeStartThread(private var context: Context, private val config: KrScriptConfig, private var updateLogViewHandler: UpdateLogViewHandler) : Thread() {
-        val params = config.getVariables();
+        val params: HashMap<String, String> = config.variables
 
         override fun run() {
             try {
@@ -209,7 +212,7 @@ class SplashActivity : Activity() {
 
     private class StreamReadThread(private var reader: BufferedReader, private var updateLogViewHandler: UpdateLogViewHandler) : Thread() {
         override fun run() {
-            var line: String? = ""
+            var line: String?
             while (true) {
                 line = reader.readLine()
                 if (line == null) {

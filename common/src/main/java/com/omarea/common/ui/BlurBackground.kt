@@ -25,8 +25,8 @@ class BlurBackground(private val activity: Activity) {
         activity.window.decorView.isDrawingCacheEnabled = true
         var bmp: Bitmap = activity.window.decorView.drawingCache
         //获取原图尺寸
-        originalW = bmp.getWidth()
-        originalH = bmp.getHeight()
+        originalW = bmp.width
+        originalH = bmp.height
         //对原图进行缩小，提高下一步高斯模糊的效率
         bmp = Bitmap.createScaledBitmap(bmp, originalW / 4, originalH / 4, false)
         return bmp
@@ -70,7 +70,7 @@ class BlurBackground(private val activity: Activity) {
     }
 
     private fun refreshUI(i: Int) {
-        runOnUiThread(Runnable { dialogBg?.setImageAlpha(i) })
+        runOnUiThread(Runnable { dialogBg?.imageAlpha = i })
     }
 
     private fun hideBlur() {
@@ -99,28 +99,25 @@ class BlurBackground(private val activity: Activity) {
 
     private fun handleBlur() {
         dialogBg?.run {
-            var bp = captureScreen(activity)
-            if (bp == null) {
-                return
-            }
+            var bp: Bitmap? = captureScreen(activity) ?: return
 
-            bp = blur(bp) //对屏幕截图模糊处理
+            bp = bp?.let { blur(it) } //对屏幕截图模糊处理
             //将模糊处理后的图恢复到原图尺寸并显示出来
-            bp = Bitmap.createScaledBitmap(bp, originalW, originalH, false)
+            bp = bp?.let { Bitmap.createScaledBitmap(it, originalW, originalH, false) }
             setImageBitmap(bp)
-            setVisibility(View.VISIBLE)
+            visibility = View.VISIBLE
             //防止UI线程阻塞，在子线程中让背景实现淡入效果
             asyncRefresh(true)
         }
     }
 
     fun setScreenBgLight(dialog: Dialog) {
-        val window: Window? = dialog.getWindow()
+        val window: Window? = dialog.window
         val lp: WindowManager.LayoutParams
         if (window != null) {
-            lp = window.getAttributes()
+            lp = window.attributes
             lp.dimAmount = 0.2f
-            window.setAttributes(lp)
+            window.attributes = lp
         }
         handleBlur()
     }
