@@ -43,6 +43,12 @@ if [[ -f "$TOOLKIT/install_busybox.sh" ]]; then
     sh "$TOOLKIT/install_busybox.sh"
 fi
 
+# 将busybox的tar功能替换为toybox的
+if [[ -f "$TOOLKIT/tar" ]]; then
+    rm $TOOLKIT/tar
+    ln -s $TOOLKIT/toybox $TOOLKIT/tar
+fi
+
 # 判断是否有指定执行目录，跳转到起始目录
 if [[ "$START_DIR" != "" ]] && [[ -d "$START_DIR" ]]
 then
