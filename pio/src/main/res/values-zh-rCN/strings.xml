@@ -83,4 +83,5 @@
     <string name="about_thanks_mumber">@嘟嘟斯基 @Yife_Playte</string>
     <string name="about_donation">捐赠名单</string>
     <string name="about_donation_mumber">@cnzt66 @E.Ming @heming505 @胡歌_Jay  @嘉然今天吃烤串  @禁止吸血 @JKL_0124 @空 @李宗财 @你的瓦龙 @VAY冬冬 @阳阳兮 @樱素华丶</string>
+    <string name="xposed_desc">为 MIUI 强制启用完美图标</string>
 </resources>

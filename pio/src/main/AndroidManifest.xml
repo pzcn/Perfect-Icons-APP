@@ -16,6 +16,16 @@
         tools:ignore="GoogleAppIndexingWarning">
 
         <meta-data
+            android:name="xposeddescription"
+            android:value="@string/xposed_desc" />
+        <meta-data
+            android:name="xposedminversion"
+            android:value="93" />
+        <meta-data
+            android:name="xposedscope"
+            android:resource="@array/xposedscope" />
+
+        <meta-data
             android:name="android.max_aspect"
             android:value="2.8" />
         <meta-data
