@@ -19,3 +19,5 @@
 -keepclassmembers class * implements java.io.Serializable{*;}
 
 -keep class com.omarea.krscript.model.**{*;}
+
+-keep class dev.miuiicons.pedroz.hook.MainHook { <init>(); }
