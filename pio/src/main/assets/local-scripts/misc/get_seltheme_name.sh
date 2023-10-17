@@ -1,5 +1,6 @@
 source theme_files/theme_config
 [ $sel_theme = default ] && echo "${string_nowselected}${string_default}"
+[ $sel_theme = Hyper ] && echo "${string_nowselected}${string_Hyper}"
 [ $sel_theme = coloros12 ] && echo "${string_nowselected}${string_ColorOS12}"
 [ $sel_theme = explore ] && echo "${string_nowselected}${string_explore}"
 [ $sel_theme = flyme9 ] && echo "${string_nowselected}${string_Flyme9}"

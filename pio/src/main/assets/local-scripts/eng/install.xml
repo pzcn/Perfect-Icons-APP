@@ -6,6 +6,7 @@
         <picker auto-off="true" interruptible="false" shell="hidden" icon="../pic/style.png">
             <title>Theme</title>
             <options>
+                <option value="Hyper">HyperOS</option>
                 <option value="default">Classic</option>
                 <option value="coloros12">ColorOS12</option>
                 <option value="explore">MIUI Explore</option>

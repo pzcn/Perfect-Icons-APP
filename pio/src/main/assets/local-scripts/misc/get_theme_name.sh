@@ -1,4 +1,5 @@
 [ $theme_name = default ] && theme_name=${string_default}${string_themepack}
+[ $theme_name = Hyper ] && theme_name=${string_Hyper}${string_themepack}
 [ $theme_name = coloros12 ] && theme_name=${string_ColorOS12}${string_themepack}
 [ $theme_name = explore ] && theme_name=${string_explore}${string_themepack}
 [ $theme_name = flyme9 ] && theme_name=${string_Flyme9}${string_themepack}
