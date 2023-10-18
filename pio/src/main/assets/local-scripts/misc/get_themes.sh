@@ -1,5 +1,4 @@
 get_theme_name() {
-    [ $themeid = Hyper ] && name=${string_Hyper}
 	[ $themeid = default ] && name=${string_default}
 	[ $themeid = coloros12 ] && name=${string_ColorOS12}
 	[ $themeid = explore ] && name=${string_explore}
