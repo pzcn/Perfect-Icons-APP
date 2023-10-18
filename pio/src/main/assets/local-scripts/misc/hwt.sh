@@ -74,7 +74,7 @@ download() {
   if [ $file_size -gt 5242880 ]; then
     downloadUrl=${link_emui}/${hwt_theme}.tar.xz
     downloader "$downloadUrl" $md5
-    [ $hwt_theme == iconsrepo ] || cp $downloader_result theme_files/hwt/${hwt_theme}.tar.xz
+    [ $hwt_theme == iconsrepo2 ] || cp $downloader_result theme_files/hwt/${hwt_theme}.tar.xz
     mv $downloader_result $file
   else
     echo "${string_needtodownloadname_1}${theme_name}${string_needtodownloadname_2}"
@@ -124,7 +124,7 @@ source theme_files/hwt_size_config
 source theme_files/hwt_shape_config
 source $START_DIR/local-scripts/misc/downloader.sh
 [ -d "$hwtdir" ] || { echo ${string_dirnotexist} && cleanall >/dev/null && exit 1; }
-hwt_theme=iconsrepo
+hwt_theme=iconsrepo2
 if [[ -d theme_files/hwt/icons/.git ]]; then
   source theme_files/hwt/${hwt_theme}.ini
   old_ver=$theme_version
@@ -145,8 +145,8 @@ if [[ -d theme_files/hwt/icons/.git ]]; then
 else
   getfiles
   echo "${string_extracting}${theme_name}..."
-  tar -xf "$TEMP_DIR/iconsrepo.tar.xz" -C "theme_files/hwt" >&2
-  rm -rf $TEMP_DIR/iconsrepo.tar.xz
+  tar -xf "$TEMP_DIR/iconsrepo2.tar.xz" -C "theme_files/hwt" >&2
+  rm -rf $TEMP_DIR/iconsrepo2.tar.xz
 fi
 hwt_theme=style
 getfiles
