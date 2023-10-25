@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <group>
     <text>
-        <title>Dynamic icon disabled list:</title>
+        <title>动态图标禁用列表：</title>
         <desc sh="source local-scripts/misc/get_denylist.sh list"/>
     </text>
 </group>
 
 <group>
         <text>
-            <title>Disable dynamic icons for some apps</title>
-            <desc>Select the app you want to disable the animated icon below, and it will be automatically disabled during subsequent installations. Please select according to your needs. If you need to disable all, please use Disable All below. It is not recommended to use the select all function in the list (it will reduce the installation efficiency). All apps will be displayed in the list, which does not mean that the apps in the list use dynamic icons.
-Again, choose according to your needs, don't choose all!</desc>
+            <title>禁用部分app的动态图标</title>
+            <desc>在下方选择想要禁用动画图标的app，后续安装时可自动禁用。请按需选择，如需全部禁用，请使用下方的禁用全部，不建议使用列表中的全选功能（会降低安装效率）。列表内会显示全部app，不代表列表内出现的app使用了动态图标。
+再次强调，按需选择，请勿全选！</desc>
         </text>
         <action reload="page" shell="hidden" icon="pic/android.png">
-            <title>select app</title>
-            <desc>Support multiple selection, select the app you want to disable and reinstall it.</desc>
+            <title>选择APP</title>
+            <desc>支持多选，选择想要禁用的app并重新安装即可。</desc>
             <param
                 name="package_name"
                 value-sh="source local-scripts/misc/get_denylist.sh sel"
@@ -27,19 +27,19 @@ Again, choose according to your needs, don't choose all!</desc>
 
 <group>
     <text>
-        <title>Disable dynamic icons for all apps</title>
-        <desc>After clicking, all dynamic icons will be disabled, and can be automatically disabled during subsequent installations.</desc>
+        <title>禁用所有app的动态图标</title>
+        <desc>点击后将禁用所有动态图标，后续安装时可自动禁用。</desc>
     </text>
         <action reload="page" shell="hidden" icon="pic/disable.png">
-            <title>disable all</title>
+            <title>禁用全部</title>
             <set>echo "all" &gt; theme_files/denylist</set>
         </action>
 </group>
 
 <group>
         <action reload="page" shell="hidden" icon="pic/clean.png">
-            <title>Clear disabled list</title>
-            <desc>Click to restore the disabled state of the setting</desc>
+            <title>清空禁用列表</title>
+            <desc>点击恢复设定的禁用状态</desc>
             <set>rm -rf theme_files/denylist</set>
         </action>
 </group>

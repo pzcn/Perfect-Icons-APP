@@ -1,23 +1,23 @@
 <group>
     <text>
-        <title>下载说明</title>
-        <slice break="true" size="13">下载使用了kr-script所提供的下载活动，但在极少部分系统上，可能会出现不兼容的情况。如若出现此情况，请打开下方下载兼容开关以尝试解决。
+        <title>Download Instructions</title>
+        <slice break="true" size="13">The download uses the download activity provided by kr-script, but in a very small number of systems, there may be compatibility issues. If this happens, please turn on the download compatibility switch below to try to solve it.
 
-开启兼容模式后，将静默下载，无下载进度条，在看到停在下载阶段时请耐心等待下载完成。</slice>
+After turning on the compatibility mode, it will download silently, without a download progress bar. Please wait patiently for the download to complete when you see it stop at the download stage.</slice>
     </text>
 </group>
 <group>
     <switch shell="hidden">
-     <title>下载兼容模式</title>
-         <desc>如果无法正常下载文件，请尝试开启</desc>
+     <title>Download Compatibility Mode</title>
+         <desc>If you cannot download files normally, please try to turn it on</desc>
         <get>
         source theme_files/download_config
         echo $curlmode
         </get>
-        <set>echo "curlmode=$state" &gt; theme_files/download_config</set>
+        <set>echo "curlmode=$state" > theme_files/download_config</set>
     </switch>
     <action>
-        <title>疑难解答</title>
+        <title>Troubleshooting</title>
         <set>sh $START_DIR/script/network_check.sh</set>
         <resource file="script/network_check.sh" />
     </action>

@@ -1,4 +1,5 @@
 get_theme_name() {
+    [ $themeid = Hyper ] && name=${string_Hyper}
 	[ $themeid = default ] && name=${string_default}
 	[ $themeid = coloros12 ] && name=${string_ColorOS12}
 	[ $themeid = explore ] && name=${string_explore}
@@ -18,18 +19,25 @@ get_theme_name() {
 	[ $themeid = coloros13 ] && name=ColorOS13
 }
 
+get_output() {
 if [ -d "/data/adb/modules_update/MIUIiconsplus" ]; then
 	source /data/adb/modules_update/MIUIiconsplus/module.prop
 	get_theme_name
-	echo "Magisk${string_nowinstalled}${name}${string_themepack}${string_reboottomakeitwork}"
+	echo "${string_nowinstalled}${name}${string_themepack}${string_reboottomakeitwork}"
 elif [ -d "/data/adb/modules/MIUIiconsplus" ]; then
 	source /data/adb/modules/MIUIiconsplus/module.prop
 	get_theme_name
-	echo "Magisk${string_nowinstalled}${name}${string_themepack}"
+	echo "${string_nowinstalled}${name}${string_themepack}"
+fi
+}
+
+if [ $1 == kernelsu ]; then
+	if [ -f "/data/adb/ksu/modules.img" ]; then
+		get_output
+	fi
+elif [[ $1 == magisk ]]; then
+	if [ ! -f "/data/adb/ksu/modules.img" ]; then
+		get_output
+	fi
 fi
 
-if [ -d "/data/adb/ksu/modules/MIUIiconsplus" ]; then
-	source /data/adb/ksu/modules/MIUIiconsplus/module.prop
-	get_theme_name
-	echo "KernelSU${string_nowinstalled}${name}${string_themepack}"
-fi

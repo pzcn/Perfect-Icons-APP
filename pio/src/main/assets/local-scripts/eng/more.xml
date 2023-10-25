@@ -4,41 +4,33 @@
     <text>
         <title>Update</title>
     </text>
-    <action icon="../pic/update.png">
-        <title>Check for icons update</title>
-        <set>source $START_DIR/local-scripts/misc/update_check.sh</set>
-        <desc sh="source local-scripts/misc/get_count.sh"/>
-    </action>
-    <page config-sh="source local-scripts/misc/get_changelog.sh" icon="../pic/changelog.png">
-        <title>Change logs</title>
-        <desc>Check out recent change logs (in Chinese)</desc>
+    <page config-sh="source local-scripts/misc/get_changelog.sh" icon="pic/changelog.png">
+        <title>Update log and check for updates</title>
+        <desc>View recent update logs, check for updates, and get update notifications</desc>
     </page>
 </group>
 
 <group>
-    <text visible="local-scripts/misc/announce_check.sh">
-        <title>MIUI</title>
+    <text>
+        <title>HyperOS/MIUI</title>
     </text>
-    <page id="@install" icon="pic/module.png" before-read="source local-scripts/misc/addon_init.sh" visible="source local-scripts/misc/installer_check.sh" >
+    <page id="@install" icon="pic/xiaomi.png" visible="source local-scripts/misc/installer_check.sh" >
         <config>install.xml</config>
-        <title>Install / Update</title>
-        <desc>Install MIUI Perfect Icons module with Magisk or KernelSU</desc>
-        <summary sh="source local-scripts/misc/get_themes.sh" />
+        <title>Download and install the module or mtz theme package</title>
+        <desc>HyperOS/MIUI is available</desc>
     </page>
-    <page id="@install" icon="pic/module.png" before-read="source local-scripts/misc/addon_init.sh" visible="source local-scripts/misc/installer_check.sh norootcheck" >
+    <page id="@install" icon="pic/xiaomi.png" visible="source local-scripts/misc/installer_check.sh norootcheck" >
         <config>install.xml</config>
-        <title>Download module</title>
-        <desc>Download module, support install with Magisk or KernelSU</desc>
+        <title>Download the module or mtz theme package</title>
+        <desc>HyperOS/MIUI is available</desc>
     </page>
-    <page config="mtz.xml" title="Export .mtz file" icon="../pic/download.png" desc="Export .mtz file for importing MIUI Perfect Icons in Themes app manually." before-read="source local-scripts/misc/addon_init.sh" />
 </group>
 
 <group>
     <text>
         <title>HarmonyOS/EMUI</title>
     </text>
-    <page config="hwt.xml" title="Export .hwt file" icon="../pic/download.png" desc="HarmonyOS/EMUI11 supported." before-read="source local-scripts/misc/hwt_init.sh" />
-    <page config="page/emui10.xml" title="Export .hwt file without adapted icons" icon="../pic/download.png" desc="EMUI10 and below are supported." />
+    <page config="hwt.xml" title="Download hwt theme package" icon="pic/huawei.png" desc="HarmonyOS/EMUI11 is available" before-read="source local-scripts/misc/hwt_init.sh" />
 </group>
 
 <group>
@@ -47,5 +39,3 @@
     </text>
     <page config="page/about.xml" title="Settings and Tips" desc="Some settings and tips, contact us." icon="../pic/about.png"/>
 </group>
-<text><title>
-</title></text>

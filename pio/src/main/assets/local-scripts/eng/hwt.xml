@@ -1,12 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <group>
+    <text>
+        <title>HarmonyOS/EMUI</title>
+        <desc>Provides layered icon packs for HarmonyOS and EMUI11</desc>
+    </text>
+</group>
+<group>
   <text>
     <title>Configuration</title>
   </text>
   <picker auto-off="true" shell="hidden" icon="../pic/style.png">
     <title>Theme</title>
     <options>
+      <option value="DelightingN">Delighting N</option>
       <option value="Wonderfulmove">Wonderfulmove Blue Bv</option>
+      <option value="MistyRealm">MistyRealm</option>
+      <option value="DuneRealm">DuneRealm</option>
+      <option value="OceanRealm">OceanRealm</option>
       <option value="Firmament">Firmament</option>
       <option value="MIUI">MIUI12</option>
       <option value="ColorOS12">ColorOS12</option>
@@ -26,7 +36,10 @@
     </options>
     <summary sh="source local-scripts/misc/get_hwt_name.sh" />
     <auto-off>true</auto-off>
-    <get>source theme_files/hwt_theme_config echo $sel_theme</get>
+    <get>
+      source theme_files/hwt_theme_config
+      echo $sel_theme
+    </get>
     <set>echo "sel_theme=$state" &gt; theme_files/hwt_theme_config</set>
   </picker>
   <picker auto-off="true" shell="hidden" icon="../pic/style.png">
@@ -39,7 +52,10 @@
     </options>
     <summary sh="source local-scripts/misc/get_hwt_size.sh" />
     <auto-off>true</auto-off>
-    <get>source theme_files/hwt_size_config echo $hwt_size</get>
+    <get>
+      source theme_files/hwt_size_config 
+      echo $hwt_size
+    </get>
     <set>echo "hwt_size=$state" &gt; theme_files/hwt_size_config</set>
   </picker>
   <picker auto-off="true" shell="hidden" icon="../pic/style.png">
@@ -51,7 +67,10 @@
     </options>
     <summary sh="source local-scripts/misc/get_hwt_shape.sh" />
     <auto-off>true</auto-off>
-    <get>source theme_files/hwt_shape_config echo $hwt_shape</get>
+    <get>
+      source theme_files/hwt_shape_config 
+      echo $hwt_shape
+    </get>
     <set>echo "hwt_shape=$state" &gt; theme_files/hwt_shape_config</set>
   </picker>
   <page html="https://icons-demo.vercel.app/" title="Themes preview" icon="../pic/preview.png" visible="false" />
@@ -76,6 +95,13 @@
     <desc>Check all settings above then tap to export .hwt file.</desc>
     <set>source $START_DIR/local-scripts/misc/hwt.sh</set>
   </action>
+</group>
+<group>
+  <text>
+    <title>Single layer icon download</title>
+  </text>
+  <page title="Download hwt single layer icon theme package" link="https://www.yuque.com/pedeoz/icons/tui2csib0wm0l4lg#TRmqA" icon="pic/clouddownload.png" desc="Available for EMUI10 and below systems" />
+  <page title="HarmonyOS/EMUI Perfect Icon Usage Guide" link="https://www.yuque.com/pedeoz/icons/tui2csib0wm0l4lg" icon="pic/qa.png"/>
 </group>
 <text><title>
 </title></text>

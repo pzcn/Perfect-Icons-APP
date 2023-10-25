@@ -1,17 +1,24 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-    <group>
+<group>
+    <text>
+        <title>HyperOS/MIUI</title>
+        <desc>提供适用于Magisk或KernelSU的模块，提供mtz主题包（需要主题破解）。首次使用前请仔细阅读使用指南。</desc>
+    </text>
+</group>
+<group>
   <text>
     <title>配置</title>
   </text>
         <picker auto-off="true" interruptible="false" shell="hidden" icon="pic/style.png">
             <title>选择主题图标</title>
             <options>
-                <option value="default">MIUI经典(推荐)</option>
-                <option value="explore">MIUI探·界(推荐)</option>
-                <option value="coloros13">ColorOS13(推荐)</option>
-                <option value="coloros12">ColorOS12(推荐)</option>
-                <option value="flyme9">Flyme9(推荐)</option>
-                <option value="flyme10">Flyme10(Beta)</option>
+                <option value="Hyper">HyperOS(需配合HyperOS桌面)</option>
+                <option value="default">MIUI经典</option>
+                <option value="explore">MIUI探·界</option>
+                <option value="coloros12">ColorOS12</option>
+                <option value="coloros13">ColorOS13</option>
+                <option value="flyme9">Flyme9</option>
+                <option value="flyme10">Flyme10</option>
                 <option value="iOS">iOS</option>
                 <option value="lrone">Lrone</option>
                 <option value="luck7">Luck7</option>
@@ -42,33 +49,36 @@
         <title>禁用动态图标</title>
         <desc>可禁用某些或全部图标的动画效果</desc>
     </page>
-</group>
-
-<group>
-  <text>
-    <title>其他</title>
-  </text>
-         <page title="预览主题图标" html="https://icons-demo.pedroz.eu.org/" icon="pic/preview.png"/>
-         <page config="page/install.xml" title="使用说明及常见问题" icon="pic/qa.png"/>
+    <switch shell="hidden" icon="pic/addon.png">
+        <title>是否启用新版遮罩</title>
+        <desc>如果你使用的是HyperOS的新桌面，请开启这个选项。如果是MIUI那就关闭。如果图标大小异常，可尝试切换。</desc>
+        <get>
+            source theme_files/new_transform_config
+            echo $new_transform_config
+        </get>
+        <set>echo "new_transform_config=$state" &gt; theme_files/new_transform_config</set>
+    </switch>
 </group>
 
 <group visible="source local-scripts/misc/installer_check.sh">
   <text visible="source local-scripts/misc/installer_check.sh notboth">
     <title>安装模块</title>
   </text>
-    <text visible="source local-scripts/misc/installer_check.sh both">
-        <title>安装模块</title>
-        <desc>注意：如果您同时将模块安装到Magisk和KernelSU，请自行处理二者优先级关系。建议模块仅应用在一种root方案中。</desc>
-    </text>
+  <text visible="source local-scripts/misc/installer_check.sh both">
+      <title>安装模块</title>
+      <desc>注意：如果您同时将模块安装到Magisk和KernelSU，请自行处理二者优先级关系。建议模块仅应用在一种root方案中。</desc>
+  </text>
         <action confirm="true" icon="pic/magisk.png" reload="@install,@cleancache" before-read="source local-scripts/misc/addon_init.sh" visible="source local-scripts/misc/installer_check.sh magisk">
             <title>安装模块（Magisk）</title>
             <desc>确认上述配置无误后，将以 Magisk 模块方式安装完美图标。</desc>
+            <summary sh="source local-scripts/misc/get_themes.sh magisk" />
             <set>source $START_DIR/local-scripts/misc/module.sh magisk</set>
         </action>
 
         <action confirm="true" icon="pic/kernelsu.png" reload="@install,@cleancache" before-read="source local-scripts/misc/addon_init.sh" visible="source local-scripts/misc/installer_check.sh kernelsu">
             <title>安装模块（KernelSU）</title>
             <desc>确认上述配置无误后，将以 KernelSU 模块方式安装完美图标。</desc>
+            <summary sh="source local-scripts/misc/get_themes.sh kernelsu" />
             <set>source $START_DIR/local-scripts/misc/module.sh kernelsu</set>
         </action>
 
@@ -81,7 +91,7 @@
 
 <group>
   <text>
-    <title>导出模块</title>
+    <title>下载至本地</title>
   </text>
     <action shell="hidden" icon="pic/folder.png">
         <title>选择文件保存位置</title>
@@ -89,11 +99,24 @@
         <summary sh="source theme_files/zipoutdir_config ; echo 当前路径为：$zipoutdir " />
         <set>echo "zipoutdir=$dir" &gt; theme_files/zipoutdir_config</set>
     </action>
-    <action icon="pic/save.png" reload="@cleancache">
-        <title>导出模块包</title>
-        <desc>确认上述配置无误后，导出模块后可自行进行安装</desc>
-        <set>source $START_DIR/local-scripts/misc/module.sh</set>
+    <action icon="pic/module.png" reload="@cleancache">
+        <title>下载模块包</title>
+        <desc>确认上述配置无误后，下载模块后可自行安装</desc>
+        <set>source $START_DIR/local-scripts/misc/module.sh save</set>
     </action>
+    <action icon="pic/brush.png" reload="@cleancache">
+        <title>下载mtz主题包</title>
+        <desc>确认上述配置无误后，下载mtz主题包，需要主题破解才能应用。</desc>
+        <set>source $START_DIR/local-scripts/misc/module.sh mtz</set>
+    </action>
+</group>
+
+<group>
+  <text>
+    <title>其他</title>
+  </text>
+         <page title="预览主题图标" link="https://icons-demo.pedroz.eu.org/" icon="pic/preview.png"/>
+         <page title="HyperOS/MIUI 完美图标使用指南" link="https://www.yuque.com/pedeoz/icons/er8ige3ldvc7wn1n" icon="pic/qa.png"/>
 </group>
 
 <text><title>

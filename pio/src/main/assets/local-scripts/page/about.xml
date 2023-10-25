@@ -4,7 +4,7 @@
     </text>
     <switch icon="../pic/beta.png">
      <title>加入Beta计划</title>
-         <desc>加入Beta计划后，脚本将在启动时自动更新到最新版本，将第一时间体验到最新特性，同时稳定性可能会下降。 </desc>
+         <desc>加入Beta计划后，脚本将在启动时自动更新到最新版本，将第一时间体验到最新特性。但是在测试新功能时，无法保证100%可用性。</desc>
         <get>
         source theme_files/beta_config
         echo $beta
@@ -51,11 +51,12 @@ fi
     <text>
     <title>使用文档</title>
     </text>
-    <page config="icons.xml" title="完美图标说明"/>
-    <page config="make_icons.xml" title="图标适配指南"/>
-    <page config="install.xml" title="模块安装相关问题"/>
-    <page config="mtz.xml" title="mtz导出相关问题"/>
-    <page config="addon.xml" title="自定义图标相关问题"/>
+    <page title="完美图标项目介绍" link="https://www.yuque.com/pedeoz/icons/crit9tn6d1334zt0"/>
+    <page title="HyperOS/MIUI 使用指南" link="https://www.yuque.com/pedeoz/icons/er8ige3ldvc7wn1n"/>
+    <page title="HarmonyOS/EMUI 使用指南" link="https://www.yuque.com/pedeoz/icons/tui2csib0wm0l4lg"/>
+    <page title="自定义图标使用指南" link="https://www.yuque.com/pedeoz/icons/bg668dqpli7brqgi"/>
+    <page title="完美图标适配指南" link="https://www.yuque.com/pedeoz/icons/ao7yvw37irgdghr6"/>
+    <page title="3.0版本更新说明" link="https://www.yuque.com/pedeoz/icons/xpqqtku1lkacpal4"/>
     <page config="download.xml" title="下载相关问题"/>
 </group>
 <group>

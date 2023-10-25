@@ -18,12 +18,43 @@
 </group>
 
 <group>
+    <text>
+    <title>Server connection status</title>
+    </text>
+        <action>
+            <title>Check server connectivity</title>
+            <set>  
+curl -skLJo "$TEMP_DIR/link.ini" "https://miuiicons-generic.pkg.coding.net/icons/files/link.ini?version=latest"
+if [ -f $TEMP_DIR/link.ini ]; then
+  source $TEMP_DIR/link.ini
+  http_code="$(curl -I -s --connect-timeout 1 ${link_check} -w %{http_code} | tail -n1)"
+  if [ "$http_code" != null ]; then
+    if [[ ! $httpcode == *$http_code* ]]; then
+      echo "× Unable to connect to file storage server"
+      else
+      echo "√ Server connectivity is normal"
+    fi
+  else
+    echo "× An error occurred while connecting to the file storage server"
+  fi
+else
+  echo "× You cannot connect to the profile server"
+fi
+</set>
+        </action>
+    <page title="Server Status" link="https://status.pedroz.eu.org/status/icons"/>
+</group>
+
+<group>
+    <text>
     <title>Tips</title>
-    <page config="icons.xml" title="Perfect icon illustration"/>
-    <page config="make_icons.xml" title="Icon adaptation guide"/>
-    <page config="install.xml" title="Module installation related issues"/>
-    <page config="mtz.xml" title="mtz export related issues"/>
-    <page config="addon.xml" title="Custom icon related issues"/>
+    </text>
+    <page title="Introduction to the Perfect Icon Project" link="https://www.yuque.com/pedeoz/icons/crit9tn6d1334zt0"/>
+    <page title="HyperOS/MIUI user's guidance" link="https://www.yuque.com/pedeoz/icons/er8ige3ldvc7wn1n"/>
+    <page title="HarmonyOS/EMUI user's guidance" link="https://www.yuque.com/pedeoz/icons/tui2csib0wm0l4lg"/>
+    <page title="Custom icon related issues" link="https://www.yuque.com/pedeoz/icons/bg668dqpli7brqgi"/>
+    <page title="Perfect icon adaptation guide" link="https://www.yuque.com/pedeoz/icons/ao7yvw37irgdghr6"/>
+    <page title="Version 3.0 update instructions" link="https://www.yuque.com/pedeoz/icons/xpqqtku1lkacpal4"/>
     <page config="download.xml" title="Download related issues"/>
 </group>
 <group>

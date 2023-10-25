@@ -1,11 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <group>
+    <text>
+        <title>HarmonyOS/EMUI</title>
+        <desc>提供适用于HarmonyOS和EMUI11的分层图标包</desc>
+    </text>
+</group>
+<group>
   <text>
     <title>配置</title>
   </text>
   <picker auto-off="true" shell="hidden" icon="pic/style.png">
     <title>选择主题图标</title>
     <options>
+      <option value="DelightingN">高光舞动</option>
       <option value="Wonderfulmove">蔚蓝海</option>
       <option value="MistyRealm">光之镜</option>
       <option value="DuneRealm">沙之镜</option>
@@ -66,12 +73,12 @@
     </get>
     <set>echo "hwt_shape=$state" &gt; theme_files/hwt_shape_config</set>
   </picker>
-  <page html="https://icons-demo.vercel.app/" title="预览主题图标" icon="pic/preview.png" visible="false" />
+  <page link="https://icons-demo.vercel.app/" title="预览主题图标" icon="pic/preview.png" visible="false" />
   <page config="page/hwt.xml" title="使用说明及常见问题" icon="pic/qa.png" visible="false" />
 </group>
 <group>
   <title>预览</title>
-  <page title="预览主题图标" html="https://icons-demo.pedroz.eu.org/" icon="pic/preview.png" />
+  <page title="预览主题图标" link="https://icons-demo.pedroz.eu.org/" icon="pic/preview.png" />
 </group>
 <group>
   <text>
@@ -88,6 +95,13 @@
     <desc>确认上述配置无误后，轻触下载hwt主题包</desc>
     <set>source $START_DIR/local-scripts/misc/hwt.sh</set>
   </action>
+</group>
+<group>
+  <text>
+    <title>单层图标下载</title>
+  </text>
+  <page title="下载hwt单层图标主题包" link="https://www.yuque.com/pedeoz/icons/tui2csib0wm0l4lg#TRmqA" icon="pic/clouddownload.png" desc="EMUI10及以下系统可用" />
+  <page title="HarmonyOS/EMUI 完美图标使用指南" link="https://www.yuque.com/pedeoz/icons/tui2csib0wm0l4lg" icon="pic/qa.png"/>
 </group>
 <text><title>
 </title></text>

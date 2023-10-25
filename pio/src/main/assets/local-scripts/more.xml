@@ -11,41 +11,33 @@
     <text>
         <title>更新</title>
     </text>
-    <action icon="pic/update.png">
-        <title>检查更新</title>
-        <set>source $START_DIR/local-scripts/misc/update_check.sh</set>
-        <desc sh="source local-scripts/misc/get_count.sh"/>
-    </action>
     <page config-sh="source local-scripts/misc/get_changelog.sh" icon="pic/changelog.png">
-        <title>更新日志</title>
-        <desc>查看近期更新日志，获取更新通知</desc>
+        <title>更新日志及检查更新</title>
+        <desc>查看近期更新日志，检查更新，获取更新通知</desc>
     </page>
 </group>
 
 <group>
     <text>
-        <title>MIUI</title>
+        <title>HyperOS/MIUI</title>
     </text>
-    <page id="@install" icon="pic/module.png" visible="source local-scripts/misc/installer_check.sh" >
+    <page id="@install" icon="pic/xiaomi.png" visible="source local-scripts/misc/installer_check.sh" >
         <config>install.xml</config>
-        <title>下载/安装模块</title>
-        <desc>以模块形式进行安装图标，支持Magisk和KernelSU</desc>
-        <summary sh="source local-scripts/misc/get_themes.sh" />
+        <title>下载安装模块或mtz主题包</title>
+        <desc>HyperOS/MIUI系统可用</desc>
     </page>
-    <page id="@install" icon="pic/module.png" visible="source local-scripts/misc/installer_check.sh norootcheck" >
+    <page id="@install" icon="pic/xiaomi.png" visible="source local-scripts/misc/installer_check.sh norootcheck" >
         <config>install.xml</config>
-        <title>下载模块包</title>
-        <desc>下载图标包模块，支持Magisk和KernelSU</desc>
+        <title>下载模块或mtz主题包</title>
+        <desc>HyperOS/MIUI系统可用</desc>
     </page>
-    <page config="mtz.xml" title="下载mtz主题包" icon="pic/save.png" desc="导出mtz主题包导出后需要MIUI主题设计师账号才能使用" before-read="source local-scripts/misc/addon_init.sh" />
 </group>
 
 <group>
     <text>
         <title>HarmonyOS/EMUI</title>
     </text>
-    <page config="hwt.xml" title="下载hwt主题包" icon="pic/download.png" desc="HarmonyOS/EMUI11系统可用" before-read="source local-scripts/misc/hwt_init.sh" />
-    <page config="page/emui10.xml" title="下载hwt单层图标主题包" icon="pic/clouddownload.png" desc="EMUI10及以下系统可用" />
+    <page config="hwt.xml" title="下载hwt主题包" icon="pic/huawei.png" desc="HarmonyOS/EMUI11系统可用" before-read="source local-scripts/misc/hwt_init.sh" />
 </group>
 
 <group>

@@ -26,8 +26,8 @@
     </action>
 </group>
 <group>
-    <page config="page/addon.xml" title="Icons customise wiki" icon="../pic/description.png" />
-    <page config="page/make_icons.xml" title="MIUI Adapted icons wiki" icon="../pic/qa.png" />
+    <page title="Icons customise wiki" link="https://www.yuque.com/pedeoz/icons/bg668dqpli7brqgi" icon="pic/description.png"/>
+    <page title="MIUI Adapted icons wiki" link="https://www.yuque.com/pedeoz/icons/ao7yvw37irgdghr6" icon="pic/qa.png"/>
 </group>
 <text><title>
 </title></text>
