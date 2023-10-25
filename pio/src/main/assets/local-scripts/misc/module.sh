@@ -4,11 +4,13 @@ if [ -n "$1" ]; then
   var_miui_version="$(getprop ro.miui.ui.version.code)"
   if [ $var_version -lt 10 ]; then
     echo "- 您的 Android 版本不符合要求，即将退出安装。"
+    echo "- Your Android version does not meet the requirements and the installation will be exited."
     cleanall
     exit 1
   fi
   if [ $var_miui_version -lt 10 ]; then
-    echo "- 您的 MIUI 版本不符合要求或者不是 MIUI，即将退出安装。"
+    echo "- 您的 MIUI 版本不符合要求或者不是 HyperOS/MIUI，即将退出安装。"
+    echo "- Your MIUI version does not meet the requirements or is not HyperOS/MIUI, and the installation will exit."
     cleanall
     exit 1
   fi
@@ -101,12 +103,17 @@ EOF
 #!/sbin/sh
 
 ui_print "---------------------------------------------"
-ui_print "  MIUI完美图标补全计划"
-ui_print "  MIUI-Adapted-Icons-Complement-Project"
+ui_print "  完美图标补全计划"
+ui_print "  Perfect-Icons-Complement-Project"
 ui_print "---------------------------------------------"
 ui_print "- 本模块下载自【完美图标计划】APP"
 ui_print "- 在酷安搜索【完美图标计划】获取更多信息"
 ui_print "- QQ群：561180493"
+ui_print ""
+ui_print "- This module is downloaded from [Perfect Icon Project] APP"
+ui_print "- Search [Perfect Icon Project] on Github or Coolapk to get more information"
+ui_print "- Telegram: miuiicons"
+
 ui_print "---------------------------------------------"
 
 SKIPUNZIP=1
@@ -116,9 +123,11 @@ var_miui_version="`getprop ro.miui.ui.version.code`"
 
 if [ $var_version -lt 10 ]; then 
   abort "- 您的 Android 版本不符合要求，即将退出安装。"
+  abort "- Your Android version does not meet the requirements and the installation will be exited."
 fi
 if [ $var_miui_version -lt 10 ]; then 
-  abort "- 您的 MIUI 版本不符合要求，即将退出安装。"
+  abort "- 您的 HyperOS/MIUI 版本不符合要求，即将退出安装。"
+  abort "- Your HyperOS/MIUI version does not meet the requirements and will exit the installation."
 fi
 
 if [ -L "/system/media" ] ;then
@@ -128,12 +137,14 @@ else
     mediapath=/system/media
   else
     abort "- ROM似乎有问题，无法安装。"
+    abort "- There seems to be a problem with the ROM and it cannot be installed."
   fi
 fi
 
 REPLACE="$mediapath/theme/miui_mod_icons"
 
 echo "- 安装中..."
+echo "- installing..."
 mkdir -p ${MODPATH}${mediapath}/theme/default/
 unzip -oj "$ZIPFILE" icons -d $MODPATH/$mediapath/theme/default/ >&2
 unzip -oj "$ZIPFILE" addons/* -d $MODPATH/$mediapath/theme/default/ >&2
@@ -144,6 +155,7 @@ set_perm_recursive $MODPATH 0 0 0755 0644
 
 rm -rf /data/system/package_cache/*
 echo "√ 安装成功，请重启设备"
+echo "√ Installation successful, please restart the device"
 echo "---------------------------------------------"
 EOF
 
@@ -158,20 +170,20 @@ themeid=$var_theme" >>$TEMP_DIR/moduletmp/module.prop
 
 save() {
   time=$(TZ=$(getprop persist.sys.timezone) date '+%m%d%H%M')
-  modulefilepath=${zipoutdir}/${theme_name}${string_projectname}模块-$time.zip
-  mv $TEMP_DIR/moduletmp/module.zip ${modulefilepath}
-  echo "√ 模块已保存至""$modulefilepath"
+  modulefilepath="${zipoutdir}/${theme_name}${string_module}-$time.zip"
+  mv $TEMP_DIR/moduletmp/module.zip "${modulefilepath}"
+  echo "${string_modulesaveto}""${modulefilepath}"
 }
 
 disable_dynamicicon() {
   test=$(head -n 1 ${START_DIR}/theme_files/denylist)
   if [ "$test" = "all" ]; then
-    echo "- 禁用所有动态图标..."
+    echo "${string_disablealldynamic}"
     rm -rf $TEMP_DIR/layer_animating_icons
   elif [ "$test" = "" ]; then
     :
   else
-    echo "- 禁用下列app的动态图标："
+    echo "${string_disabledynamic}"
     list=$(cat ${START_DIR}/theme_files/denylist)
     for p in $list; do
       [ -d "$TEMP_DIR/layer_animating_icons/$p" ] && rm -rf $TEMP_DIR/layer_animating_icons/$p && echo "  ""$p"
@@ -213,17 +225,17 @@ install() {
     fi
     if [ -f "/data/adb/ksud" ]; then
       /data/adb/ksud module install $TEMP_DIR/moduletmp/module.zip >/dev/null
-      echo "√ 已安装为KernelSU模块，重启后生效"
+      echo "$string_installwithksu"
     else
-      echo "× 无法安装模块，模块即将导出，请手动安装。"
+      echo "$string_cannotinstall"
       save
     fi
   elif [ "$1" == magisk ]; then
     if [ $(magisk -V) -ge 20400 ]; then
       magisk --install-module $TEMP_DIR/moduletmp/module.zip >/dev/null
-      echo "√ 已安装为Magisk模块，重启后生效"
+      echo "$string_installwithmagisk"
     else
-      echo "× 无法安装模块，模块即将导出，请手动安装。"
+      echo "$string_cannotinstall"
       save
     fi
   elif [ "$1" == save ]; then
@@ -240,9 +252,9 @@ save_mtz() {
   cd $TEMP_DIR/moduletmp
   time=$(TZ=$(getprop persist.sys.timezone) date '+%m%d%H%M')
   zip -r mtz.zip * >/dev/null
-  mtzfilepath=${zipoutdir}/${themename2}${string_projectname}-$time.mtz
-  mv $TEMP_DIR/moduletmp/mtz.zip ${mtzfilepath}
-  echo "√ mtz主题已保存至""$mtzfilepath"
+  mtzfilepath="${zipoutdir}/${themename2}${string_projectname}-$time.mtz"
+  mv $TEMP_DIR/moduletmp/mtz.zip "${mtzfilepath}"
+  echo "$string_mtzsaveto""$mtzfilepath"
 }
 
 getfiles() {
@@ -323,7 +335,7 @@ transform_config() {
 exec 3>&2
 exec 2>/dev/null
 
-if [ "$1" !== mtz ]; then
+if [ "$1" != mtz ]; then
   device_check
 fi
 

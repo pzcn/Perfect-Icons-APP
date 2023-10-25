@@ -1,9 +1,9 @@
 if [ $1 = list ]; then
 	test=$(head -n 1 theme_files/denylist)
 	if [ $test = all ]; then
-		echo 所有APP
+		echo $string_allapp
 	elif [ "$test" = "" ]; then
-		echo 禁用列表为空
+		echo $string_disablelistempty
 	else
 		cat theme_files/denylist
 	fi

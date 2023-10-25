@@ -10,7 +10,7 @@ if [[ -d "${TEMP_DIR}" ]]; then
 fi
 }
 install() {
-  echo ${string_exportinghwt}
+  echo "${string_exportinghwt}"
   mkdir -p $TEMP_DIR/
   mkdir -p $TEMP_DIR/hwt
   mkdir -p $TEMP_DIR/icons
@@ -22,7 +22,7 @@ install() {
   mv $TEMP_DIR/hwt/$sel_theme/icons $TEMP_DIR/hwt/$sel_theme/icons.zip
   unzip -qo $TEMP_DIR/hwt/$sel_theme/icons.zip -d $TEMP_DIR/icons
   rm -rf $TEMP_DIR/hwt/$sel_theme/icons.zip
-  echo ${string_setsizeshape}
+  echo "${string_setsizeshape}"
   tar -xf "$TEMP_DIR/style.tar.xz" -C "$TEMP_DIR/style" >&2
   cp -rf ${TEMP_DIR}/style/${hwt_shape}_${hwt_size}/* $TEMP_DIR/icons
   source ${TEMP_DIR}/style/${hwt_shape}_${hwt_size}/config.ini
@@ -38,7 +38,7 @@ install() {
   sed -i "s/{date}/$date1/g" $TEMP_DIR/hwt/$sel_theme/description.xml
   cd $TEMP_DIR/hwt/$sel_theme
   zip -qr $TEMP_DIR/hwt.zip *
-  mv $TEMP_DIR/hwt.zip $hwtdir/${theme_name}${string_projectname}.hwt
+  mv $TEMP_DIR/hwt.zip "$hwtdir/${theme_name}${string_projectname}.hwt"
   cleanall
   echo "${string_hwthasexportto} $hwtdir/${theme_name}${string_projectname}.hwt"
   echo "${string_hwtapply}"

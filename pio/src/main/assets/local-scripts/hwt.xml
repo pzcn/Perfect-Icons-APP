@@ -90,7 +90,7 @@
     <summary sh="source theme_files/hwt_dir_config ; echo 当前路径为：$hwtdir" />
     <set>echo "hwtdir=$dir" &gt; theme_files/hwt_dir_config</set>
   </action>
-  <action icon="pic/start.png" reload="@cleancache">
+  <action icon="pic/start.png" confirm="true">
     <title>开始下载hwt</title>
     <desc>确认上述配置无误后，轻触下载hwt主题包</desc>
     <set>source $START_DIR/local-scripts/misc/hwt.sh</set>

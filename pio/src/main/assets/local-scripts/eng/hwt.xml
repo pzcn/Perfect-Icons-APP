@@ -42,7 +42,7 @@
     </get>
     <set>echo "sel_theme=$state" &gt; theme_files/hwt_theme_config</set>
   </picker>
-  <picker auto-off="true" shell="hidden" icon="../pic/style.png">
+  <picker auto-off="true" shell="hidden" icon="../pic/size.png">
     <title>Icon size</title>
     <options>
       <option value="S">Small</option>
@@ -58,7 +58,7 @@
     </get>
     <set>echo "hwt_size=$state" &gt; theme_files/hwt_size_config</set>
   </picker>
-  <picker auto-off="true" shell="hidden" icon="../pic/style.png">
+  <picker auto-off="true" shell="hidden" icon="../pic/shape.png">
     <title>Icon shape</title>
     <options>
       <option value="Round">Round</option>
@@ -100,8 +100,8 @@
   <text>
     <title>Single layer icon download</title>
   </text>
-  <page title="Download hwt single layer icon theme package" link="https://www.yuque.com/pedeoz/icons/tui2csib0wm0l4lg#TRmqA" icon="pic/clouddownload.png" desc="Available for EMUI10 and below systems" />
-  <page title="HarmonyOS/EMUI Perfect Icon Usage Guide" link="https://www.yuque.com/pedeoz/icons/tui2csib0wm0l4lg" icon="pic/qa.png"/>
+  <page title="Download hwt single layer icon theme package" link="https://www.yuque.com/pedeoz/icons/tui2csib0wm0l4lg#TRmqA" icon="../pic/clouddownload.png" desc="Available for EMUI10 and below systems" />
+  <page title="HarmonyOS/EMUI Perfect Icon Usage Guide" link="https://www.yuque.com/pedeoz/icons/tui2csib0wm0l4lg" icon="../pic/qa.png"/>
 </group>
 <text><title>
 </title></text>

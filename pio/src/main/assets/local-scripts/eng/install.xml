@@ -9,7 +9,7 @@
   <text>
     <title>Config</title>
   </text>
-        <picker auto-off="true" interruptible="false" shell="hidden" icon="pic/style.png">
+        <picker auto-off="true" interruptible="false" shell="hidden" icon="../pic/style.png">
             <title>Theme</title>
             <options>
                 <option value="Hyper">HyperOS</option>
@@ -39,17 +39,17 @@
             </get>
             <set>echo "sel_theme=$state" &gt; theme_files/theme_config </set>
         </picker>
-    <page icon="pic/addon.png" before-read="source local-scripts/misc/addon_init.sh">
+    <page icon="../pic/addon.png" before-read="source local-scripts/misc/addon_init.sh">
         <config>addon.xml</config>
         <title>Customized icons?</title>
         <desc>While activated, customized icons will be import into the theme.</desc>
     </page>
-    <page icon="pic/disabledynamic.png">
+    <page icon="../pic/disabledynamic.png">
         <config>disabledynamicicons.xml</config>
         <title>Disable dynamic icons</title>
         <desc>Ability to disable animation effects for some or all icons</desc>
     </page>
-    <switch shell="hidden" icon="pic/addon.png">
+    <switch shell="hidden" icon="../pic/addon.png">
         <title>Enable the new mask</title>
         <desc>If you are using the new desktop of HyperOS, please enable this option. If it's MIUI, keep it off.</desc>
         <get>
@@ -68,21 +68,21 @@
       <title>Install module</title>
         <desc>Note: If you install modules to Magisk and KernelSU at the same time, please handle the priority relationship between the two. Advice modules should only be used in one root scenario.</desc>
   </text>
-        <action confirm="true" icon="pic/magisk.png" reload="@install,@cleancache" before-read="source local-scripts/misc/addon_init.sh" visible="source local-scripts/misc/installer_check.sh magisk">
+        <action confirm="true" icon="../pic/magisk.png" reload="@install,@cleancache" before-read="source local-scripts/misc/addon_init.sh" visible="source local-scripts/misc/installer_check.sh magisk">
             <title>Install module（Magisk）</title>
             <desc>After confirming that the above configuration is correct, Perfect Icon will be installed as a Magisk module.</desc>
             <summary sh="source local-scripts/misc/get_themes.sh magisk" />
             <set>source $START_DIR/local-scripts/misc/module.sh magisk</set>
         </action>
 
-        <action confirm="true" icon="pic/kernelsu.png" reload="@install,@cleancache" before-read="source local-scripts/misc/addon_init.sh" visible="source local-scripts/misc/installer_check.sh kernelsu">
+        <action confirm="true" icon="../pic/kernelsu.png" reload="@install,@cleancache" before-read="source local-scripts/misc/addon_init.sh" visible="source local-scripts/misc/installer_check.sh kernelsu">
             <title>Install module（KernelSU）</title>
             <desc>After confirming that the above configuration is correct, Perfect Icon will be installed as a KernelSU module.</desc>
             <summary sh="source local-scripts/misc/get_themes.sh kernelsu" />
             <set>source $START_DIR/local-scripts/misc/module.sh kernelsu</set>
         </action>
 
-        <action confirm="true" icon="pic/reboot.png" shell="hidden" warning="确认重启？">
+        <action confirm="true" icon="../pic/reboot.png" shell="hidden">
             <title>Restart the device</title>
             <desc>restart</desc>
             <set>/system/bin/sync;/system/bin/svc power reboot || reboot</set>
@@ -93,18 +93,18 @@
   <text>
     <title>Download</title>
   </text>
-    <action shell="hidden" icon="pic/folder.png">
+    <action shell="hidden" icon="../pic/folder.png">
         <title>Choose where to save the file</title>
         <param name="dir" type="folder" value="/sdcard/Download" />
-        <summary sh="source theme_files/zipoutdir_config ; echo 当前路径为：$zipoutdir " />
+        <summary sh="source theme_files/zipoutdir_config ; echo The current path is: $zipoutdir " />
         <set>echo "zipoutdir=$dir" &gt; theme_files/zipoutdir_config</set>
     </action>
-    <action icon="pic/module.png" reload="@cleancache">
+    <action icon="../pic/module.png" confirm="true">
         <title>Download module zip</title>
         <desc>After confirming that the above configuration is correct, you can install it yourself after downloading the module.</desc>
         <set>source $START_DIR/local-scripts/misc/module.sh save</set>
     </action>
-    <action icon="pic/brush.png" reload="@cleancache">
+    <action icon="../pic/brush.png" confirm="true">
         <title>Download mtz theme pack</title>
         <desc>After confirming that the above configuration is correct, download the mtz theme package. The theme needs to be cracked before it can be applied.</desc>
         <set>source $START_DIR/local-scripts/misc/module.sh mtz</set>
@@ -115,8 +115,8 @@
   <text>
     <title>Others</title>
   </text>
-         <page title="Preview theme icons" link="https://icons-demo.pedroz.eu.org/" icon="pic/preview.png"/>
-         <page title="HyperOS/MIUI Usage Guide" link="https://www.yuque.com/pedeoz/icons/er8ige3ldvc7wn1n" icon="pic/qa.png"/>
+         <page title="Preview theme icons" link="https://icons-demo.pedroz.eu.org/" icon="../pic/preview.png"/>
+         <page title="HyperOS/MIUI Usage Guide" link="https://www.yuque.com/pedeoz/icons/er8ige3ldvc7wn1n" icon="../pic/qa.png"/>
 </group>
 
 <text><title>

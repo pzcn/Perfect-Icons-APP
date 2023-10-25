@@ -4,7 +4,7 @@
     <text>
         <title>Update</title>
     </text>
-    <page config-sh="source local-scripts/misc/get_changelog.sh" icon="pic/changelog.png">
+    <page config-sh="source local-scripts/misc/get_changelog.sh" icon="../pic/changelog.png">
         <title>Update log and check for updates</title>
         <desc>View recent update logs, check for updates, and get update notifications</desc>
     </page>
@@ -14,12 +14,12 @@
     <text>
         <title>HyperOS/MIUI</title>
     </text>
-    <page id="@install" icon="pic/xiaomi.png" visible="source local-scripts/misc/installer_check.sh" >
+    <page id="@install" icon="../pic/xiaomi.png" visible="source local-scripts/misc/installer_check.sh" >
         <config>install.xml</config>
         <title>Download and install the module or mtz theme package</title>
         <desc>HyperOS/MIUI is available</desc>
     </page>
-    <page id="@install" icon="pic/xiaomi.png" visible="source local-scripts/misc/installer_check.sh norootcheck" >
+    <page id="@install" icon="../pic/xiaomi.png" visible="source local-scripts/misc/installer_check.sh norootcheck" >
         <config>install.xml</config>
         <title>Download the module or mtz theme package</title>
         <desc>HyperOS/MIUI is available</desc>
@@ -30,7 +30,7 @@
     <text>
         <title>HarmonyOS/EMUI</title>
     </text>
-    <page config="hwt.xml" title="Download hwt theme package" icon="pic/huawei.png" desc="HarmonyOS/EMUI11 is available" before-read="source local-scripts/misc/hwt_init.sh" />
+    <page config="hwt.xml" title="Download hwt theme package" icon="../pic/huawei.png" desc="HarmonyOS/EMUI11 is available" before-read="source local-scripts/misc/hwt_init.sh" />
 </group>
 
 <group>

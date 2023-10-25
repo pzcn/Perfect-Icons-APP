@@ -68,9 +68,9 @@
       <title>安装模块</title>
       <desc>注意：如果您同时将模块安装到Magisk和KernelSU，请自行处理二者优先级关系。建议模块仅应用在一种root方案中。</desc>
   </text>
-        <action confirm="true" icon="pic/magisk.png" reload="@install,@cleancache" before-read="source local-scripts/misc/addon_init.sh" visible="source local-scripts/misc/installer_check.sh magisk">
+        <action confirm="true" icon="pic/magisk.png" reload="@install,@cleancache" before-read="source local-scripts/misc/addon_init.sh" visible="source local-scripts/misc/installer_check.sh magisk" >
             <title>安装模块（Magisk）</title>
-            <desc>确认上述配置无误后，将以 Magisk 模块方式安装完美图标。</desc>
+            <desc>确认上述配置无误后，将以 Magisk 模块方式安装完美图标。warning="确认安装？"</desc>
             <summary sh="source local-scripts/misc/get_themes.sh magisk" />
             <set>source $START_DIR/local-scripts/misc/module.sh magisk</set>
         </action>
@@ -82,7 +82,7 @@
             <set>source $START_DIR/local-scripts/misc/module.sh kernelsu</set>
         </action>
 
-        <action confirm="true" icon="pic/reboot.png" shell="hidden" warning="确认重启？">
+        <action confirm="true" icon="pic/reboot.png" shell="hidden">
             <title>重启设备</title>
             <desc>轻触重启</desc>
             <set>/system/bin/sync;/system/bin/svc power reboot || reboot</set>
@@ -93,18 +93,18 @@
   <text>
     <title>下载至本地</title>
   </text>
-    <action shell="hidden" icon="pic/folder.png">
+    <action  shell="hidden" icon="pic/folder.png">
         <title>选择文件保存位置</title>
         <param name="dir" type="folder" value="/sdcard/Download" />
         <summary sh="source theme_files/zipoutdir_config ; echo 当前路径为：$zipoutdir " />
         <set>echo "zipoutdir=$dir" &gt; theme_files/zipoutdir_config</set>
     </action>
-    <action icon="pic/module.png" reload="@cleancache">
+    <action icon="pic/module.png" confirm="true">
         <title>下载模块包</title>
         <desc>确认上述配置无误后，下载模块后可自行安装</desc>
         <set>source $START_DIR/local-scripts/misc/module.sh save</set>
     </action>
-    <action icon="pic/brush.png" reload="@cleancache">
+    <action icon="pic/brush.png" confirm="true">
         <title>下载mtz主题包</title>
         <desc>确认上述配置无误后，下载mtz主题包，需要主题破解才能应用。</desc>
         <set>source $START_DIR/local-scripts/misc/module.sh mtz</set>

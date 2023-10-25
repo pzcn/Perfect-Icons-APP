@@ -16,7 +16,7 @@
         <desc>This will download archieved icons to /sdcard/Documents/MIUI_Perfect_Icons/Archived_Icons.zip.</desc>
         <script>source local-scripts/misc/Icons_Archiving.sh</script>
     </action>
-<page title="View archived icons" html="https://github.com/pzcn/Perfect-Icons-Completion-Project/tree/main/addition/Icons_Archiving" icon="pic/preview.png" />
+<page title="View archived icons" html="https://github.com/pzcn/Perfect-Icons-Completion-Project/tree/main/addition/Icons_Archiving" icon="../pic/preview.png" />
 </group>
 <group>
     <action icon="../pic/migrate.png" visible="source local-scripts/misc/addon_check.sh" id="@addon" reload="@addon">
@@ -26,8 +26,8 @@
     </action>
 </group>
 <group>
-    <page title="Icons customise wiki" link="https://www.yuque.com/pedeoz/icons/bg668dqpli7brqgi" icon="pic/description.png"/>
-    <page title="MIUI Adapted icons wiki" link="https://www.yuque.com/pedeoz/icons/ao7yvw37irgdghr6" icon="pic/qa.png"/>
+    <page title="Icons customise wiki" link="https://www.yuque.com/pedeoz/icons/bg668dqpli7brqgi" icon="../pic/description.png"/>
+    <page title="MIUI Adapted icons wiki" link="https://www.yuque.com/pedeoz/icons/ao7yvw37irgdghr6" icon="../pic/qa.png"/>
 </group>
 <text><title>
 </title></text>
