@@ -1,5 +1,4 @@
 #!/system/bin/sh
-
 [[ $(getprop ro.product.cpu.abi) == "arm64-v8a" ]] || exit 
 
 
@@ -14,6 +13,17 @@ else
    language="eng"
    string_clean="Cleaning cache..."
 fi
+
+clean() {
+cd ${START_DIR}/theme_files
+rm -rf *.tar.xz
+rm -rf *.ini
+rm -rf hwt
+rm -rf miui
+rm -rf $SDCARD_PATH/Android/data/dev.miuiicons.pedroz/files/download
+cd ${START_DIR}
+echo $string_clean
+}
 
 chmod -R 777 $TOOLKIT/curl
 echo $string_init
@@ -41,11 +51,6 @@ if [ -n "$var_miui_version" ]; then
 [ -d "$addon_path/$string_advancedaddons" ] || mkdir -p $addon_path/$string_advancedaddons
 [ -f "$addon_path/.nomedia" ] || echo " " >  $addon_path/.nomedia
 fi
-
-clean() {
-echo $string_clean
-source "local-scripts/misc/cleancache.sh"
-}
 
 #旧版本升级清空旧版本缓存
 if [ ! -f "theme_files/version" ]; then
