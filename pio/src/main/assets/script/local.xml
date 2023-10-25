@@ -21,10 +21,12 @@
 </group>
 <group visible="if [ $LANGUAGE == zh-rCN ]; then echo 1; else echo 0; fi">
     <text>
-        <title>EMUI10以下旧设备专区</title>
+        <title>查看使用指南/下载成品图标包</title>
     </text>
-    <page config="script/emui10.xml" title="下载hwt单层图标主题包" desc="EMUI10及以下旧设备可能无法正常使用软件，可在这此处下载资源" />
-    <resource file="script/emui10.xml" />
+    <page link="https://www.yuque.com/pedeoz/icons/niid5q7957q3x1er">
+        <title>查看在线文档</title>
+        <desc>使用指南、EMUI10及以下旧版本图标下载</desc>
+    </page>
 </group>
 
 <group visible="if [ $LANGUAGE == zh-rCN ]; then echo 1; else echo 0; fi">
@@ -79,7 +81,15 @@ No Network Detected or Not Support Your Divice</slice>
 </slice>
     </text>
 </group>
-
+<group visible="if [ $LANGUAGE == zh-rCN ]; then echo 1; else echo 0; fi">
+    <text>
+        <title>View the user guide/download the finished icon pack</title>
+    </text>
+    <page link="https://www.yuque.com/pedeoz/icons/niid5q7957q3x1er">
+        <title>View online documentation</title>
+        <desc>User Guide, EMUI10 and below old version icon download</desc>
+    </page>
+</group>
 <group visible="if [ $LANGUAGE == zh-rCN ]; then echo 0; else echo 1; fi">
     <action>
         <title>Problem check</title>
