@@ -131,25 +131,26 @@ if [ $var_miui_version -lt 10 ]; then
 fi
 
 if [ -L "/system/media" ] ;then
-  mediapath=/system$(realpath /system/media)
+  MEDIAPATH=/system$(realpath /system/media)
 else
   if [ -d "/system/media" ]; then 
-    mediapath=/system/media
+    MEDIAPATH=/system/media
   else
     abort "- ROM似乎有问题，无法安装。"
     abort "- There seems to be a problem with the ROM and it cannot be installed."
   fi
 fi
 
-REPLACE="$mediapath/theme/miui_mod_icons"
+REPLACE="$MEDIAPATH/theme/miui_mod_icons"
 
 echo "- 安装中..."
 echo "- installing..."
-mkdir -p ${MODPATH}${mediapath}/theme/default/
-unzip -oj "$ZIPFILE" icons -d $MODPATH/$mediapath/theme/default/ >&2
-unzip -oj "$ZIPFILE" addons/* -d $MODPATH/$mediapath/theme/default/ >&2
+mkdir -p ${MODPATH}${MEDIAPATH}/theme/default/
+unzip -oj "$ZIPFILE" icons -d $MODPATH/$MEDIAPATH/theme/default/ >&2
+unzip -oj "$ZIPFILE" addons/* -d $MODPATH/$MEDIAPATH/theme/default/ >&2
 unzip -oj "$ZIPFILE" module.prop -d $MODPATH/ >&2
-unzip -oj "$ZIPFILE" post-fs-data.sh -d $MODPATH/ >&2
+unzip -oj "$ZIPFILE" post-fs-data.sh -d $MODPATH/ >&2 
+echo -ne '\x50\x4b\x05\x06\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00' > $MODPATH/$MEDIAPATH/theme/default/dynamicicons
 settings put global is_default_icon 0
 set_perm_recursive $MODPATH 0 0 0755 0644
 

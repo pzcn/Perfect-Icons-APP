@@ -70,7 +70,7 @@
   </text>
         <action confirm="true" icon="pic/magisk.png" reload="@install,@cleancache" before-read="source local-scripts/misc/addon_init.sh" visible="source local-scripts/misc/installer_check.sh magisk" >
             <title>安装模块（Magisk）</title>
-            <desc>确认上述配置无误后，将以 Magisk 模块方式安装完美图标。warning="确认安装？"</desc>
+            <desc>确认上述配置无误后，将以 Magisk 模块方式安装完美图标。</desc>
             <summary sh="source local-scripts/misc/get_themes.sh magisk" />
             <set>source $START_DIR/local-scripts/misc/module.sh magisk</set>
         </action>
