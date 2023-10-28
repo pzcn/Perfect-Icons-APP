@@ -212,8 +212,10 @@ pack() {
   cd $TEMP_DIR
   zip -r icons.zip ./layer_animating_icons >/dev/null
   zip -r icons.zip ./res >/dev/null
+  zip -r icons.zip ./transform_config.xml >/dev/null
   rm -rf $TEMP_DIR/res
   rm -rf $TEMP_DIR/layer_animating_icons
+  rm -rf $TEMP_DIR/transform_config.xml
   mkdir $TEMP_DIR/moduletmp
   mv $TEMP_DIR/icons.zip $TEMP_DIR/moduletmp/icons
   [ -d "$TEMP_DIR/miui_mod_icons" ] && mv $TEMP_DIR/miui_mod_icons $TEMP_DIR/moduletmp
