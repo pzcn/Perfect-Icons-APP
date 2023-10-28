@@ -330,9 +330,9 @@ addon() {
 
 transform_config() {
   if [ $new_transform_config = 1 ]; then
-    cp -rf $START_DIR/local-scripts/misc/transform_config2.xml transform_config.xml
+    cp -rf $START_DIR/local-scripts/misc/transform_config2.xml $TEMP_DIR/transform_config.xml
   else
-    cp -rf $START_DIR/local-scripts/misc/transform_config1.xml transform_config.xml
+    cp -rf $START_DIR/local-scripts/misc/transform_config1.xml $TEMP_DIR/transform_config.xml
   fi
 }
 
