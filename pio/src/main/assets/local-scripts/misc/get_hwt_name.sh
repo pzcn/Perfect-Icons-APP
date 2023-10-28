@@ -20,3 +20,4 @@ source theme_files/hwt_theme_config
 [ $sel_theme = OceanRealm ] && echo "${string_nowselected}${string_OceanRealm}"
 [ $sel_theme = Wonderfulmove ] && echo "${string_nowselected}${string_Wonderfulmove}"
 [ $sel_theme = DelightingN ] && echo "${string_nowselected}${string_DelightingN}"
+[ $sel_theme = WonderlandN ] && echo "${string_nowselected}${string_WonderlandN}"

@@ -131,27 +131,28 @@ if [ $var_miui_version -lt 10 ]; then
 fi
 
 if [ -L "/system/media" ] ;then
-  MEDIAPATH=/system$(realpath /system/media)
+  MEDIAPATH=system$(realpath /system/media)
 else
   if [ -d "/system/media" ]; then 
-    MEDIAPATH=/system/media
+    MEDIAPATH=system/media
   else
     abort "- ROM似乎有问题，无法安装。"
     abort "- There seems to be a problem with the ROM and it cannot be installed."
   fi
 fi
 
-REPLACE="$MEDIAPATH/theme/miui_mod_icons"
+REPLACE="/$MEDIAPATH/theme/miui_mod_icons/dynamic"
 
 echo "- 安装中..."
 echo "- installing..."
-mkdir -p ${MODPATH}${MEDIAPATH}/theme/default/
+
+mkdir -p ${MODPATH}/${MEDIAPATH}/theme/default/
 unzip -oj "$ZIPFILE" icons -d $MODPATH/$MEDIAPATH/theme/default/ >&2
+unzip -oj "$ZIPFILE" miui_mod_icons/* -d $MODPATH/$MEDIAPATH/theme/miui_mod_icons >&2
 unzip -oj "$ZIPFILE" addons/* -d $MODPATH/$MEDIAPATH/theme/default/ >&2
 unzip -oj "$ZIPFILE" module.prop -d $MODPATH/ >&2
 unzip -oj "$ZIPFILE" post-fs-data.sh -d $MODPATH/ >&2 
 echo -ne '\x50\x4b\x05\x06\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00' > $MODPATH/$MEDIAPATH/theme/default/dynamicicons
-settings put global is_default_icon 0
 set_perm_recursive $MODPATH 0 0 0755 0644
 
 rm -rf /data/system/package_cache/*
@@ -193,23 +194,29 @@ disable_dynamicicon() {
 }
 
 pack() {
-  echo "${string_exporting}$theme_name..."
+  echo "${string_exporting}$theme_name${string_plzwait}..."
   cd ${START_DIR}/theme_files/miui
-  transform_config
-  zip -r $TEMP_DIR/icons.zip * -x './res/drawable-xxhdpi/.git/*' >/dev/null
+  zip -r $TEMP_DIR/icons.zip * -x './res/drawable-xxhdpi/.git/*' >/dev/null  
   cd $TEMP_DIR
   tar -xf $TEMP_DIR/$var_theme.tar.xz -C "$TEMP_DIR/"
   mkdir -p $TEMP_DIR/res/drawable-xxhdpi
   mv $TEMP_DIR/icons/* $TEMP_DIR/res/drawable-xxhdpi 2>/dev/null
   rm -rf $TEMP_DIR/icons
   [ -f ${START_DIR}/theme_files/denylist ] && disable_dynamicicon
+  transform_config
+  [ $addon == 1 ] && addon
+  if [ "$1" != mtz ]; then
+    mkdir $TEMP_DIR/miui_mod_icons
+    mv $TEMP_DIR/res/drawable-xxhdpi/*.png $TEMP_DIR/miui_mod_icons
+  fi
+  cd $TEMP_DIR
   zip -r icons.zip ./layer_animating_icons >/dev/null
   zip -r icons.zip ./res >/dev/null
   rm -rf $TEMP_DIR/res
   rm -rf $TEMP_DIR/layer_animating_icons
   mkdir $TEMP_DIR/moduletmp
-  [ $addon == 1 ] && addon
   mv $TEMP_DIR/icons.zip $TEMP_DIR/moduletmp/icons
+  [ -d "$TEMP_DIR/miui_mod_icons" ] && mv $TEMP_DIR/miui_mod_icons $TEMP_DIR/moduletmp
   cd ${START_DIR}
 }
 
@@ -318,10 +325,6 @@ addon() {
     [ -d "$addon_path/${string_animatingicons}" ] && cp -rf $addon_path/${string_animatingicons}/* $TEMP_DIR/layer_animating_icons/ >/dev/null
     [ -d "$addon_path/${string_staticicons}" ] && cp -rf $addon_path/${string_staticicons}/* $TEMP_DIR/res/drawable-xxhdpi/ >/dev/null
     [ -d "$addon_path/${string_advancedaddons}" ] && cp -rf $addon_path/${string_advancedaddons}/* $TEMP_DIR/moduletmp/addons/ 2>/dev/null
-    cd $TEMP_DIR
-    zip -r icons.zip res >/dev/null
-    zip -r icons.zip layer_animating_icons >/dev/null
-    cd ..
   fi
 }
 

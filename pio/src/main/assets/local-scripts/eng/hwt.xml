@@ -12,6 +12,7 @@
   <picker auto-off="true" shell="hidden" icon="../pic/style.png">
     <title>Theme</title>
     <options>
+      <option value="WonderlandN">Wonderland N</option>
       <option value="DelightingN">Delighting N</option>
       <option value="Wonderfulmove">Wonderfulmove Blue Bv</option>
       <option value="MistyRealm">MistyRealm</option>
