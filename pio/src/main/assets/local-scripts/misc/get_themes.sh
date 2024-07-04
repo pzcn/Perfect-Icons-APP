@@ -17,6 +17,7 @@ get_theme_name() {
 	[ $themeid = Reconstruction ] && name=${string_EMUIReconstruction}
 	[ $themeid = iOS ] && name=${string_iOS}
 	[ $themeid = coloros13 ] && name=ColorOS13
+	[ $themeid = coloros14 ] && name=ColorOS14
 }
 
 get_output() {

@@ -15,4 +15,5 @@
 [ $theme_name = Reconstruction ] && theme_name=${string_EMUIReconstruction}${string_themepack}
 [ $theme_name = iOS ] && theme_name=${string_iOS}${string_themepack}
 [ $theme_name = coloros13 ] && theme_name=ColorOS13${string_themepack}
+[ $theme_name = coloros14 ] && theme_name=ColorOS14${string_themepack}
 [ $theme_name = flyme10 ] && theme_name=${string_Flyme10}${string_themepack}

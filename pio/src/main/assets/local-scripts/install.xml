@@ -17,6 +17,7 @@
                 <option value="explore">MIUI探·界</option>
                 <option value="coloros12">ColorOS12</option>
                 <option value="coloros13">ColorOS13</option>
+                <option value="coloros14">ColorOS14</option>
                 <option value="flyme9">Flyme9</option>
                 <option value="flyme10">Flyme10</option>
                 <option value="iOS">iOS</option>

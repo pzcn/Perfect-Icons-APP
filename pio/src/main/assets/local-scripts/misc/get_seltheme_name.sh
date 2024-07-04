@@ -16,4 +16,5 @@ source theme_files/theme_config
 [ $sel_theme = Reconstruction ] && echo "${string_nowselected}${string_EMUIReconstruction}"
 [ $sel_theme = iOS ] && echo "${string_nowselected}${string_iOS}"
 [ $sel_theme = coloros13 ] && echo "${string_nowselected}ColorOS13"
+[ $sel_theme = coloros14 ] && echo "${string_nowselected}ColorOS14"
 [ $sel_theme = flyme10 ] && echo "${string_nowselected}Flyme10"

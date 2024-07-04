@@ -354,13 +354,16 @@ if [[ -d theme_files/miui/res/drawable-xxhdpi/.git ]]; then
   curl -skLJo "$TEMP_DIR/${var_theme}.ini" "https://miuiicons-generic.pkg.coding.net/icons/hyper/${var_theme}.ini?version=latest"
   source $TEMP_DIR/${var_theme}.ini
   source $START_DIR/local-scripts/misc/get_theme_name.sh
-  new_ver=$theme_version
-  if [ $new_ver -ne $old_ver ]; then
+  export LD_LIBRARY_PATH=$TOOLKIT/so: $LD_LIBRARY_PATH
+  git="$TOOLKIT/git"
+  cd theme_files/miui/res/drawable-xxhdpi
+  local_SHA=`git rev-parse --short HEAD`
+  cd ${START_DIR}
+  if [ $local_SHA != $git_SHA ]; then
     echo "${string_newverdown_1}${theme_name}${string_newverdown_2}"
     echo "${string_gitpull}"
     cd theme_files/miui/res/drawable-xxhdpi
-    export LD_LIBRARY_PATH=$TOOLKIT/so: $LD_LIBRARY_PATH
-    git pull >/dev/null 2>&1 
+    git pull 3>&2 || ( echo "× 增量更新出现错误，请重试或截图反馈" && cleanall >/dev/null && exit 1 )
     cp -rf $TEMP_DIR/${var_theme}.ini ${START_DIR}/theme_files/${var_theme}.ini
     cd ../../../..
   else
